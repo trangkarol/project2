@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        @include('common.block.header')
+        @include('admin.block.header')
     </head>
     <body class="nav-md">
         <div class="container body">
             <div class="main_container">
-                @include('common.block.menu')
-                @include('common.block.left_bar')
+                @include('admin.block.menu')
+                @include('admin.block.left_bar')
                 <!-- content -->
                  <div class="right_col" role="main">
                     @yield('content')

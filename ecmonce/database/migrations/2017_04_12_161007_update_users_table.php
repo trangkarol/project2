@@ -15,7 +15,7 @@ class UpdateUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->date('birthday')->after('password');
-            $table->string('phone_number', 11)->after('birthday');
+            $table->string('phone_number')->after('birthday');
             $table->string('avatar')->after('phone_number');
             $table->string('address')->after('avatar');
             $table->tinyInteger('role')->after('address');
@@ -30,7 +30,7 @@ class UpdateUsersTable extends Migration
      */
     public function down()
     {
-         Schema::table('users', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('birthday');
             $table->dropColumn('phone_number');
             $table->dropColumn('avatar');

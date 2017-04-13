@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->tinyInteger('type_category');
-            $table->integer('sub_category');
+            $table->integer('parent_id');
             $table->softDeletes();
             $table->timestamps();
         });

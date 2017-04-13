@@ -17,7 +17,7 @@ class Category extends Model
     protected $fillable = [
         'name',
         'type_category',
-        'sub_categor',
+        'parent_id',
     ];
 
     /**
@@ -27,13 +27,8 @@ class Category extends Model
      */
     protected $dates = ['deleted_at'];
 
-    public function activitiable()
+    public function products()
     {
-        return $this->morphTo();
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Product::class);
     }
 }

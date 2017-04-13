@@ -17,11 +17,14 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('image');
-            $table->integer('price');
+            $table->decimal('price', 5, 2);
             $table->integer('number_current');
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categorities');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('made_in');
+            $table->date('date_manufacture');
+            $table->date('date_expiration');
+            $table->float('avg_rating');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -17,9 +17,16 @@ class CreateSuggestProductsTable extends Migration
             $table->increments('id');
             $table->string('product_name');
             $table->string('category_name');
-            $table->integer('price');
+            $table->decimal('price', 5, 2);
+            $table->string('images');
+            $table->integer('number_current');
+            $table->string('made_in');
+            $table->date('date_manufacture');
+            $table->date('date_expiration');
+            $table->tinyInteger('is_accept');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ $(document).ready(function() {
             jQuery.colorbox.resize({width:"90%"});
         });
 
-    $('#avatar').change(function (event) {
+    $('#file').change(function (event) {
         //lấy path của ảnh tại client
         $(this).parent().addClass('img-current')
         var tmppath = URL.createObjectURL(event.target.files[0]);

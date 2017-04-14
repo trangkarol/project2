@@ -3,6 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App;
+use App\Repositories\User\UserInterface;
+use App\Repositories\User\UserRepository;
+use App\Repositories\Product\ProductInterface;
+use App\Repositories\Product\ProductRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -23,6 +28,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        App::bind(UserInterface::class, UserRepository::class);
+        App::bind(ProductInterface::class, ProductRepository::class);
     }
 }

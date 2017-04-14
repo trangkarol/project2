@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+    use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Product\ProductInterface;
+use App\Http\Requests\Product\UpdateProductRequest;
+use App\Http\Requests\Product\InsertProductRequest;
+use App\Helpers\Library;
+    use DB;
 
 class ProductController extends Controller
 {
+
     protected $productRepository;
 
     /**
@@ -27,17 +32,21 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return "ff";
+        $products = $this->productRepository->getProduct();
+
+        return view('admin.product.index', compact('products'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\m_responsekeys(conn, identifier)
      */
     public function create()
     {
-        //
+        $categoryOne = Library::getCategoryLevel(config('setting.mutil-level.one'));
+
+        return view('admin.product.create', compact('categoryOne'));
     }
 
     /**
@@ -46,9 +55,21 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InsertProductRequest $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $this->productRepository->create($request);
+            DB::commit();
+            $request->session()->flash('success', trans('product.msg.insert-success'));
+
+            return redirect()->action('Admin\ProductController@index');
+        } catch (\Exception $e) {
+            DB::rollback();
+            $request->session()->flash('fail', trans('product.msg.insert-fail'));
+
+            return redirect()->back();
+        }
     }
 
     /**
@@ -59,7 +80,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -70,7 +91,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        dd($id);
     }
 
     /**

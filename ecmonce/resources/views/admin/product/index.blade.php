@@ -1,4 +1,4 @@
-@extends('common.block.master')
+@extends('admin.block.master')
 <!-- title off page -->
 @section('title')
     {{ trans('product.title-product') }}
@@ -18,12 +18,7 @@
                         <a href="{{ action('Admin\ProductController@create') }}" data-toggle="tooltip" data-placement="top" title="{{ trans('product.tooltip.create') }}" class="btn btn-primary"><i class="fa fa-user-plus " ></i></a>
                     </div>
 
-                    <div class="col-md-4">
-                        <a href="#" class="btn btn-primary" id= "import-file" data-toggle="tooltip" data-placement="top" title="{{ trans('common.file.import') }}"><i class="glyphicon glyphicon-import" ></i></a>
-                        {!! Form::open(['action' => 'Admin\ProductController@importFile', 'class' => 'form-horizontal', 'id' => 'form-input-file', 'enctype' => 'multipart/form-data']) !!}
-                            {{  Form::file('file', ['id' => 'file-csv', 'class' => 'hidden']) }}
-                        {!! Form::close() !!}
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -65,6 +60,5 @@
 @section('contentJs')
     @parent
     {{ Html::script('/admin/js/product.js') }}
-    <!-- add trans and action used in file user.js -->
-    @include('library.product_trans_javascript')
+
 @endsection

@@ -6,7 +6,7 @@ interface ProductInterface
 {
     public function create($request);
 
-    public function update($request);
+    public function getProduct();
 
     public function uploadImages($file);
 }

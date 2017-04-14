@@ -1,8 +1,14 @@
 <?php
 
 return [
+    'minutes' => 60,
+    'admin' => [
+        'paginate' => 15,
+    ],
+
     'path' => [
         'file' => base_path() . '/public/Upload/',
+        'show' => '/Upload',
     ],
 
     'images' => [
@@ -10,4 +16,8 @@ return [
         'product' => 'product.jpg',
     ],
 
+    'mutil-level' => [
+        'one' => 0,
+        'two' => 1,
+    ],
 ];

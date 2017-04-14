@@ -25,12 +25,12 @@ abstract class BaseRepository implements BaseInterface
 
     public function paginate($limit = null, $columns = ['*'])
     {
-        $limit = is_null($limit) ? config('settings.user.paginate') : $limit;
+        $limit = is_null($limit) ? config('settings.admin.paginate') : $limit;
 
         return $this->model->paginate($limit, $columns);
     }
 
-    public function find($id)
+    public function find($id, $columns = ['*'])
     {
         return $data = $this->model->find($id);
     }
@@ -38,6 +38,11 @@ abstract class BaseRepository implements BaseInterface
     public function where($conditions, $operator = null, $value = null)
     {
         return $this->model->where($conditions, $operator, $value)->get();
+    }
+
+    public function orWhere($conditions, $operator = null, $value = null)
+    {
+        return $this->model->orWhere($conditions, $operator, $value);
     }
 
     public function whereIn($column, $values)

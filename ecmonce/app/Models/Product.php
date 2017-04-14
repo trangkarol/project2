@@ -24,6 +24,7 @@ class Product extends Model
         'date_manufacture',
         'date_expiration',
         'avg_rating',
+        'description',
     ];
 
     /**
@@ -33,6 +34,8 @@ class Product extends Model
      */
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['path_image'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -41,5 +44,15 @@ class Product extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'ratings')->withPivot('point')->withTimestamps();
+    }
+
+    /**
+     * Get the url of images.
+     *
+     * @return string
+     */
+    public function getPathImageAttribute()
+    {
+        return url(config('setting.path.show'), $this->image);
     }
 }

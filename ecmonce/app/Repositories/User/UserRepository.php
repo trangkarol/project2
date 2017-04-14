@@ -8,6 +8,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Input;
 use Exception;
 use File;
+use App\Repositories\User\UserInterface;
 
 class UserRepository extends BaseRepository implements UserInterface
 {

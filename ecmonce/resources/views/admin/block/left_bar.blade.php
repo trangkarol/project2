@@ -7,11 +7,11 @@
         <!-- menu profile quick info -->
         <div class="profile clearfix">
             <div class="profile_pic">
-                <img src="{{ url('/Upload', Auth::user()->avatar) }}" class="img-circle profile_img">
+                <img src="" class="img-circle profile_img">
             </div>
             <div class="profile_info">
                 <span>{{ trans('common.lbl-welcome') }}</span>
-                <h2>{{ Auth::user()->name }}</h2>
+                <h2></h2>
             </div>
         </div>
         <!-- /menu profile quick info -->
@@ -22,7 +22,7 @@
                 <ul class="nav side-menu">
                     <!-- management products-->
                     <li class="@if (Request::url() == action('Admin\ProductController@index')) active @endif ">
-                        <a href="{{ action('Admin\ProductControllerr@index') }}"><i class="fa fa-users "></i><span> {{ trans('product.title-product') }} </span></a>
+                        <a href="{{ action('Admin\ProductController@index') }}"><i class="fa fa-users "></i><span> {{ trans('product.title-product') }} </span></a>
                     </li>
 
                 </ul>

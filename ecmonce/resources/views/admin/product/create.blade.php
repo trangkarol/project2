@@ -1,4 +1,4 @@
-@extends('common.block.master')
+@extends('admin.block.master')
 <!-- title off page -->
 @section('title')
     {{ trans('product.title-insert') }}
@@ -38,7 +38,7 @@
                                 <div class="clearfix"></div>
                             </div>
                             {!! Form::open(['action' => 'Admin\ProductController@store', 'class' => 'form-horizontal form-label-left', 'enctype' => 'multipart/form-data']) !!}
-                                @include('admin.product.form_user')
+                                @include('admin.product.form_product')
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-7">
                                         <div class="col-md-3">
@@ -63,6 +63,5 @@
     @parent
     {{ Html::script('/admin/js/product.js') }}
     <!-- add trans and action used in file user.js -->
-    @include('library.product_trans_javascript')
 @endsection
 

@@ -4,7 +4,10 @@ return [
     // title
     'title-system' => 'Ecommerce',
     'title-login' => 'Login',
+    'title-logout' => 'Logout',
     // label
+    'lbl-profile' => 'Profile',
+    'lbl-change-pass-word' => 'Change Password',
     'lbl-result-search' => 'Result search',
     'lbl-welcome' => 'Welcome, ',
     'lbl-genaral' => 'Genaral',
@@ -20,6 +23,7 @@ return [
         'delete' => 'Delete',
         'insert' => 'Insert',
         'login' => 'Login',
+        'change' => 'Change',
     ],
 
     'made_in' => [

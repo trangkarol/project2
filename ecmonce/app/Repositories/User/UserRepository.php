@@ -21,9 +21,9 @@ class UserRepository extends BaseRepository implements UserInterface
     }
 
     /**
-    * function uploadImages.
+    * function login.
      *
-     * @return imageName
+     * @return $result
      */
     public function login($request)
     {
@@ -45,8 +45,51 @@ class UserRepository extends BaseRepository implements UserInterface
 
             return ['result' => false];
         } catch (\Exception $e) {
-            dd($e);
             return ['result' => false];
+        }
+    }
+
+    /**
+    * function logout.
+     *
+     * @return $result
+     */
+    public function logout($request)
+    {
+        try {
+            Auth::guard()->logout();
+            $request->session()->flush();
+            $request->session()->regenerate();
+
+            return true;
+        } catch (\Exception $e) {
+            return true;
+        }
+    }
+
+    /**
+    * function change password.
+     *
+     * @return $result
+     */
+    public function changePassword($request)
+    {
+        try {
+            $user = $this->model->find(Auth::user()->id);
+            $user->password = bcrypt($request->password);
+            $user->save();
+            Auth::logout();
+            return true;
+
+            $request->session()->flash('success', trans('user.msg.change-password-success'));
+
+            return redirect()->action('Auth\LoginController@login');
+        } catch(\Exception $e) {
+            return false;
+            $request->session()->flash('fail', trans('user.msg.change-password-fail'));
+            DB::rollback();
+
+            return redirect()->back();
         }
     }
 }

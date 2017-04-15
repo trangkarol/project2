@@ -7,7 +7,6 @@ use App\Repositories\User\UserInterface;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\User\LoginRequest;
 use Illuminate\Http\Request;
-use Auth;
 
 class LoginController extends Controller
 {
@@ -82,25 +81,16 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::guard()->logout();
-        $request->session()->flush();
-        $request->session()->regenerate();
 
-        return redirect()->action('Auth\LoginController@index');
-    }
+        $result = $this->userRepository->logout($request);
+        if ($result) {
+            $request->session()->flash('success', trans('user.msg.logout-success'));
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function changePassword(Request $request)
-    {
-        $this->activity->insertActivities(Auth::user(), 'logout');
-        Auth::guard()->logout();
-        $request->session()->flush();
-        $request->session()->regenerate();
+            return redirect()->action('Auth\LoginController@index');
+        }
 
-        return redirect()->action('Auth\LoginController@index');
+        $request->session()->flash('fail', trans('user.msg.logout-fail'));
+
+        return redirect()->back();
     }
 }

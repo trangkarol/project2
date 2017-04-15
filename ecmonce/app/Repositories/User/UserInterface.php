@@ -8,5 +8,7 @@ interface UserInterface
 
     public function update($request);
 
+    public function login($request);
+
     public function uploadAvatar($file);
 }

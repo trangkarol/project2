@@ -15,10 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//admin , 'middleware' => 'admin'
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+//admin
+Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace' => 'Admin'], function () {
     // product
     // Route::group(['prefix' => 'product'], function () {
         Route::resource('product', 'ProductController');
     // });
 });
+
+/*login user*/
+Route::group(['namespace' => 'Auth'], function() {
+    Route::get('/login', 'LoginController@index');
+    Route::post('/login', 'LoginController@login');
+    Route::post('/logout', 'LoginController@logout');
+    Route::post('/change-password', 'ResetPasswordController@changePassword');
+    Route::get('/page-change-password', 'ResetPasswordController@index')->middleware('auth');
+});
+
+Route::get('/home', 'HomeController@index');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+
 class LoginController extends Controller
 {
     /*
@@ -35,5 +36,55 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    /**
+     * login.
+     *
+     * @return void
+     */
+    public function index()
+    {
+        return view('admin.common.login');
+    }
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function login(LoginRequest $request)
+    {
+
+    }
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function logout(Request $request)
+    {
+        $this->activity->insertActivities(Auth::user(), 'logout');
+        Auth::guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+
+        return redirect()->action('Auth\LoginController@index');
+    }
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function changePassword(Request $request)
+    {
+        $this->activity->insertActivities(Auth::user(), 'logout');
+        Auth::guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+
+        return redirect()->action('Auth\LoginController@index');
     }
 }

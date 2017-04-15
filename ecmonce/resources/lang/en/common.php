@@ -3,6 +3,7 @@
 return [
     // title
     'title-system' => 'Ecommerce',
+    'title-login' => 'Login',
     // label
     'lbl-result-search' => 'Result search',
     'lbl-welcome' => 'Welcome, ',
@@ -18,5 +19,6 @@ return [
         'edit' => 'Edit',
         'delete' => 'Delete',
         'insert' => 'Insert',
+        'login' => 'Login',
     ],
 ];

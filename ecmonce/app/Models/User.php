@@ -57,4 +57,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Product::class, 'ratings')->withPivot('point')->withTimestamps();
     }
+
+    public function isAdmin()
+    {
+        return $this->role == config('setting.role.admin');
+    }
+
+    public function isUser()
+    {
+        return $this->role == config('setting.role.user');
+    }
 }

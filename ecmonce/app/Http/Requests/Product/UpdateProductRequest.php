@@ -24,7 +24,7 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:50|min:4|unique:products,name,'.$this->id,
+            'name' => 'required|max:50|min:4|unique:products,name,' . $this->id,
             'image' => 'required',
             'date_manufacture' => 'required',
             'date_expiration' => 'required|after:date_manufacture',

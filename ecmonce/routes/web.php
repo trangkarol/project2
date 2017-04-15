@@ -18,9 +18,10 @@ Route::get('/', function () {
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace' => 'Admin'], function () {
     // product
-    // Route::group(['prefix' => 'product'], function () {
-        Route::resource('product', 'ProductController');
-    // });
+    Route::resource('product', 'ProductController');
+    Route::group(['prefix' => 'product'], function () {
+        Route::post('/sub-category', 'ProductController@getSubCategory');
+    });
 });
 
 /*login user*/

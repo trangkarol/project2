@@ -35,11 +35,11 @@ return [
         'description-required' => 'Please input description!',
         'description-min' => 'Name have minlengt is 30 characters!',
 
-        'insert-success ' => 'Insert Product Success!',
-        'insert-fail ' => 'Insert Product Fail!',
-        'update-success ' => 'Update Product Success!',
-        'update-fail ' => 'Update Product Fail!',
-        'delete-success ' => 'Delete Product Success!',
-        'delete-fail ' => 'Delete Product Fail!',
+        'insert-success' => 'Insert Product Success!',
+        'insert-fail' => 'Insert Product Fail!',
+        'update-success' => 'Update Product Success!',
+        'update-fail' => 'Update Product Fail!',
+        'delete-success' => 'Delete Product Success!',
+        'delete-fail' => 'Delete Product Fail!',
     ],
 ];

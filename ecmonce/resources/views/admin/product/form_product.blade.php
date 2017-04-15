@@ -15,7 +15,7 @@
     <div class="col-md-6">
        {{ Form::file('file', ['id' => 'images']) }}
         <div class="col-md-6">
-            <img src="{{ isset($product->images)? url('/Upload', $product->images) : url('/Upload', config('setting.images.product')) }}" width="200px" height="150px">
+            <img src="{{ isset($product->image)? url('/Upload', $product->image) : url('/Upload', config('setting.images.product')) }}" width="200px" height="150px">
         </div>
 
     </div>
@@ -50,7 +50,7 @@
 <div class="form-group{{ $errors->has('made_in') ? 'has-error' : '' }}">
     {{ Form::label('made_in', trans('product.lbl-made-in'), ['class' => 'col-md-4 control-label']) }}
     <div class="col-md-6">
-        {{ Form::text('made_in', isset($product->made_in) ? $product->made_in : old('made_in'), ['class' => 'form-control', 'id' => 'made_in', 'required' => true]) }}
+        {{ Form::select('made_in', $madeIn, isset($product->made_in) ? $product->made_in : old('made_in'), ['class' => 'form-control', 'id' => 'made_in']) }}
     </div>
 
     @if ($errors->has('made_in'))
@@ -63,14 +63,13 @@
 <div class="form-group">
     {{ Form::label('category', trans('product.lbl-category'), ['class' => 'col-md-4 control-label']) }}
     <div class="col-md-6">
-        {{ Form::select('category', $categoryOne, isset($product->category_id) ? $product->category_id : old('category'), ['class' => 'form-control', 'id' => 'category']) }}
+        {{ Form::hidden('sub_id', isset($product->category_id) ? $product->category_id : 0, ['id' => 'sub_id']) }}
+        {{ Form::select('category', $parentCategory, isset($product->category->parent_id) ? $product->category->parent_id : old('category'), ['class' => 'form-control', 'id' => 'category']) }}
     </div>
 </div>
+
 <div class="form-group" id="sub-category">
-    {{ Form::label('category', trans('product.lbl-subcatelory'), ['class' => 'col-md-4 control-label']) }}
-    <div class="col-md-6">
-        {{ Form::select('subCategory', isset($subCategory) ? $subCategory : ['0' => ''], isset($product->category_id) ? $product->category_id : old('category'), ['class' => 'form-control', 'id' => 'subCategory']) }}
-    </div>
+
 </div>
 
 <div class="form-group{{ $errors->has('date_manufacture') ? 'has-error' : '' }}">

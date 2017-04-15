@@ -27,13 +27,14 @@ class ProductRepository extends BaseRepository implements ProductInterface
      */
     public function uploadImages($oldImage = null, $fileImages = null)
     {
+        // dd($oldImage);
         if ($oldImage != config('settings.images.avatar')) {
             unlink(config('setting.path.file') . $oldImage);
         }
 
         $dt = new DateTime();
         $arr_images = explode('.', $fileImages->getClientOriginalName());
-        $imageName = 'users_' . $dt->format('Y-m-d-H-i-s') . '.' .  $arr_images[count($arr_images) - 1];
+        $imageName = 'product_' . $dt->format('Y-m-d-H-i-s') . '.' .  $arr_images[count($arr_images) - 1];
         $fileImages->move(config('setting.path.file'), $imageName);
 
         return $imageName;
@@ -59,18 +60,52 @@ class ProductRepository extends BaseRepository implements ProductInterface
     public function create($request)
     {
         try {
-            $input = $request->only(['name', 'made_in', 'number_current', 'description']);
-            $input['price'] = '100.000';
+            $input = $request->only(['name', 'made_in', 'number_current', 'description', 'price']);
             $input['date_manufacture'] = date_create($request->date_manufacture);
             $input['date_expiration'] = date_create($request->date_expiration);
-            $input['category_id'] = $request->category;
+            $input['category_id'] = $request->subCategory;
             $input['image'] = isset($request->file) ? $this->uploadImages(null, $request->file) : config('settings.images.product');
-            $input['avg_rating'] = '1.4';
-            parent::create($input);
+            $result = parent::create($input);
 
             return true;
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    /**
+    * function create.
+     *
+     * @return true or false
+     */
+    public function update($request, $id)
+    {
+        try {
+            $product = parent::find($id, 'image');
+            $input = $request->only(['name', 'made_in', 'number_current', 'description']);
+            $input['date_manufacture'] = date_create($request->date_manufacture);
+            $input['date_expiration'] = date_create($request->date_expiration);
+            $input['category_id'] = $request->subCategory;
+            if (isset($request->file)) {
+                $input['image'] = $this->uploadImages($product->image, $request->file);
+            }
+
+            parent::update($input, $id);
+
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+    * function findProduct.
+     *
+     * @return true or false
+     */
+    public function findProduct($productId)
+    {
+        $product = $this->model->with('category')->where('id', $productId)->first();
+        return $product;
     }
 }

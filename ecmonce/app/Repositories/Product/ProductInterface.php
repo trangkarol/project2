@@ -8,5 +8,7 @@ interface ProductInterface
 
     public function getProduct();
 
+    public function findProduct($productId);
+
     public function uploadImages($file);
 }

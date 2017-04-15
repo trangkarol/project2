@@ -24,8 +24,7 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:50|min:4|unique:products,name,'.$this->id,
-            'image' => 'required',
+            'name' => 'required|max:50|min:4|unique:products,name,' . $this->id,
             'date_manufacture' => 'required',
             'date_expiration' => 'required|after:date_manufacture',
             'description' => 'required|min:30',
@@ -44,7 +43,6 @@ class UpdateProductRequest extends FormRequest
             'name.unique' => trans('product.msg.name-unique'),
             'name.max' => trans('product.msg.name-max'),
             'name.min' => trans('product.msg.name-min'),
-            'image.required' => trans('product.msg.image-required'),
             'date_manufacture.required' => trans('product.msg.date-manufacture-required'),
             'date_expiration.required' => trans('product.msg.date-expiration-required'),
             'date_expiration.after' => trans('product.msg.date-expiration-after'),

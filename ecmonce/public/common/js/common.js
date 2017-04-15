@@ -4,11 +4,11 @@ $(document).ready(function() {
             jQuery.colorbox.resize({width:"90%"});
         });
 
-    $('#file').change(function (event) {
-        //lấy path của ảnh tại client
+    $('#images').change(function (event) {
+        //get path of client
         $(this).parent().addClass('img-current')
         var tmppath = URL.createObjectURL(event.target.files[0]);
-        $('.img-current').find("img").fadeIn("fast").attr('src', URL.createObjectURL(event.target.files[0]));
+        $('.img-current').find('img').fadeIn('fast').attr('src', URL.createObjectURL(event.target.files[0]));
         $(this).parent().removeClass('img-current')
 
     });

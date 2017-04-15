@@ -1,7 +1,7 @@
 @extends('admin.block.master')
 <!-- title off page -->
 @section('title')
-    {{ trans('product.title-insert') }}
+    {{ trans('product.title-update') }}
 @endsection
 <!-- css used for page -->
 <!-- content of page -->
@@ -30,14 +30,15 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2> {{ trans('product.title-insert') }} </h2>
+                                <h2> {{ trans('product.title-edit') }} </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
                                     </ul>
                                 <div class="clearfix"></div>
                             </div>
-                            {!! Form::open(['action' => 'Admin\ProductController@store', 'class' => 'form-horizontal form-label-left', 'enctype' => 'multipart/form-data']) !!}
+                            {!! Form::open(['action' => ['Admin\ProductController@update', $product->id], 'method' => 'PATCH', 'class' => 'form-horizontal form-label-left', 'enctype' => 'multipart/form-data']) !!}
+                                {{ Form::hidden('id', isset($product->id) ? $product->id : null, ['id' => 'id']) }}
                                 @include('admin.product.form_product')
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-7">
@@ -45,7 +46,7 @@
                                             {{ Form::reset(trans('common.button.reset'), ['class' => 'btn btn-success']) }}
                                         </div>
                                         <div class="col-md-3">
-                                            {{ Form::submit(trans('common.button.insert'), ['class' => 'btn btn-success']) }}
+                                            {{ Form::submit(trans('common.button.edit'), ['class' => 'btn btn-success']) }}
                                         </div>
                                     </div>
                                 </div>

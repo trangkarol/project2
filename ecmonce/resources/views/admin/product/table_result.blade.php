@@ -28,7 +28,6 @@
                         </div>
                         <div class="col-md-6">
                         {{ Form::open(['action' => ['Admin\ProductController@destroy', $product->id], 'class' => 'form-delete-product']) }}
-                                {{ Form::hidden('productId',$product->id) }}
                                 {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['class' => 'btn btn-primary btn-delete', 'type' => 'button', 'data-toggle' => 'tooltip', 'title' => trans('product.tooltip.delete')]) !!}
                             {{ Form::close() }}
                         </div>

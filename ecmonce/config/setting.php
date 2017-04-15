@@ -2,6 +2,10 @@
 
 return [
     'minutes' => 60,
+    'defaul_select' => [
+        '0' => '',
+    ],
+
     'admin' => [
         'paginate' => 15,
     ],

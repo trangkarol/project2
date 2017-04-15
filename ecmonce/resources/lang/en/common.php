@@ -19,4 +19,13 @@ return [
         'delete' => 'Delete',
         'insert' => 'Insert',
     ],
+
+    'made_in' => [
+        'chosse' => '--Made in--',
+        'china' => 'China',
+        'vietname' => 'VietNam',
+        'usa' => 'USA',
+        'japan' => 'Japan',
+        'italy' => 'Italy',
+    ],
 ];

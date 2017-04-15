@@ -8,6 +8,8 @@ use App\Repositories\User\UserInterface;
 use App\Repositories\User\UserRepository;
 use App\Repositories\Product\ProductInterface;
 use App\Repositories\Product\ProductRepository;
+use App\Repositories\Category\CategoryInterface;
+use App\Repositories\Category\CategoryRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -30,5 +32,6 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         App::bind(UserInterface::class, UserRepository::class);
         App::bind(ProductInterface::class, ProductRepository::class);
+        App::bind(CategoryInterface::class, CategoryRepository::class);
     }
 }

@@ -1,7 +1,7 @@
 @extends('admin.common.master')
 <!-- title off page -->
 @section('title')
-    {{ trans('admin.title-login') }}
+    {{ trans('common.title-login') }}
 @endsection
 <!-- content of page -->
 @section('content')

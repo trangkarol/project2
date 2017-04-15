@@ -24,4 +24,10 @@ return [
         'one' => 0,
         'two' => 1,
     ],
+
+    'role' => [
+        'admin' => 0,
+        'user' => 1,
+    ],
+
 ];

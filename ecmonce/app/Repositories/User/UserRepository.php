@@ -31,13 +31,11 @@ class UserRepository extends BaseRepository implements UserInterface
             $user = $request->only('email', 'password');
 
             if (Auth::attempt($user)) {
+                $role = config('setting.role.user');
                 if (Auth::user()->isAdmin()) {
-                    $this->activity->insertActivities(Auth::user(), 'login');
-                    $role = config('setting.role.user');
+                    $role = config('setting.role.admin');
                 }
 
-                $this->activity->insertActivities(Auth::user(), 'login');
-                $role = config('setting.role.admin');
                 $result = [
                     'result' => true,
                     'role' => $role,
@@ -45,13 +43,10 @@ class UserRepository extends BaseRepository implements UserInterface
                 return $result;
             }
 
-            $result = [
-                'result' => false,
-            ];
+            return ['result' => false];
         } catch (\Exception $e) {
-            $result = [
-                'result' => false,
-            ];
+            dd($e);
+            return ['result' => false];
         }
     }
 }

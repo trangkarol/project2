@@ -2,59 +2,56 @@
 
 namespace App\Repositories\User;
 
-use Auth;
 use App\Models\User;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Input;
-use Exception;
-use File;
 use App\Repositories\User\UserInterface;
+use Auth;
 
 class UserRepository extends BaseRepository implements UserInterface
 {
+    /**
+    * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct(User $user)
     {
         $this->model = $user;
     }
 
-    public function create($request)
+    /**
+    * function uploadImages.
+     *
+     * @return imageName
+     */
+    public function login($request)
     {
-        $fileName = isset($request['avatar'])
-            ? $this->uploadAvatar()
-            : config('settings.user.avatar_default');
-        $input = [
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'avatar' => $fileName,
-            'password' => $request['password'],
-        ];
-        return $this->model->create($input);
-    }
+        try {
+            $user = $request->only('email', 'password');
 
-    public function update($request)
-    {
-        $fileName = isset($request['avatar'])
-            ? $this->uploadAvatar()
-            : config('settings.user.avatar_default');
-        $input = [
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'avatar' => $fileName,
-            'password' => $request['password'],
-        ];
-        return $this->model->create($input);
-    }
+            if (Auth::attempt($user)) {
+                if (Auth::user()->isAdmin()) {
+                    $this->activity->insertActivities(Auth::user(), 'login');
+                    $role = config('setting.role.user');
+                }
 
-    protected function uploadAvatar($oldImage = null)
-    {
-        $fileAvatar = Input::file('avatar');
-        $destinationPath = public_path(config('settings.user.avatar_path'));
-        $fileName = uniqid(time(), true) . '_' . $fileAvatar->getClientOriginalName();
-        Input::file('avatar')->move($destinationPath, $fileName);
-        $imageOldDestinationPath = $destinationPath . $oldImage;
-        if (!empty($oldImage) && File::exists($imageOldDestinationPath)) {
-            File::delete($imageOldDestinationPath);
+                $this->activity->insertActivities(Auth::user(), 'login');
+                $role = config('setting.role.admin');
+                $result = [
+                    'result' => true,
+                    'role' => $role,
+                ];
+                return $result;
+            }
+
+            $result = [
+                'result' => false,
+            ];
+        } catch (\Exception $e) {
+            $result = [
+                'result' => false,
+            ];
         }
-        return $fileName;
     }
 }

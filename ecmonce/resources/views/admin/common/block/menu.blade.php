@@ -1,4 +1,4 @@
-<!-- top navigation -->
+  <!-- top navigation -->
 <div class="top_nav">
     <div class="nav_menu">
         <nav>
@@ -14,7 +14,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-usermenu pull-right">
                             <li>
-                                <a href=""> {{ trans('user.lbl-profile')}}</a>
+                                <a href="{{ action('Member\HomeController@index') }}"> {{ trans('user.lbl-profile')}}</a>
                             </li>
                             <li>
                                 <a href="{{ action('Auth\LoginController@logout') }}" id="btn-logout">

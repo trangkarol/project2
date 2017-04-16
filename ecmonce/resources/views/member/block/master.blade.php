@@ -8,6 +8,7 @@
         @section('contentCss')
             {{ Html::style('/bower_components/bootstrap/dist/css/bootstrap.min.css') }}
             {{ Html::style('/bower_components/components-font-awesome/css/font-awesome.min.css') }}
+            {{ Html::style('/css/bootstrap.css') }}
             {{ Html::style('/css/style.css') }}
             {{ Html::style('/css/coreSlider.css') }}
             {{ Html::style('/css/jstarbox.css') }}
@@ -38,9 +39,14 @@
             {{ Html::script('/bower_components/jquery/dist/jquery.js') }}
             {{ Html::script('/js/member/simpleCart.min.js') }}
             {{ Html::script('/js/member/responsiveslides.min.js') }}
-            {{ Html::script('/js/member/sjstarbox.js') }}
+            {{ Html::script('/js/member/jstarbox.js') }}
             {{ Html::script('/js/member/coreSlider.js') }}
             {{ Html::script('/js/member/main.js') }}
+            {{ Html::script('/js/member/jquery.mousewheel.js') }}
+            {{ Html::script('/js/member/jquery.mycart.js') }}
+            {{ Html::script('/js/member/owl.carousel.js') }}
+            {{ Html::script('/js/member/simpleCart.min.js') }}
+            {{ Html::script('/js/member/bootstrap.js') }}
             {{ Html::script('/member/common.js') }}
             {{ Html::script('/jquery-colorbox/jquery.colorbox-min.js') }}
             {{ Html::script('/common/js/bootbox.min.js') }}

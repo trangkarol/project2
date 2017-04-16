@@ -22,6 +22,10 @@ return [
     'lbl-result-search' => 'Result search',
     'lbl-welcome' => 'Welcome, ',
     'lbl-genaral' => 'Genaral',
+    'lbl-hot' => 'Hot',
+    'lbl-new' => 'New',
+    'lbl-vnd' => 'VND',
+    'lbl-add-cart' => 'Add to cart',
     'lbl-stt' => 'No.',
     'file' => [
         'import' => 'Import File',

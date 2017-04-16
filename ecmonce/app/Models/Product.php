@@ -46,11 +46,16 @@ class Product extends Model
         return $this->belongsToMany(User::class, 'ratings')->withPivot('point')->withTimestamps();
     }
 
-    /**
-     * Get the url of images.
-     *
-     * @return string
-     */
+    public function Orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_details')->withPivot('number', 'total_price')->withTimestamps();
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
+
     public function getPathImageAttribute()
     {
         return url(config('setting.path.show'), $this->image);

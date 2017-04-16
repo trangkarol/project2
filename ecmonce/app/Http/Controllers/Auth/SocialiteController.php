@@ -47,6 +47,7 @@ class SocialiteController extends Controller
         $user = Socialite::driver($provider)->user();
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
+
         return redirect()->action('Member\HomeController@index');
     }
 

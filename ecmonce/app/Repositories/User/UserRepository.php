@@ -95,7 +95,6 @@ class UserRepository extends BaseRepository implements UserInterface
     public function createSocialite($user, $provider)
     {
         try {
-            $user = $this->model->find(Auth::user()->id);
             $authUser = $this->model->where('provider_id', $user->id)->first();
             if ($authUser) {
                 return $authUser;

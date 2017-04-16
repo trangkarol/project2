@@ -9,4 +9,6 @@ interface CategoryInterface
     public function getSubCategory($parent_id);
 
     public function getMenu();
+
+    public function getProductHome();
 }

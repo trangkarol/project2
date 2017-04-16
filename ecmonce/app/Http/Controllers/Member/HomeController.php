@@ -3,22 +3,25 @@
 namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
+use App\Repositories\Product\ProductInterface;
 use App\Repositories\Category\CategoryInterface;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
     protected $cateRepository;
-
+    protected $productRepository;
     /**
     * Create a new controller instance.
      *
      * @return void
      */
     public function __construct(
-        CategoryInterface $cateRepository
+        CategoryInterface $cateRepository,
+        ProductInterface $productRepository
     ) {
         $this->cateRepository = $cateRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -29,7 +32,11 @@ class HomeController extends Controller
     public function index()
     {
         $menus = $this->cateRepository->getMenu();
-        return view('member.home.home', compact('menus'));
+        $product_hot = $this->productRepository->hotProduct();
+        $product_new = $this->productRepository->newProduct();
+        $categories = $this->cateRepository->getProductHome();
+
+        return view('member.home.home', compact('menus', 'categories', 'product_hot', 'product_new'));
     }
 
     /**

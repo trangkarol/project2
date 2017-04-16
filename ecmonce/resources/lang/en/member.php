@@ -7,4 +7,6 @@ return [
     'lbl-msg-pass' => 'My new password is ',
     'lbl-msg-please' => 'Please connect to your website to login',
     'lbl-connect' => 'Connect',
+    'title-new-product' => 'New Product',
+    'title-hot-product' => 'Hot Product',
 ];

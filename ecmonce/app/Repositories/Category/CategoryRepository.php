@@ -55,4 +55,15 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
 
         return $menu;
     }
+
+    /**
+    * function getProductHome.
+     *
+     * @return true or false
+     */
+    public function getProductHome()
+    {
+        $product = $this->model->with('subCategory.products')->get();
+        return $product;
+    }
 }

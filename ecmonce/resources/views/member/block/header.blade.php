@@ -7,7 +7,7 @@
         <ul>
             @if (Auth::guard()->check())
                 <li><a href="#">{{ Auth::user()->name }}</a></li>
-                <li><a href="#"><img src="{{ Auth::user()->getPathAvatarAttribute() }}"></a></li>
+                <li><a href="#"><img src="{{ Auth::user()->getPathAvatarAttribute() }}" width="70px" height="50px"></a></li>
                 <li>
                     <a href="{{ action('Auth\LoginController@logout') }}" id="btn-logout">
                         <i class="fa fa-sign-out pull-right"></i> {{ trans('common.title-logout') }}
@@ -17,7 +17,7 @@
                 </li>
             @else
                 <li><a href="javascript:void(0)" id="login">{{ trans('common.title-login') }}</a></li>
-                <li><a href="javascript:void(0)" id="resgiter">{{ trans('common.title-resgiter') }}</a></li>
+                <li><a href="{{ action('Auth\RegisterController@index') }}" id="resgiter">{{ trans('common.title-resgiter') }}</a></li>
             @endif
         </ul>
         </div>

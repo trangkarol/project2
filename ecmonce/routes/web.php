@@ -37,6 +37,8 @@ Route::group(['namespace' => 'Auth'], function() {
     Route::post('/login', 'LoginController@login');
     Route::post('/logout', 'LoginController@logout');
     Route::post('/change-password', 'ResetPasswordController@changePassword');
+    Route::get('/register', 'RegisterController@index');
+    Route::post('/register', 'RegisterController@register');
     Route::get('/page-change-password', 'ResetPasswordController@index')->middleware('auth');
     // OAuth Routes
     Route::get('auth/{provider}', 'SocialiteController@redirectToProvider');

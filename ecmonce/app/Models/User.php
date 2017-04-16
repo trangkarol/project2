@@ -26,6 +26,7 @@ class User extends Authenticatable
         'address',
         'provider',
         'provider_id',
+        'password',
     ];
 
     /**
@@ -75,4 +76,10 @@ class User extends Authenticatable
     {
         return url(config('setting.path.show'), $this->avatar);
     }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
 }

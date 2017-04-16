@@ -28,7 +28,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
     public function uploadImages($oldImage = null, $fileImages = null)
     {
         // dd($oldImage);
-        if ($oldImage != config('settings.images.avatar')) {
+        if ($oldImage != config('settings.images.product')) {
             unlink(config('setting.path.file') . $oldImage);
         }
 

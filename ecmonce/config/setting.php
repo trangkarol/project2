@@ -17,7 +17,7 @@ return [
     ],
 
     'images' => [
-        'avatar' => 'avatar.jpg',
+        'avatar' => 'avatar.png',
         'product' => 'product.jpg',
     ],
 

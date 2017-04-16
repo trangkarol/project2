@@ -7,6 +7,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Input;
 use App\Repositories\User\UserInterface;
 use Auth;
+use DateTime;
 
 class UserRepository extends BaseRepository implements UserInterface
 {
@@ -79,6 +80,7 @@ class UserRepository extends BaseRepository implements UserInterface
             $user->password = bcrypt($request->password);
             $user->save();
             Auth::logout();
+
             return true;
         } catch(\Exception $e) {
             return false;
@@ -110,5 +112,43 @@ class UserRepository extends BaseRepository implements UserInterface
         } catch(\Exception $e) {
             return false;
         }
+    }
+
+    /**
+    * function register
+     *
+     * @return $result
+     */
+    public function register($request, $role)
+    {
+        try {
+            $input = $request->only(['name', 'email', 'password', 'address', 'phone_number']);
+            $input['avatar'] = isset($request->file) ? $this->uploadAvatar(null, $request->file) : config('setting.images.avatar');
+            $input['birthday'] = date_create($request->birthday);
+            $input['role'] = $role;
+
+            return parent::create($input);
+        } catch(\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+    * function uploadImages.
+     *
+     * @return imageName
+     */
+    public function uploadAvatar($images = null, $fileImages = null)
+    {
+        if ($images != config('settings.images.avatar')) {
+            unlink(config('setting.path.file') . $images);
+        }
+
+        $dt = new DateTime();
+        $arr_images = explode('.', $fileImages->getClientOriginalName());
+        $imageName = 'user_' . $dt->format('Y-m-d-H-i-s') . '.' .  $arr_images[count($arr_images) - 1];
+        $fileImages->move(config('setting.path.file'), $imageName);
+
+        return $imageName;
     }
 }

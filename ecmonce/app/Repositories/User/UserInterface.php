@@ -9,4 +9,6 @@ interface UserInterface
     public function logout($request);
 
     public function changePassword($request);
+
+    public function createSocialite($user, $provider);
 }

@@ -13,6 +13,7 @@ return [
     'path' => [
         'file' => base_path() . '/public/Upload/',
         'show' => '/Upload',
+        'images' => '/images',
     ],
 
     'images' => [

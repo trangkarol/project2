@@ -1,63 +1,54 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>@yield('title')</title>
         <!-- start css -->
         @section('contentCss')
             {{ Html::style('/bower_components/bootstrap/dist/css/bootstrap.min.css') }}
             {{ Html::style('/bower_components/components-font-awesome/css/font-awesome.min.css') }}
-            {{ Html::style('/bower_components/nprogress/nprogress.css') }}
-            {{ Html::style('/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}
+            {{ Html::style('/css/style.css') }}
+            {{ Html::style('/css/coreSlider.css') }}
+            {{ Html::style('/css/jstarbox.css') }}
+            {{ Html::style('/css/flexslider.css') }}
+            {{ Html::style('/css/jquery-ui.css') }}
+            {{ Html::style('/css/owl.carousel.css') }}
+            {{ Html::style('//fonts.googleapis.com/css?family=Cagliostro') }}
             {{ Html::style('/jquery-colorbox/example3/colorbox.css') }}
-            {{ Html::style('/css/custom.min.css') }}
-            {{ Html::style('/css/common.css') }}
+            {{ Html::style('//fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300') }}
         @show
-        <!-- end csss -->
     </head>
-    <body class="home">
-        <!-- Color Bars (above header)-->
-        <div class="color-bar-1"></div>
-        <div class="color-bar-2 color-bg"></div>
-        <div class="container">
-            <div class="row header">
-                @include('user.block.header')
+    <body>
+        <div class="container-fluid">
+            <!-- header -->
+            <div class="header">
+                @include('member.block.header')
             </div>
-            <div class="row headline">
+            <!-- banner -->
+            <div class="banner-w3">
+                @include('member.block.banner')
+            </div>
+            <!-- content -->
+            <div class="content">
                 @yield('content')
             </div>
         </div>
         @section('contentJs')
             {{ Html::script('/bower_components/jquery/dist/jquery.js') }}
-            {{ Html::script('/bower_components/bootstrap/dist/js/bootstrap.min.js') }}
-            {{ Html::style('/bower_components/nprogress/nprogress.js') }}
-            {{ Html::style('/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}
-            {{ Html::style('/bower_components/fastclick/lib/fastclick.js') }}
-            {{ Html::style('/bower_components/Flot/jquery.flot.js') }}
-            {{ Html::style('/bower_components/Flot/jquery.pie.js') }}
-            {{ Html::style('/bower_components/Flot/jquery.time.js') }}
-            {{ Html::style('/bower_components/Flot/jquery.stack.js') }}
-            {{ Html::style('/bower_components/Flot/jquery.resize.js') }}
-            {{ Html::style('/bower_components/DateJS/build/date.js') }}
-            {{ Html::style('/bower_components/moment/min/moment.min.js') }}
-            {{ Html::script('/common/js/common.js') }}
+            {{ Html::script('/js/member/simpleCart.min.js') }}
+            {{ Html::script('/js/member/responsiveslides.min.js') }}
+            {{ Html::script('/js/member/sjstarbox.js') }}
+            {{ Html::script('/js/member/coreSlider.js') }}
+            {{ Html::script('/js/member/main.js') }}
+            {{ Html::script('/member/common.js') }}
             {{ Html::script('/jquery-colorbox/jquery.colorbox-min.js') }}
             {{ Html::script('/common/js/bootbox.min.js') }}
-            {{ Html::script('/js/custom.min.js') }}
+            <script type="text/javascript">
+                var action = {
+                    'get_login': "{{ action('Member\HomeController@getFormLogin') }}",
+                };
+            </script>
         @show
-        <!-- end js  -->
-        <script type="text/javascript">
-            $.ajaxSetup ({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        </script>
-
-        @inlude('user.block.footer')
     </body>
 </html>

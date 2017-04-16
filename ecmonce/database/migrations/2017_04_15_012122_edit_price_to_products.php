@@ -26,7 +26,7 @@ class EditPriceToProducts extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->integer('price')->change();
+            $table->decimal('price', 5, 2)->change();
         });
     }
 }

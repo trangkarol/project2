@@ -1,4 +1,4 @@
-@extends('user.block.master')
+@extends('member.block.master')
 <!-- title off page -->
 @section('title')
     {{ trans('member.title-admin') }}
@@ -6,7 +6,8 @@
 
 <!-- content of page -->
 @section('content')
-    <div class="row headline">
+    <div class="headline">
+        <p>Home</p>
         @include('member.home.hot_product')
     </div>
 @endsection

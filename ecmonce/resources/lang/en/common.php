@@ -4,7 +4,18 @@ return [
     // title
     'title-system' => 'Ecommerce',
     'title-login' => 'Login',
+    'title-sinup' => 'Sinup',
+    'title-facebook' => 'Facebook',
+    'title-google' => 'Google+',
+    'title-twitter' => 'Twitter',
     'title-logout' => 'Logout',
+    'title-newshop' => 'Newshop',
+    'title-everywhere' => 'everywhere',
+    'title-resgiter' => 'Register',
+    'title-home' => 'Home',
+    'lbl-or' => 'or',
+    'lbl-sdt' => '+0123-456-789',
+    'lbl-help' => 'Help',
     // label
     'lbl-profile' => 'Profile',
     'lbl-change-pass-word' => 'Change Password',

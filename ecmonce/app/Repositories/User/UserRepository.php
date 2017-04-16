@@ -80,16 +80,35 @@ class UserRepository extends BaseRepository implements UserInterface
             $user->save();
             Auth::logout();
             return true;
-
-            $request->session()->flash('success', trans('user.msg.change-password-success'));
-
-            return redirect()->action('Auth\LoginController@login');
         } catch(\Exception $e) {
             return false;
-            $request->session()->flash('fail', trans('user.msg.change-password-fail'));
-            DB::rollback();
+        }
+    }
 
-            return redirect()->back();
+    /**
+    * function createSocialite($user, $provider)
+     *
+     * @return $result
+     */
+    public function createSocialite($user, $provider)
+    {
+        try {
+            $user = $this->model->find(Auth::user()->id);
+            $authUser = $this->model->where('provider_id', $user->id)->first();
+            if ($authUser) {
+                return $authUser;
+            }
+
+            return parent::create([
+                'name'     => $user->name,
+                'email'    => $user->email,
+                'provider' => $provider,
+                'provider_id' => $user->id,
+                'avatar' => config('setting.images.avatar'),
+                'role' => config('setting.role.user'),
+            ]);
+        } catch(\Exception $e) {
+            return false;
         }
     }
 }

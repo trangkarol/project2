@@ -67,6 +67,7 @@ class LoginController extends Controller
                 return redirect()->action('Admin\ProductController@index');
             }
 
+            return redirect()->action('Member\HomeController@index');
         }
 
         $request->session()->flash('fail', trans('user.msg.login-fail'));
@@ -86,7 +87,7 @@ class LoginController extends Controller
         if ($result) {
             $request->session()->flash('success', trans('user.msg.logout-success'));
 
-            return redirect()->action('Auth\LoginController@index');
+            return redirect()->action('Member\HomeController@index');
         }
 
         $request->session()->flash('fail', trans('user.msg.logout-fail'));

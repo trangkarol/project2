@@ -24,6 +24,8 @@ class User extends Authenticatable
         'role',
         'phone_number',
         'address',
+        'provider',
+        'provider_id',
     ];
 
     /**
@@ -42,6 +44,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = ['deleted_at'];
+    protected $appends = ['path_avatar'];
 
     public function orders()
     {
@@ -66,5 +69,10 @@ class User extends Authenticatable
     public function isUser()
     {
         return $this->role == config('setting.role.user');
+    }
+
+    public function getPathAvatarAttribute()
+    {
+        return url(config('setting.path.show'), $this->avatar);
     }
 }

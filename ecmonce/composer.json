@@ -6,11 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*",
         "doctrine/dbal": "^2.4",
-        "laravelcollective/html": "5.3.",
-        "maatwebsite/excel": "^2.1",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.4|~6.0",
+        "laravel/framework": "5.4.*",
+        "laravel/socialite": "^3.0",
+        "laravelcollective/html": "5.4.*",
+        "maatwebsite/excel": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -42,4 +42,17 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
 
         return $subCategory;
     }
+
+    /**
+    * function get memnu.
+     *
+     * @param $parent_id
+     * @return imageName
+     */
+    public function getMenu()
+    {
+        $menu = $this->model->with('subCategory')->get();
+
+        return $menu;
+    }
 }

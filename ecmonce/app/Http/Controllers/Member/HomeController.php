@@ -3,10 +3,24 @@
 namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
+use App\Repositories\Category\CategoryInterface;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+    protected $cateRepository;
+
+    /**
+    * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(
+        CategoryInterface $cateRepository
+    ) {
+        $this->cateRepository = $cateRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +28,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // \Auth::logout();
-        return view('member.home.home');
+        $menus = $this->cateRepository->getMenu();
+        return view('member.home.home', compact('menus'));
     }
 
     /**

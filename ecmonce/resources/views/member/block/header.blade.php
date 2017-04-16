@@ -45,78 +45,32 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.html" class="act">{{ trans('common.title-home') }}</a></li>
                         <!-- Mega Menu -->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women<b class="caret"></b></a>
-                            <ul class="dropdown-menu multi-column columns-3">
-                                <div class="row">
-                                    <div class="col-sm-3  multi-gd-img">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Submenu1</h6>
-                                            <li><a href="products.html">Clothing</a></li>
-                                            <li><a href="products.html">Wallets</a></li>
-                                            <li><a href="products.html">Shoes</a></li>
-                                            <li><a href="products.html">Watches</a></li>
-                                            <li><a href="products.html"> Underwear </a></li>
-                                            <li><a href="products.html">Accessories</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3  multi-gd-img">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Submenu2</h6>
-                                            <li><a href="products.html">Sunglasses</a></li>
-                                            <li><a href="products.html">Wallets,Bags</a></li>
-                                            <li><a href="products.html">Footwear</a></li>
-                                            <li><a href="products.html">Watches</a></li>
-                                            <li><a href="products.html">Accessories</a></li>
-                                            <li><a href="products.html">Jewellery</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3  multi-gd-img">
-                                            <a href="products.html"><img src="images/woo.jpg" alt=" "/></a>
-                                    </div>
-                                    <div class="col-sm-3  multi-gd-img">
-                                            <a href="products.html"><img src="images/woo1.jpg" alt=" "/></a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men <b class="caret"></b></a>
-                            <ul class="dropdown-menu multi-column columns-3">
-                                <div class="row">
-                                    <div class="col-sm-3  multi-gd-img">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Submenu1</h6>
-                                            <li><a href="products.html">Clothing</a></li>
-                                            <li><a href="products.html">Wallets</a></li>
-                                            <li><a href="products.html">Shoes</a></li>
-                                            <li><a href="products.html">Watches</a></li>
-                                            <li><a href="products.html"> Underwear </a></li>
-                                            <li><a href="products.html">Accessories</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3  multi-gd-img">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Submenu2</h6>
-                                            <li><a href="products.html">Sunglasses</a></li>
-                                            <li><a href="products.html">Wallets,Bags</a></li>
-                                            <li><a href="products.html">Footwear</a></li>
-                                            <li><a href="products.html">Watches</a></li>
-                                            <li><a href="products.html">Accessories</a></li>
-                                            <li><a href="products.html">Jewellery</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3  multi-gd-img">
-                                            <a href="products1.html"><img src="images/woo3.jpg" alt=" "/></a>
-                                    </div>
-                                    <div class="col-sm-3  multi-gd-img">
-                                            <a href="products1.html"><img src="images/woo4.jpg" alt=" "/></a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </ul>
-                        </li>
+                        @foreach ($menus as $menu)
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $menu->name }}<b class="{{ $menu->subCategory->isEmpty() ? '' : 'caret' }}"></b></a>
+                                @if (!$menu->subCategory->isEmpty())
+                                    <ul class="dropdown-menu multi-column columns-3">
+                                        <div class="row">
+                                            <div class="col-sm-3  multi-gd-img">
+                                                <ul class="multi-column-dropdown">
+                                                    <h6>Submenu1</h6>
+                                                    @foreach ($menu->subCategory as $subCategory)
+                                                        <li><a href="products.html">{{ $subCategory->name }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-3  multi-gd-img">
+                                                    <a href="products.html"><img src="images/woo.jpg" alt=" "/></a>
+                                            </div>
+                                            <div class="col-sm-3  multi-gd-img">
+                                                    <a href="products.html"><img src="images/woo1.jpg" alt=" "/></a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </ul>
+                                @endif
+                            </li>
+                        @endforeach
                         <li><a href="codes.html">Short Codes</a></li>
                         <li><a href="mail.html">Mail Us</a></li>
                     </ul>

@@ -1,7 +1,7 @@
 @extends('member.block.master')
 <!-- title off page -->
 @section('title')
-    {{ trans('common.title-register') }}
+    {{ trans('common.title-detail') }}
 @endsection
 
 <!-- content of page -->
@@ -9,8 +9,8 @@
     <div class="login">
         <div class="main-agileits">
             <div class="form-w3agile form1">
-                <h3>{{ trans('common.title-resgiter') }}</h3>
-                 {!! Form::open(['action' => 'Auth\RegisterController@register', 'enctype' => 'multipart/form-data']) !!}
+                <h3>{{ trans('common.title-detail') }}</h3>
+                 {!! Form::open(['action' => ['Auth\RegisterController@update', $user->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
 
                     @include('member.user.form_user')
                     <div class="form-group">
@@ -18,7 +18,7 @@
                             {{ Form::reset(trans('common.button.reset'), ['class' => 'btn btn-success']) }}
                         </div>
                         <div class="col-md-3">
-                            {{ Form::submit(trans('common.button.insert'), ['class' => 'btn btn-success']) }}
+                            {{ Form::submit(trans('common.button.edit'), ['class' => 'btn btn-success']) }}
                         </div>
                         <div class="clearfix"></div>
                     </div>

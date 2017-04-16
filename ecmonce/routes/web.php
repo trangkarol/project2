@@ -37,9 +37,17 @@ Route::group(['namespace' => 'Auth'], function() {
     Route::post('/login', 'LoginController@login');
     Route::post('/logout', 'LoginController@logout');
     Route::post('/change-password', 'ResetPasswordController@changePassword');
+    // register
     Route::get('/register', 'RegisterController@index');
     Route::post('/register', 'RegisterController@register');
+    //update user
+    Route::get('/update/{id}', 'RegisterController@getUpdate');
+    Route::post('/update/{id}', 'RegisterController@update');
+    // change password
     Route::get('/page-change-password', 'ResetPasswordController@index')->middleware('auth');
+    //forgot password
+    Route::get('/forgot-password', 'ForgotPasswordController@index');
+    Route::post('/forgot-password', 'ForgotPasswordController@forgotPassword');
     // OAuth Routes
     Route::get('auth/{provider}', 'SocialiteController@redirectToProvider');
     Route::get('auth/{provider}/callback', 'SocialiteController@handleProviderCallback');

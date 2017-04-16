@@ -4,22 +4,22 @@
             <a href="#">{{ trans('common.lbl-help') }}<i class="glyphicon glyphicon-phone" aria-hidden="true"></i>{{ trans('common.lbl-sdt') }}</a>
         </div>
         <div class="top-right">
-        <ul>
-            @if (Auth::guard()->check())
-                <li><a href="#">{{ Auth::user()->name }}</a></li>
-                <li><a href="#"><img src="{{ Auth::user()->getPathAvatarAttribute() }}" width="70px" height="50px"></a></li>
-                <li>
-                    <a href="{{ action('Auth\LoginController@logout') }}" id="btn-logout">
-                        <i class="fa fa-sign-out pull-right"></i> {{ trans('common.title-logout') }}
-                    </a>
-                    {!! Form::open(['action' => 'Auth\LoginController@logout', 'class' => 'form-horizontal', 'id' => 'logout-form']) !!}
-                    {{ Form::close() }}
-                </li>
-            @else
-                <li><a href="javascript:void(0)" id="login">{{ trans('common.title-login') }}</a></li>
-                <li><a href="{{ action('Auth\RegisterController@index') }}" id="resgiter">{{ trans('common.title-resgiter') }}</a></li>
-            @endif
-        </ul>
+            <ul>
+                @if (Auth::guard()->check())
+                    <li><a href="{{ action('Auth\RegisterController@getUpdate', Auth::user()->id) }}">{{ Auth::user()->name }}</a></li>
+                    <li><a href="#"><img src="{{ Auth::user()->path_avatar }}" width="70px" height="50px"></a></li>
+                    <li>
+                        <a href="{{ action('Auth\LoginController@logout') }}" id="btn-logout">
+                            <i class="fa fa-sign-out pull-right"></i> {{ trans('common.title-logout') }}
+                        </a>
+                        {!! Form::open(['action' => 'Auth\LoginController@logout', 'class' => 'form-horizontal', 'id' => 'logout-form']) !!}
+                        {{ Form::close() }}
+                    </li>
+                @else
+                    <li><a href="javascript:void(0)" id="login">{{ trans('common.title-login') }}</a></li>
+                    <li><a href="{{ action('Auth\RegisterController@index') }}" id="resgiter">{{ trans('common.title-resgiter') }}</a></li>
+                @endif
+            </ul>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html" class="act">{{ trans('common.title-home') }}</a></li>
+                        <li class="active"><a href="{{ action('Member\HomeController@index') }}" class="act">{{ trans('common.title-home') }}</a></li>
                         <!-- Mega Menu -->
                         @foreach ($menus as $menu)
                             <li class="dropdown">

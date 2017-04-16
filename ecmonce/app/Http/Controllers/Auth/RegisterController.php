@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Repositories\User\UserInterface;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Requests\User\InsertUserRequest;
+use App\Repositories\Category\CategoryInterface;
+use App\Http\Requests\User\UpdateUserRequest;
 use DB;
 use Auth;
 
@@ -33,16 +35,19 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
     protected $userRepository;
+    protected $cateRepository;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(UserInterface $userRepository)
-    {
-        $this->middleware('guest');
+    public function __construct(
+        UserInterface $userRepository,
+        CategoryInterface $cateRepository
+    ) {
         $this->userRepository = $userRepository;
+        $this->cateRepository = $cateRepository;
     }
 
     /**
@@ -51,9 +56,10 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function index()
+    public function index()
     {
-        return view('member.user.register');
+        $menus = $this->cateRepository->getMenu();
+        return view('member.user.register', compact('menus'));
     }
 
     /**
@@ -62,19 +68,51 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function register(InsertUserRequest $request)
+    public function register(InsertUserRequest $request)
     {
         DB::beginTransaction();
         $result = $this->userRepository->register($request, config('setting.role.user'));
         if ($result) {
             DB::commit();
             Auth::login($result, true);
-
-            return redirect()->action('Member\HomeController@index');
         }
 
         DB::rollback();
 
         return redirect()->action('Member\HomeController@index');
+    }
+
+    /**
+     * register a member.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function getUpdate($id)
+    {
+        $user = $this->userRepository->find($id);
+        $menus = $this->cateRepository->getMenu();
+
+        return view('member.user.detail', compact('user', 'menus'));
+    }
+
+    /**
+     * register a member.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function update(UpdateUserRequest $request, $id)
+    {
+        DB::beginTransaction();
+        dd($request->all());
+        $result = $this->userRepository->update($request, $id);
+        if ($result) {
+            DB::commit();
+        }
+
+        DB::rollback();
+
+        return redirect()->action('Auth\RegisterController@getUpdate', $id);
     }
 }

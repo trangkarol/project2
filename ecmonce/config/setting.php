@@ -2,6 +2,7 @@
 
 return [
     'minutes' => 60,
+    'numer_pass' => 8,
     'defaul_select' => [
         '0' => '',
     ],

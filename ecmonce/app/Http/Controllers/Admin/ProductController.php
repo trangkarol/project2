@@ -49,7 +49,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $parentCategory = Library::getCategoryLevel(config('setting.mutil-level.one'));
+        $parentCategory = $this->cateRepository->getCategoryLibrary(config('setting.mutil-level.one'));
         $madeIn = Library::getMadeIn();
 
         return view('admin.product.create', compact('parentCategory', 'subCategory', 'madeIn'));
@@ -93,7 +93,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -105,7 +105,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->productRepository->findProduct($id);
-        $parentCategory = Library::getCategoryLevel(config('setting.mutil-level.one'));
+        $parentCategory = $this->cateRepository->getCategoryLibrary(config('setting.mutil-level.one'));
         $madeIn = Library::getMadeIn();
 
         return view('admin.product.edit', compact('product', 'parentCategory', 'madeIn'));
@@ -135,7 +135,6 @@ class ProductController extends Controller
 
             return redirect()->action(['Admin\ProductController@edit', $id]);
         } catch (\Exception $e) {
-
             DB::rollback();
             $request->session()->flash('fail', trans('product.msg.update-fail'));
 

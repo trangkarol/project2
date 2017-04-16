@@ -13,6 +13,7 @@ return [
     'title-everywhere' => 'everywhere',
     'title-resgiter' => 'Register',
     'title-home' => 'Home',
+    'title-detail' => 'Detail',
     'lbl-or' => 'or',
     'lbl-sdt' => '+0123-456-789',
     'lbl-help' => 'Help',
@@ -23,6 +24,7 @@ return [
     'lbl-welcome' => 'Welcome, ',
     'lbl-genaral' => 'Genaral',
     'lbl-stt' => 'No.',
+    'lbl-forgot-password' => 'Forgot password?',
     'file' => [
         'import' => 'Import File',
         'export' => 'Export File',
@@ -35,6 +37,7 @@ return [
         'insert' => 'Insert',
         'login' => 'Login',
         'change' => 'Change',
+        'agree' => 'Agree',
     ],
 
     'made_in' => [

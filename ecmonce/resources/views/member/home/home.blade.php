@@ -1,7 +1,7 @@
 @extends('member.block.master')
 <!-- title off page -->
 @section('title')
-    {{ trans('member.title-admin') }}
+    {{ trans('member.title-home') }}
 @endsection
 
 <!-- content of page -->

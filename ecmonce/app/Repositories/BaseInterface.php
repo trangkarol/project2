@@ -21,4 +21,6 @@ interface BaseInterface
     public function update($id, $input);
 
     public function delete($id);
+
+    public function uploadImages($image = null, $fileImages = null, $namedefault = null);
 }

@@ -46,7 +46,7 @@ class Product extends Model
         return $this->belongsToMany(User::class, 'ratings')->withPivot('point')->withTimestamps();
     }
 
-    public function Orders()
+    public function orders()
     {
         return $this->belongsToMany(Order::class, 'order_details')->withPivot('number', 'total_price')->withTimestamps();
     }
@@ -59,5 +59,15 @@ class Product extends Model
     public function getPathImageAttribute()
     {
         return url(config('setting.path.show'), $this->image);
+    }
+
+    public function setDateManufacturedAttribute($value)
+    {
+        $this->attributes['date_manufacture'] = date_create($value);
+    }
+
+    public function setDateExpirationAttribute($value)
+    {
+        $this->attributes['date_expiration'] = date_create($value);
     }
 }

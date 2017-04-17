@@ -23,11 +23,9 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
      *
      * @return imageName
      */
-    public function getCategoryLibrary($type_category)
+    public function getCategoryLibrary($type_category, $array = ['*'])
     {
-        $category = $this->model->where('type_category', config('setting.mutil-level.one'))->pluck('name', 'id')->all();
-
-        return $category;
+        return $this->model->where('type_category', config('setting.mutil-level.one'))->pluck('name', 'id')->all();
     }
 
     /**
@@ -38,9 +36,7 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
      */
     public function getSubCategory($parent_id)
     {
-        $subCategory = $this->model->where('parent_id', $parent_id)->pluck('name', 'id')->all();
-
-        return $subCategory;
+        return $this->model->where('parent_id', $parent_id)->pluck('name', 'id')->all();
     }
 
     /**
@@ -51,9 +47,7 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
      */
     public function getMenu()
     {
-        $menu = $this->model->with('subCategory')->get();
-
-        return $menu;
+        return $this->model->with('subCategory')->get();
     }
 
     /**
@@ -63,7 +57,16 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
      */
     public function getProductHome()
     {
-        $product = $this->model->with('subCategory.products')->get();
-        return $product;
+        return $this->model->with('subCategory.products')->get();
+    }
+
+    /**
+    * function productCategory.
+     *
+     * @return true or false
+     */
+    public function productCategory()
+    {
+        return $this->model->with('products')->where('type_category', config('setting.mutil-level.one'))->paginate(config('setting.user.paginate'));
     }
 }

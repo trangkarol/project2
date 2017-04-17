@@ -3,7 +3,10 @@
 @section('title')
     {{ trans('member.title-forgot-password') }}
 @endsection
-
+<!-- banner -->
+@section('banner')
+    @include('member.block.banner')
+@endsection
 <!-- content of page -->
 @section('content')
     <div class="login">

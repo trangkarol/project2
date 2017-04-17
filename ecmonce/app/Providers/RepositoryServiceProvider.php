@@ -10,6 +10,8 @@ use App\Repositories\Product\ProductInterface;
 use App\Repositories\Product\ProductRepository;
 use App\Repositories\Category\CategoryInterface;
 use App\Repositories\Category\CategoryRepository;
+use App\Repositories\SuggestProduct\SuggestProductRepository;
+use App\Repositories\SuggestProduct\SuggestProductInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -33,5 +35,6 @@ class RepositoryServiceProvider extends ServiceProvider
         App::bind(UserInterface::class, UserRepository::class);
         App::bind(ProductInterface::class, ProductRepository::class);
         App::bind(CategoryInterface::class, CategoryRepository::class);
+        App::bind(SuggestProductInterface::class, SuggestProductRepository::class);
     }
 }

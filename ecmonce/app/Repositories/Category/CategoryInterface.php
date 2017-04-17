@@ -11,4 +11,6 @@ interface CategoryInterface
     public function getMenu();
 
     public function getProductHome();
+
+    public function productCategory();
 }

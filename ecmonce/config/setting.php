@@ -3,12 +3,17 @@
 return [
     'minutes' => 60,
     'numer_pass' => 8,
+    'accept_default' => 0,
     'defaul_select' => [
         '0' => '',
     ],
 
     'admin' => [
         'paginate' => 15,
+    ],
+
+    'user' => [
+        'paginate' => 10,
     ],
 
     'path' => [

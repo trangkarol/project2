@@ -10,8 +10,6 @@ interface ProductInterface
 
     public function findProduct($productId);
 
-    public function uploadImages($file);
-
     public function hotProduct();
 
     public function newProduct();

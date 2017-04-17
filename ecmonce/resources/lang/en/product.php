@@ -15,7 +15,13 @@ return [
     'lbl-made-in' => 'Made In',
     'lbl-date-manufacture' => 'Date Manufacture',
     'lbl-date-expiration' => 'Expiration Date',
+    'lbl-new-category' => 'Do you want to add a new category?',
+    'lbl-old-category' => 'Do you want to use old category?',
     'lbl-subcatelory' => 'Subcategory',
+    'lbl-new-parent-category' => 'New Parent Category',
+    'lbl-new-sub-category' => 'New Sub Category',
+    'lbl-choose-category' => '-- Chosse Category --',
+    'lbl-accept' => 'Accept',
     'tooltip' => [
         'create' => 'Create product',
         'update' => 'Update product',

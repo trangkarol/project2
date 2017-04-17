@@ -29,6 +29,9 @@ Route::group(['prefix' => 'member', 'namespace' => 'Member'], function () {
     // home
     Route::resource('/home', 'HomeController');
     Route::get('/get-login', 'HomeController@getFormLogin');
+    Route::resource('product', 'ProductController');
+    Route::resource('suggest', 'SuggestProductController');
+    Route::post('/sub-category', 'SuggestProductController@getCategory');
 });
 
 /*login user*/

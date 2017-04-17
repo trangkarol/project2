@@ -7,6 +7,7 @@ namespace App\Repositories;
 use Exception;
 use DB;
 use Auth;
+use DateTime;
 use Carbon\Carbon;
 
 abstract class BaseRepository implements BaseInterface
@@ -18,14 +19,14 @@ abstract class BaseRepository implements BaseInterface
         return $this->model->all();
     }
 
-    public function fluck($column, $key = null)
+    public function pluck($column)
     {
-        return $this->model->lists($column, $key);
+        return $this->model->pluck($column);
     }
 
     public function paginate($limit = null, $columns = ['*'])
     {
-        $limit = is_null($limit) ? config('settings.admin.paginate') : $limit;
+        $limit = $limit ?: config('settings.admin.paginate');
 
         return $this->model->paginate($limit, $columns);
     }
@@ -75,5 +76,19 @@ abstract class BaseRepository implements BaseInterface
     public function search($column, $value)
     {
         return $this->model->where('$column LIKE $value');
+    }
+
+    public function uploadImages($image = null, $fileImages = null, $namedefault = null)
+    {
+        if ($image != $namedefault) {
+            unlink(config('setting.path.file') . $image);
+        }
+
+        $dt = new DateTime();
+        $arr_images = explode('.', $fileImages->getClientOriginalName());
+        $imageName = 'product_' . $dt->format('Y-m-d-H-i-s') . '.' .  $arr_images[count($arr_images) - 1];
+        $fileImages->move(config('setting.path.file'), $imageName);
+
+        return $imageName;
     }
 }

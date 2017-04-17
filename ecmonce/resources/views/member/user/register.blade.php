@@ -3,13 +3,16 @@
 @section('title')
     {{ trans('common.title-register') }}
 @endsection
-
+<!-- banner -->
+@section('banner')
+    @include('member.block.banner')
+@endsection
 <!-- content of page -->
 @section('content')
     <div class="login">
         <div class="main-agileits">
             <div class="form-w3agile form1">
-                <h3>{{ trans('common.title-resgiter') }}</h3>
+                <h3>{{ trans('common.title-register') }}</h3>
                  {!! Form::open(['action' => 'Auth\RegisterController@register', 'enctype' => 'multipart/form-data']) !!}
 
                     @include('member.user.form_user')

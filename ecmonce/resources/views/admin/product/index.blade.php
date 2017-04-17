@@ -60,5 +60,4 @@
 @section('contentJs')
     @parent
     {{ Html::script('/admin/js/product.js') }}
-
 @endsection

@@ -17,7 +17,7 @@
                     </li>
                 @else
                     <li><a href="javascript:void(0)" id="login">{{ trans('common.title-login') }}</a></li>
-                    <li><a href="{{ action('Auth\RegisterController@index') }}" id="resgiter">{{ trans('common.title-resgiter') }}</a></li>
+                    <li><a href="{{ action('Auth\RegisterController@index') }}" id="resgiter">{{ trans('common.title-register') }}</a></li>
                 @endif
             </ul>
         </div>
@@ -71,7 +71,9 @@
                                 @endif
                             </li>
                         @endforeach
-                        <li><a href="codes.html">Short Codes</a></li>
+                        @if (Auth::guard()->check())
+                            <li><a href="{{ action('Member\SuggestProductController@index') }}">{{ trans('member.title-suggest') }}</a></li>
+                        @endif
                         <li><a href="mail.html">Mail Us</a></li>
                     </ul>
                 </div>
@@ -95,7 +97,7 @@
                             <img src="{{ url(config('setting.path.images'), 'bag.png') }}" alt="" />
                         </h3>
                     </a>
-                    <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+                    <p><a href="javascript:;" class="simpleCart_empty">{{ trans('common.lbl-empty-cart') }}</a></p>
                     <div class="clearfix"> </div>
                 </div>
             </div>

@@ -21,34 +21,13 @@ class ProductRepository extends BaseRepository implements ProductInterface
     }
 
     /**
-    * function uploadImages.
-     *
-     * @return imageName
-     */
-    public function uploadImages($oldImage = null, $fileImages = null)
-    {
-        if ($oldImage != config('settings.images.product')) {
-            unlink(config('setting.path.file') . $oldImage);
-        }
-
-        $dt = new DateTime();
-        $arr_images = explode('.', $fileImages->getClientOriginalName());
-        $imageName = 'product_' . $dt->format('Y-m-d-H-i-s') . '.' .  $arr_images[count($arr_images) - 1];
-        $fileImages->move(config('setting.path.file'), $imageName);
-
-        return $imageName;
-    }
-
-    /**
     * function getProduct.
      *
      * @return imageName
      */
     public function getProduct()
     {
-        $products = $this->model->with('category')->paginate(15);
-
-        return $products;
+        return $this->model->with('category')->paginate(config('setting.admin.paginate'));
     }
 
     /**
@@ -63,7 +42,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
             $input['date_manufacture'] = date_create($request->date_manufacture);
             $input['date_expiration'] = date_create($request->date_expiration);
             $input['category_id'] = $request->subCategory;
-            $input['image'] = isset($request->file) ? $this->uploadImages(null, $request->file) : config('settings.images.product');
+            $input['image'] = isset($request->file) ? parent::uploadImages(null, $request->file, null) : config('settings.images.product');
             $result = parent::create($input);
 
             return true;
@@ -86,7 +65,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
             $input['date_expiration'] = date_create($request->date_expiration);
             $input['category_id'] = $request->subCategory;
             if (isset($request->file)) {
-                $input['image'] = $this->uploadImages($product->image, $request->file);
+                $input['image'] = parent::uploadImages($product->image, $request->file, config('settings.images.product'));
             }
 
             parent::update($input, $id);
@@ -104,8 +83,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
      */
     public function findProduct($productId)
     {
-        $product = $this->model->with('category')->where('id', $productId)->first();
-        return $product;
+        return $this->model->with('category')->where('id', $productId)->first();
     }
 
     /**
@@ -115,7 +93,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
      */
     public function hotProduct()
     {
-        $products = $this->model->join('order_details', 'products.id', 'order_details.product_id')
+        return $this->model->join('order_details', 'products.id', 'order_details.product_id')
                         ->select(
                             'products.id',
                             'products.name',
@@ -126,7 +104,6 @@ class ProductRepository extends BaseRepository implements ProductInterface
                         )
                         ->groupBy('products.id', 'products.name', 'products.image', 'products.price', 'products.avg_rating')
                         ->orderBy('numberProduct', 'desc')->take(8)->get();
-        return $products;
     }
 
     /**
@@ -136,15 +113,8 @@ class ProductRepository extends BaseRepository implements ProductInterface
      */
     public function newProduct()
     {
-        $products = $this->model->select(
-                            'products.id',
-                            'products.name',
-                            'products.image',
-                            'products.price',
-                            'products.avg_rating'
-                        )
-                        ->where(\DB::raw('DATEDIFF(NOW(), created_at)'), '>=', 3)
-                        ->orderBy('created_at', 'desc')->take(8)->get();
-        return $products;
+        return $this->model->select('products.id', 'products.name', 'products.image', 'products.price', 'products.avg_rating')
+                    ->where(\DB::raw('DATEDIFF(NOW(), created_at)'), '>=', 3)
+                    ->orderBy('created_at', 'desc')->take(8)->get();
     }
 }

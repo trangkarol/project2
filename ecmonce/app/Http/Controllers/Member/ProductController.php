@@ -7,10 +7,9 @@ use App\Repositories\Product\ProductInterface;
 use App\Repositories\Category\CategoryInterface;
 use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class ProductController extends Controller
 {
     protected $categoryRepository;
-    protected $productRepository;
 
     /**
     * Create a new controller instance.
@@ -32,12 +31,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $menus = $this->categoryRepository->getMenu();
-        $product_hot = $this->productRepository->hotProduct();
-        $product_new = $this->productRepository->newProduct();
-        $categories = $this->categoryRepository->getProductHome();
-
-        return view('member.home.home', compact('menus', 'categories', 'product_hot', 'product_new'));
+        $menus = [];
+        // $parentId =  $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'), ['id']);
+        // dd($parentId);
+        $products= $this->categoryRepository->productCategory();
+        dd($products->toArray());
+        return view('member.product.product_detail', compact('menus'));
     }
 
     /**
@@ -104,22 +103,5 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * getFormLogin.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getFormLogin()
-    {
-        try {
-            $html = view('member.user.login')->render();
-
-            return response()->json(['result' => true, 'html' => $html]);
-        } catch (\Exception $e) {
-            return response()->json('result', true);
-        }
     }
 }

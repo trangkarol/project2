@@ -7,6 +7,7 @@ use App\Repositories\User\UserInterface;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\User\LoginRequest;
 use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {

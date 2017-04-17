@@ -69,7 +69,7 @@
 <div class="form-group">
     {{ Form::label('avartar', trans('user.lbl-avartar'), ['class' => 'col-md-12 control-label']) }}
     <div class="col-md-12">
-       {{ Form::file('file', ['id' => 'avatar']) }}
+       {{ Form::file('file', ['id' => 'images']) }}
         <div class="col-md-6">
             <img src="{{ isset($user->avatar)? $user->path_avatar : url(config('setting.path.show'), config('setting.images.avatar')) }}" width="200px" height="150px">
         </div>

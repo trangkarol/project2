@@ -14,7 +14,5 @@ interface UserInterface
 
     public function createSocialite($user, $provider);
 
-    public function uploadAvatar($images, $fileImages);
-
     public function forgotPassword($request);
 }

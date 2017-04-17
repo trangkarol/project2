@@ -31,14 +31,14 @@
             {{ Html::script('/jquery-colorbox/jquery.colorbox-min.js') }}
             {{ Html::script('/common/js/bootbox.min.js') }}
             {{ Html::script('/js/custom.min.js') }}
+            <!-- end js  -->
+            <script type="text/javascript">
+                $.ajaxSetup ({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+            </script>
         @show
-        <!-- end js  -->
-        <script type="text/javascript">
-            $.ajaxSetup ({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        </script>
     </body>
 </html>

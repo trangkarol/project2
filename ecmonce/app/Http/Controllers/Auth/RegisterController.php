@@ -35,7 +35,7 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
     protected $userRepository;
-    protected $cateRepository;
+    protected $categoryRepository;
 
     /**
      * Create a new controller instance.
@@ -44,10 +44,10 @@ class RegisterController extends Controller
      */
     public function __construct(
         UserInterface $userRepository,
-        CategoryInterface $cateRepository
+        CategoryInterface $categoryRepository
     ) {
         $this->userRepository = $userRepository;
-        $this->cateRepository = $cateRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -58,7 +58,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        $menus = $this->cateRepository->getMenu();
+        $menus = $this->categoryRepository->getMenu();
         return view('member.user.register', compact('menus'));
     }
 
@@ -88,7 +88,7 @@ class RegisterController extends Controller
     public function getUpdate($id)
     {
         $user = $this->userRepository->find($id);
-        $menus = $this->cateRepository->getMenu();
+        $menus = $this->categoryRepository->getMenu();
 
         return view('member.user.detail', compact('user', 'menus'));
     }

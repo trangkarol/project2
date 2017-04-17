@@ -3,7 +3,10 @@
 @section('title')
     {{ trans('common.title-detail') }}
 @endsection
-
+<!-- banner -->
+@section('banner')
+    @include('member.block.banner')
+@endsection
 <!-- content of page -->
 @section('content')
     <div class="login">

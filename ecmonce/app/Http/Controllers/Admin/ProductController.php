@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
 
     protected $productRepository;
-    protected $cateRepository;
+    protected $categoryRepository;
 
     /**
     * Create a new controller instance.
@@ -24,10 +24,10 @@ class ProductController extends Controller
      */
     public function __construct(
         ProductInterface $productRepository,
-        CategoryInterface $cateRepository
+        CategoryInterface $categoryRepository
     ) {
         $this->productRepository = $productRepository;
-        $this->cateRepository = $cateRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -49,7 +49,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $parentCategory = $this->cateRepository->getCategoryLibrary(config('setting.mutil-level.one'));
+        $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
         $madeIn = Library::getMadeIn();
 
         return view('admin.product.create', compact('parentCategory', 'subCategory', 'madeIn'));
@@ -105,7 +105,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->productRepository->findProduct($id);
-        $parentCategory = $this->cateRepository->getCategoryLibrary(config('setting.mutil-level.one'));
+        $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
         $madeIn = Library::getMadeIn();
 
         return view('admin.product.edit', compact('product', 'parentCategory', 'madeIn'));
@@ -164,12 +164,12 @@ class ProductController extends Controller
         $parent_id = $request->parent_id;
         $sub_id = $request->sub_id;
         try {
-            $subCategory = $this->cateRepository->getSubCategory($parent_id);
+            $subCategory = $this->categoryRepository->getSubCategory($parent_id);
             $html = view('admin.product.sub_category', compact('subCategory', 'sub_id'))->render();
 
             return response()->json(['result' => true, 'html' => $html]);
         } catch (\Exception $e) {
-            return response()->json('result', true);
+            return response()->json('result', false);
         }
     }
 }

@@ -121,7 +121,7 @@ class UserRepository extends BaseRepository implements UserInterface
         DB::beginTransaction();
         try {
             $input = $request->only(['name', 'email', 'password', 'address', 'phone_number']);
-            $input['avatar'] = isset($request->file) ? $this->uploadAvatar(null, $request->file) : config('setting.images.avatar');
+            $input['avatar'] = isset($request->file) ? parent::uploadImages(null, $request->file, null) : config('setting.images.avatar');
             $input['birthday'] = $request->birthday;
             $input['role'] = $role;
             DB::commit();
@@ -145,7 +145,7 @@ class UserRepository extends BaseRepository implements UserInterface
         try {
             $user = $this->model->find($id);
             $input = $request->only(['name', 'email', 'address', 'phone_number']);
-            $input['avatar'] = isset($request->file) ? $this->uploadAvatar($user->avatar, $request->file) : $user->avatar;
+            $input['avatar'] = isset($request->file) ? parent::uploadImages($user->avatar, $request->file, config('setting.images.avatar')) : $user->avatar;
             $input['birthday'] = $request->birthday;
             $input['password'] = isset($request->password) ? $request->password : $user->password;
             DB::commit();
@@ -156,25 +156,6 @@ class UserRepository extends BaseRepository implements UserInterface
 
             return false;
         }
-    }
-
-    /**
-    * function uploadImages.
-     *
-     * @return imageName
-     */
-    public function uploadAvatar($images = null, $fileImages = null)
-    {
-        if ($images != config('settings.images.avatar')) {
-            unlink(config('setting.path.file') . $images);
-        }
-
-        $dt = new DateTime();
-        $arr_images = explode('.', $fileImages->getClientOriginalName());
-        $imageName = 'user_' . $dt->format('Y-m-d-H-i-s') . '.' .  $arr_images[count($arr_images) - 1];
-        $fileImages->move(config('setting.path.file'), $imageName);
-
-        return $imageName;
     }
 
     /**

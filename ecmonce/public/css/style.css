@@ -31,11 +31,11 @@ p{
 }
 ul{
 	padding:0 0;
-	margin:0 0;	
+	margin:0 0;
 }
 body{
 	padding:0 0;
-	margin:0 0; 
+	margin:0 0;
 	font-family: 'Open Sans', sans-serif;
 }
 .header-top {
@@ -43,7 +43,7 @@ body{
 	 padding: .7em 0;
  }
 .top-left {
-    float: left; 
+    float: left;
 }
 .top-left i {
     font-size: 1em;
@@ -400,7 +400,7 @@ ul.multi-column-dropdown h6 {
 }
 /*-- search-ends --*/
 .header-right2{
-	float:right; 
+	float:right;
 	margin-top: 1.5em;
 }
 .box_1 {
@@ -1164,12 +1164,12 @@ h3.tittle1 {
 .quantity-select .entry.value-minus:before,
 .quantity-select .entry.value-plus:before,.quantity-select .entry.value-minus1:before,
 .quantity-select .entry.value-plus1:before{
-	content: ""; 
+	content: "";
 	width: 13px;
-	height: 2px; 
+	height: 2px;
 	background: #000;
 	left: 50%;
-	margin-left: -7px; 
+	margin-left: -7px;
 	top: 50%;
 	margin-top: -0.5px;
 	position: absolute;
@@ -1177,9 +1177,9 @@ h3.tittle1 {
 .quantity-select .entry.value-plus:after,.quantity-select .entry.value-plus1:after{
 	content: "";
 	height: 13px;
-	width: 2px; 
+	width: 2px;
 	background: #000;
-	left: 50%; 
+	left: 50%;
 	margin-left: -1.4px;
     top: 50%;
     margin-top: -6.2px;
@@ -1361,15 +1361,15 @@ h3.tittle1 {
 	{
 		-webkit-animation: webkit-adjacent-element-selector-bugfix infinite 1s;
 	}
-	
-	@-webkit-keyframes webkit-adjacent-element-selector-bugfix 
+
+	@-webkit-keyframes webkit-adjacent-element-selector-bugfix
 	{
-		from 
-		{ 
+		from
+		{
 			padding: 0;
-		} 
-		to 
-		{ 
+		}
+		to
+		{
 			padding: 0;
 		}
 	}
@@ -1419,7 +1419,7 @@ ul.dropdown-menu6 li a {
 }
 .range,.range-two{
 	padding: 15px 0 22px 0;
-	border-bottom: 1px solid #e5e3db; 
+	border-bottom: 1px solid #e5e3db;
 }
 .top-rates {
     padding-top: 3.5em;
@@ -1535,7 +1535,7 @@ li.list-group-item1 {
 .label {
 	font-weight: 300 !important;
 	border-radius:4px;
-}  
+}
 .grid_5{
 	background:none;
 	padding:2em 0;
@@ -2141,14 +2141,14 @@ h3.account-text{
 }
 
 .cart-sec{
-	
+
 	margin-bottom:3em;
 }
 .cart-item{
 	width:20%;
 	float:left;
 	margin-right:5%;
-	
+
 }
 .cart-item img{
 	width:100%;
@@ -2156,7 +2156,7 @@ h3.account-text{
 .cart-item-info{
 	width:75%;
 	float:left;
-	 
+
 }
 .check{
 	padding:5em 0;
@@ -2195,7 +2195,7 @@ h3.account-text{
 .cart-item-info h4 span{
 	font-size:0.65em;
 	font-weight:400;
-} 
+}
 .close1,.close2{
   background: url('../images/close_1.png') no-repeat 0px 0px;
   cursor: pointer;
@@ -2222,19 +2222,19 @@ h3.account-text{
   -o-transition: color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out;
 }
-.cart-header {  
-  position: relative;  
+.cart-header {
+  position: relative;
 }
-.cart-header2 {  
-  position: relative;  
+.cart-header2 {
+  position: relative;
 }
-.cart-header3 {  
-  position: relative;  
+.cart-header3 {
+  position: relative;
 }
 a.order {
   background:#00405d;
   padding: 10px 20px;
-  
+
   font-size: 1em;
   color: #fff;
   text-decoration: none;
@@ -2266,7 +2266,7 @@ a.order:hover{
 a.cpns{
 	background:#ff6978;
 	color:#fff;
-	
+
 	padding: 10px;
   font-size: 0.8em;
 	font-weight:600;
@@ -2278,7 +2278,7 @@ a.cpns:hover{
 	font-size:0.9em;
 	font-weight:400;
 	margin-top:1em;
-	color:#727272;	
+	color:#727272;
 }
 .total-item p a:hover{
 	color:#333;
@@ -2287,12 +2287,12 @@ a.cpns:hover{
 a.continue{
 	background:#00405d;
 	padding:10px 20px;
-	
+
 	font-size:1em;
 	color:#fff;
 	text-decoration:none;
 	display: block;
-   font-weight: 600;  
+   font-weight: 600;
    text-align: center;
    margin-bottom:2em;
 }
@@ -2307,7 +2307,7 @@ ul.total_price{
 ul.total_price li.last_price{
 	width: 50%;
   float: left;
-  
+
 }
 ul.total_price li.last_price span{
 	font-size: 1.1em;
@@ -2375,7 +2375,7 @@ li.bt-nn h6 {
 }
 /**responsive**/
 @media(max-width:1440px){
-	
+
 }
 @media(max-width:1366px){
 .accessories-w3l {
@@ -2383,7 +2383,7 @@ li.bt-nn h6 {
     padding: 7em 0;
 }
 .ribben1 {
-    top: 12%;	
+    top: 12%;
 }
 .main-agileits {
     width: 31%;
@@ -2391,7 +2391,7 @@ li.bt-nn h6 {
 }
 @media(max-width:1280px){
 .ribben2 {
-    top: 15%;	
+    top: 15%;
 }
 .main-agileits {
     width: 33%;
@@ -2405,7 +2405,7 @@ li.bt-nn h6 {
     width: 20%;
 }
 .ban-text2 h4 {
-    font-size: 1.3em;	
+    font-size: 1.3em;
 }
 .ban-text h4,.ban-text1 h4 {
     font-size: 1.8em;
@@ -2520,7 +2520,7 @@ li.bt-nn h6 {
 }
 .ban-bottom {
     float: left;
-    width: 50%;	
+    width: 50%;
 }
 .ban-bottom3 {
     float: left;
@@ -2717,7 +2717,7 @@ ul.multi-column-dropdown h6 {
 }
 .main-agileits {
     width: 52%;
-}	
+}
 }
 @media(max-width:768px){
 .cd-search {
@@ -2725,7 +2725,7 @@ ul.multi-column-dropdown h6 {
 }
 .main-agileits {
     width: 54%;
-}	
+}
 }
 @media(max-width:736px){
 .navbar-toggle {
@@ -2816,14 +2816,14 @@ h3.tittle1, h3.tittle {
 }
 .modal-dialog {
     width: 700px;
-}	
+}
 }
 @media(max-width:667px){
 .ban-text2 {
     width: 31%;
 }
 .ban-text {
-    top: 55%;	
+    top: 55%;
 }
 .new-arrivals-w3agile, .product-agile, .latest-w3, .footer-w3l, .products-agileinfo, .typo-w3, .mail-w3ls, .single-wl3 {
     padding: 3em 0;
@@ -3004,7 +3004,7 @@ p.quote {
 }
 .cd-search input{
 	font-size: 1.2em;
-    padding: 0.5em;	
+    padding: 0.5em;
 }
 .cd-search {
     top: 51%;
@@ -3043,7 +3043,7 @@ p.quote {
     font-size: 1em;
 }
 .heder-bottom {
-    padding: 1em 0 0.8em;	
+    padding: 1em 0 0.8em;
 }
 .total-item, .cart-items {
     margin-top: 0em;
@@ -3125,7 +3125,7 @@ h3.tittle1, h3.tittle {
     height: 210px;
 }
 .mail-bottom input[type="text"], .mail-bottom input[type="email"] {
-    width: 100%;		
+    width: 100%;
 }
 .mail-bottom input[type="email"] {
     margin: 12px 0;
@@ -3169,7 +3169,7 @@ h3.tittle1, h3.tittle {
 }
 .core-slider__carousel .core-slider_arrow__right {
     right: 19px !important;
-}	
+}
 }
 @media(max-width:414px){
 .ban-text2 {
@@ -3239,7 +3239,7 @@ h3.tittle1, h3.tittle {
 		float: right;
 	}
 	.navbar-toggle {
-		margin-right: 0px;	
+		margin-right: 0px;
 	}
 	.logo-nav-left1 {
 		width: 51%;
@@ -3358,7 +3358,7 @@ h3.tittle1, h3.tittle {
 		width: 338px;
 	}
 	.new-grid h6 {
-		font-size: 1em;	
+		font-size: 1em;
 	}
 
 }
@@ -3416,4 +3416,8 @@ h3.tittle1, h3.tittle {
     top: 132px;
     right: 85%;
 }
+}
+
+.div-category-new {
+  display: none;
 }

@@ -5,12 +5,6 @@ $(document).ready(function () {
         controlNavEnabled: true
     });
 
-    //click logout
-    $(document).on('click', '#btn-logout', function(event) {
-        event.preventDefault();
-        $('#logout-form').submit();
-    });
-
     $('.value-plus1').on('click', function () {
         var divUpd = $(this).parent().find('.value1'), newVal = parseInt(divUpd.text(), 10) + 1;
         divUpd.text(newVal);
@@ -33,12 +27,6 @@ $(document).ready(function () {
             namespace: "callbacks",
             pager: true,
         });
-    });
-
-    $.ajaxSetup ({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
     });
 });
 

@@ -62,16 +62,13 @@ class ResetPasswordController extends Controller
      */
     public function changePassWord(ChangePasswordRequest $request)
     {
-        DB::beginTransaction();
         $result = $this->userRepository->changePassWord($request);
         if ($result) {
-            DB::commit();
             $request->session()->flash('success', trans('user.msg.change-password-success'));
 
             return redirect()->action('Auth\LoginController@login');
         }
 
-        DB::rollback();
         $request->session()->flash('fail', trans('user.msg.change-password-fail'));
 
         return redirect()->back();

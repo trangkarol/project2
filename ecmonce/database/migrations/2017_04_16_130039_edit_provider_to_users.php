@@ -14,7 +14,7 @@ class EditProviderToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('provider')->nullable()->change();
+            $table->string('provider')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class EditProviderToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-           $table->string('provider')->change();
+            $table->dropColumn('provider');
         });
     }
 }

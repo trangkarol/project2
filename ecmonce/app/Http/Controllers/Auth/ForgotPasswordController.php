@@ -62,16 +62,13 @@ class ForgotPasswordController extends Controller
     protected function forgotPassword(ForgotPasswordRequest $request)
     {
 
-        DB::beginTransaction();
+
         $result = $this->userRepository->forgotPassword($request);
         if ($result) {
-            DB::commit();
             $request->session()->flash('success', trans('user.msg.forgotpassword-success'));
 
             return redirect()->action('Member\HomeController@index');
         }
-
-        DB::rollback();
         $request->session()->flash('fail', trans('user.msg.forgotpassword-fail'));
 
         return redirect()->action('Member\HomeController@index');

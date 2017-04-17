@@ -14,7 +14,7 @@ class EditProviderIdToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('provider_id')->nullable()->change();
+            $table->string('provider_id')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class EditProviderIdToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-           $table->string('provider_id')->change();
+            $table->dropColumn('provider_id');
         });
     }
 }

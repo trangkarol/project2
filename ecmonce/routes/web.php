@@ -49,8 +49,8 @@ Route::group(['namespace' => 'Auth'], function() {
     Route::get('/forgot-password', 'ForgotPasswordController@index');
     Route::post('/forgot-password', 'ForgotPasswordController@forgotPassword');
     // OAuth Routes
-    Route::get('auth/{provider}', 'SocialiteController@redirectToProvider');
-    Route::get('auth/{provider}/callback', 'SocialiteController@handleProviderCallback');
+    Route::get('/auth/{provider}', 'SocialiteController@redirectToProvider');
+    Route::get('/auth/{provider}/callback', 'SocialiteController@handleProviderCallback');
 });
 
 Route::get('/home', 'HomeController@index');

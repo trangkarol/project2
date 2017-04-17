@@ -10,6 +10,7 @@ use App\Mail\ForgotPassword;
 use Auth;
 use DateTime;
 use Mail;
+use DB;
 
 class UserRepository extends BaseRepository implements UserInterface
 {
@@ -77,14 +78,18 @@ class UserRepository extends BaseRepository implements UserInterface
      */
     public function changePassword($request)
     {
+        DB::beginTransaction();
         try {
             $user = $this->model->find(Auth::user()->id);
             $user->password = bcrypt($request->password);
             $user->save();
             Auth::logout();
+            DB::commit();
 
             return true;
         } catch (\Exception $e) {
+            DB::rollback();
+
             return false;
         }
     }
@@ -122,14 +127,18 @@ class UserRepository extends BaseRepository implements UserInterface
      */
     public function register($request, $role)
     {
+        DB::beginTransaction();
         try {
             $input = $request->only(['name', 'email', 'password', 'address', 'phone_number']);
             $input['avatar'] = isset($request->file) ? $this->uploadAvatar(null, $request->file) : config('setting.images.avatar');
             $input['birthday'] = date_create($request->birthday);
             $input['role'] = $role;
+            DB::commit();
 
             return parent::create($input);
         } catch (\Exception $e) {
+            DB::rollback();
+
             return false;
         }
     }
@@ -141,15 +150,19 @@ class UserRepository extends BaseRepository implements UserInterface
      */
     public function update($request, $id)
     {
+        DB::beginTransaction();
         try {
             $user = $this->model->find($id);
             $input = $request->only(['name', 'email', 'address', 'phone_number']);
             $input['avatar'] = isset($request->file) ? $this->uploadAvatar($user->avatar, $request->file) : $user->avatar;
             $input['birthday'] = date_create($request->birthday);
             $input['password'] = isset($request->password) ? $request->password : $user->password;
+            DB::commit();
 
             return parent::update($input, $id);
         } catch (\Exception $e) {
+            DB::rollback();
+
             return false;
         }
     }
@@ -180,6 +193,7 @@ class UserRepository extends BaseRepository implements UserInterface
      */
     public function forgotPassword($request)
     {
+        DB::beginTransaction();
         try {
             $user = $this->model->where('email', $request->email)->first();
             if ($user) {
@@ -191,13 +205,15 @@ class UserRepository extends BaseRepository implements UserInterface
                 ];
                 $this->model->update();
                 Mail::to($user->email)->queue(new ForgotPassword($data));
+                DB::commit();
 
                 return true;
             }
 
             return false;
         } catch (\Exception $e) {
-            dd($e);
+            DB::rollback();
+
             return false;
         }
     }

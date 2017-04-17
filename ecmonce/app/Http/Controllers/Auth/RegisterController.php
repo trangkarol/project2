@@ -70,14 +70,11 @@ class RegisterController extends Controller
      */
     public function register(InsertUserRequest $request)
     {
-        DB::beginTransaction();
+
         $result = $this->userRepository->register($request, config('setting.role.user'));
         if ($result) {
-            DB::commit();
             Auth::login($result, true);
         }
-
-        DB::rollback();
 
         return redirect()->action('Member\HomeController@index');
     }
@@ -105,7 +102,6 @@ class RegisterController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         DB::beginTransaction();
-        dd($request->all());
         $result = $this->userRepository->update($request, $id);
         if ($result) {
             DB::commit();

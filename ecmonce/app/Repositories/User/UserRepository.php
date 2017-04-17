@@ -35,21 +35,12 @@ class UserRepository extends BaseRepository implements UserInterface
             $user = $request->only('email', 'password');
 
             if (Auth::attempt($user)) {
-                $role = config('setting.role.user');
-                if (Auth::user()->isAdmin()) {
-                    $role = config('setting.role.admin');
-                }
-
-                $result = [
-                    'result' => true,
-                    'role' => $role,
-                ];
-                return $result;
+                return true;
             }
 
-            return ['result' => false];
+            return false;
         } catch (\Exception $e) {
-            return ['result' => false];
+            return false;
         }
     }
 
@@ -81,7 +72,7 @@ class UserRepository extends BaseRepository implements UserInterface
         DB::beginTransaction();
         try {
             $user = $this->model->find(Auth::user()->id);
-            $user->password = bcrypt($request->password);
+            $user->password = $request->password;
             $user->save();
             Auth::logout();
             DB::commit();
@@ -131,7 +122,7 @@ class UserRepository extends BaseRepository implements UserInterface
         try {
             $input = $request->only(['name', 'email', 'password', 'address', 'phone_number']);
             $input['avatar'] = isset($request->file) ? $this->uploadAvatar(null, $request->file) : config('setting.images.avatar');
-            $input['birthday'] = date_create($request->birthday);
+            $input['birthday'] = $request->birthday;
             $input['role'] = $role;
             DB::commit();
 
@@ -155,7 +146,7 @@ class UserRepository extends BaseRepository implements UserInterface
             $user = $this->model->find($id);
             $input = $request->only(['name', 'email', 'address', 'phone_number']);
             $input['avatar'] = isset($request->file) ? $this->uploadAvatar($user->avatar, $request->file) : $user->avatar;
-            $input['birthday'] = date_create($request->birthday);
+            $input['birthday'] = $request->birthday;
             $input['password'] = isset($request->password) ? $request->password : $user->password;
             DB::commit();
 
@@ -203,6 +194,7 @@ class UserRepository extends BaseRepository implements UserInterface
                     'name' => $user->name,
                     'password' => $password,
                 ];
+
                 $this->model->update();
                 Mail::to($user->email)->queue(new ForgotPassword($data));
                 DB::commit();

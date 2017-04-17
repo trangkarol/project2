@@ -60,10 +60,10 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         $result = $this->userRepository->login($request);
-        if ($result['result']) {
+        if ($result) {
             $request->session()->flash('success', trans('user.msg.login-success'));
 
-            if ($result['role'] == config('setting.role.admin')) {
+            if (Auth::user()->role == config('setting.role.admin')) {
                 return redirect()->action('Admin\ProductController@index');
             }
 

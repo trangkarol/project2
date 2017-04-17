@@ -82,4 +82,14 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
+    public function setBirthdayAttribute($value)
+    {
+        $this->attributes['birthday'] = date_create($request->birthday);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
 }

@@ -70,4 +70,9 @@ class Product extends Model
     {
         $this->attributes['date_expiration'] = date_create($value);
     }
+
+    public function getPriceFormatAttribute()
+    {
+        return number_format($this->price, 3, ',', '.');
+    }
 }

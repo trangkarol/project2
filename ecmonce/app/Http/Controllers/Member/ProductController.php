@@ -31,12 +31,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $menus = [];
-        // $parentId =  $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'), ['id']);
-        // dd($parentId);
         $products= $this->categoryRepository->productCategory();
-        dd($products->toArray());
-        return view('member.product.product_detail', compact('menus'));
+
+        return view('member.product.product_detail', compact());
     }
 
     /**
@@ -68,7 +65,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = $this->productRepository->findProduct($id);
+        $relatedProducts = $this->productRepository->relatedProduct($product->category_id, $product->id);
+
+        return view('member.product.product_detail', compact('product', 'relatedProducts'));
     }
 
     /**

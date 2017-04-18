@@ -26,6 +26,16 @@
         <script type='text/javascript'>
             window._sbzq||function(e){e._sbzq=[];var t=e._sbzq;t.push(["_setAccount",44079]);var n=e.location.protocol=="https:"?"https:":"http:";var r=document.createElement("script");r.type="text/javascript";r.async=true;r.src=n+"//static.subiz.com/public/js/loader.js";var i=document.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)}(window);
         </script>
+        <div id="fb-root"></div>
+        <script>
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
         <div class="container-fluid">
             <!-- header -->
             <div class="header">
@@ -59,11 +69,6 @@
                     'get_login': "{{ action('Member\HomeController@getFormLogin') }}",
                 };
 
-                $.ajaxSetup ({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
             </script>
         @show
     </body>

@@ -32,12 +32,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $menus = $this->categoryRepository->getMenu();
-        $product_hot = $this->productRepository->hotProduct();
-        $product_new = $this->productRepository->newProduct();
+        $product_hots = $this->productRepository->hotProduct();
+        $product_news = $this->productRepository->newProduct();
         $categories = $this->categoryRepository->getProductHome();
 
-        return view('member.home.home', compact('menus', 'categories', 'product_hot', 'product_new'));
+        return view('member.home.home', compact('categories', 'product_hots', 'product_news'));
     }
 
     /**

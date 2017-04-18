@@ -21,6 +21,5 @@
     <div class="product-agile">
         @include('member.home.product_new')
     </div>
-
     <!-- product -->
 @endsection

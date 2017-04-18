@@ -13,6 +13,6 @@ return [
     'title-product-detail' => 'Product Detail',
     'title-suggest' => 'Product Suggest',
     'title-update-suggest' => 'Update Suggest Product',
-    'title-insert-suggest' => 'Update Insert Product',
+    'title-insert-suggest' => 'Insert Suggest Product',
     'title-detail-suggest' => 'Detail Suggest Product',
 ];

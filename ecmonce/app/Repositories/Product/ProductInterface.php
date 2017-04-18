@@ -10,6 +10,8 @@ interface ProductInterface
 
     public function findProduct($productId);
 
+    public function relatedProduct($categoryId, $productId);
+
     public function hotProduct();
 
     public function newProduct();

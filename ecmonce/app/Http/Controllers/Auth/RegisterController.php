@@ -70,7 +70,6 @@ class RegisterController extends Controller
      */
     public function register(InsertUserRequest $request)
     {
-
         $result = $this->userRepository->register($request, config('setting.role.user'));
         if ($result) {
             Auth::login($result, true);

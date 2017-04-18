@@ -36,9 +36,7 @@ class SuggestProductController extends Controller
     {
         $productSuggests = $this->suggestProductRepository->getSuggestProduct();
         $madeIn = Library::getMadeIn();
-        $menus = [];
-
-        return view('member.product_suggest.index', compact('productSuggests', 'menus'));
+        return view('member.product_suggest.index', compact('productSuggests'));
     }
 
     /**
@@ -50,9 +48,8 @@ class SuggestProductController extends Controller
     {
         $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
         $madeIn = Library::getMadeIn();
-        $menus = [];
 
-        return view('member.product_suggest.create', compact('parentCategory', 'madeIn', 'menus'));
+        return view('member.product_suggest.create', compact('parentCategory', 'madeIn'));
     }
 
     /**
@@ -89,8 +86,8 @@ class SuggestProductController extends Controller
         $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
         $madeIn = Library::getMadeIn();
         $productSuggest = $this->suggestProductRepository->find($id, '*');
-        $menus = [];
-        return view('member.product_suggest.detail', compact('parentCategory', 'madeIn', 'menus', 'productSuggest'));
+
+        return view('member.product_suggest.detail', compact('parentCategory', 'madeIn', 'productSuggest'));
     }
 
     /**
@@ -140,7 +137,7 @@ class SuggestProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->suggestProductRepository->delete($id);
     }
 
     /**

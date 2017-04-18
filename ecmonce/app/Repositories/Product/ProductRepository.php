@@ -87,6 +87,16 @@ class ProductRepository extends BaseRepository implements ProductInterface
     }
 
     /**
+    * function relatedProduct.
+     *
+     * @return true or false
+     */
+    public function relatedProduct($categoryId, $productId)
+    {
+        return $this->model->where('category_id', $categoryId)->where('id', '!=', $productId)->take(8)->get();
+    }
+
+    /**
     * function  hotProduct.
      *
      * @return true or false

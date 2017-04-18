@@ -18,6 +18,7 @@ return [
     'lbl-sdt' => '+0123-456-789',
     'lbl-help' => 'Help',
     'lbl-empty-cart' => 'Empty cart',
+    'lbl-accept' => 'Accept',
     // label
     'lbl-profile' => 'Profile',
     'lbl-change-pass-word' => 'Change Password',
@@ -52,5 +53,9 @@ return [
         'usa' => 'USA',
         'japan' => 'Japan',
         'italy' => 'Italy',
+    ],
+
+    'msg' => [
+        'confirm-delete' => 'Do you want to delete this row?',
     ],
 ];

@@ -67,6 +67,26 @@ class SuggestProductRepository extends BaseRepository implements SuggestProductI
     }
 
     /**
+    * function create.
+     *
+     * @return true or false
+     */
+    public function delete($id)
+    {
+        DB::beginTransaction();
+        try {
+            $result = parent::delete($id);
+            DB::commit();
+
+            return $result;
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return false;
+        }
+    }
+
+    /**
     * function getSuggestProduct.
      *
      * @return true or false

@@ -5,6 +5,8 @@ return [
     'title-insert' => 'Insert Product',
     'title-edit' => 'Edit Product',
     'title-delete' => 'Delete Product',
+    'title-detail-product' => 'Detail Product',
+    'lbl-related-product' => 'Related Product',
     'lbl-name' => 'Name',
     'lbl-images' => 'Images',
     'lbl-description' => 'Description',

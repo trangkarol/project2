@@ -28,6 +28,16 @@ $(document).ready(function () {
             pager: true,
         });
     });
+
+    $(document).on('click', '.add-cart', function () {
+        addCart();
+    });
+
+    $.ajaxSetup ({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
 jQuery(function() {
@@ -59,6 +69,20 @@ function getFormLogin() {
         success:function(data) {
             if (data.result) {
                 $.colorbox({ html: data.html });
+            }
+        }
+    });
+}
+
+function addCart() {
+    $.ajax({
+        type: 'GET',
+        url: action['get_add_cart'],
+        dataType: 'json',
+        success:function(data) {
+            if (data.result) {
+                $('#sub-category').empty();
+                $('#sub-category').html(data.html);
             }
         }
     });

@@ -19,6 +19,17 @@ $(document).ready(function () {
     $(document).on('change', '#category',function() {
         getSubCategory();
     });
+
+    // delelete
+    $(document).on('click', '.btn-delete', function(event) {
+        $(this).parents('.form-delete').addClass('current');
+        event.preventDefault();
+        bootbox.confirm(trans['confirm_delete'], function(result) {
+            if(result) {
+                $('.form-delete.current').submit();
+            }
+        });
+    });
 });
 
 function getSubCategory() {

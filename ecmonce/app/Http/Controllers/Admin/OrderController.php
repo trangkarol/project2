@@ -1,16 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Member;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Repositories\Product\ProductInterface;
-use App\Repositories\Category\CategoryInterface;
 use App\Http\Controllers\Controller;
+use App\Repositories\Product\ProductInterface;
+use App\Repositories\Order\OrderInterface;
+use App\Repositories\OrderDetail\OrderDetailInterface;
+use App\Mail\SendOrder;
 use Session;
+use DB;
 
-class ProductController extends Controller
+class OrderController extends Controller
 {
-    protected $categoryRepository;
+    protected $productRepository;
+    protected $orderRepository;
+    protected $orderDetailRepository;
 
     /**
     * Create a new controller instance.
@@ -18,11 +23,13 @@ class ProductController extends Controller
      * @return void
      */
     public function __construct(
-        CategoryInterface $categoryRepository,
-        ProductInterface $productRepository
+        ProductInterface $productRepository,
+        OrderDetailInterface $orderDetailRepository,
+        OrderInterface $orderRepository
     ) {
-        $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
+        $this->orderRepository = $orderRepository;
+        $this->orderDetailRepository = $orderDetailRepository;
     }
 
     /**
@@ -32,7 +39,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('member.product.product_detail', compact());
+        $orders = $this->orderRepository->getOrders();
+
+        return view('admin.order.index', compact('orders'));
     }
 
     /**
@@ -64,30 +73,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = $this->productRepository->findProduct($id);
-        $relatedProducts = $this->productRepository->relatedProduct($product->category_id, $product->id);
-
-        //handel viewed products
-        $viewedProduct = [
-            'productId' => $id,
-            'dateView' => date("Y-m-d H:i:s"),
-        ];
-
-        if (Session::has('viewedProducts')) {
-            $viewedProducts = Session::get('viewedProducts');
-            $productIds = array_pluck($viewedProducts, 'productId');
-
-            if (in_array($id, $productIds)) {
-                $viewedProducts = array_except($viewedProducts, $id);
-            }
-
-            $viewedProducts[] = $viewedProduct;
-            Session::put('viewedProducts', $viewedProducts);
-        } else {
-            Session::push('viewedProducts', $viewedProduct);
-        }
-
-        return view('member.product.product_detail', compact('product', 'relatedProducts'));
+        //
     }
 
     /**

@@ -45,8 +45,8 @@
                                         </div>
                                         <div class="col-md-6">
                                         {{ Form::open(['action' => ['Member\SuggestProductController@destroy', $product->id], 'class' => 'form-delete']) }}
-                                                {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['class' => 'btn btn-success btn-delete', 'type' => 'button', 'data-toggle' => 'tooltip', 'title' => trans('product.tooltip.delete')]) !!}
-                                            {{ Form::close() }}
+                                            {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['class' => 'btn btn-success btn-delete', 'type' => 'button', 'data-toggle' => 'tooltip', 'title' => trans('product.tooltip.delete')]) !!}
+                                        {{ Form::close() }}
                                         </div>
                                     @endif
                                 </td>

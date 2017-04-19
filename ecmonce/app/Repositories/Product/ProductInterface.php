@@ -15,4 +15,8 @@ interface ProductInterface
     public function hotProduct();
 
     public function newProduct();
+
+    public function listProduct($productIds);
+
+    public function saveFile($products);
 }

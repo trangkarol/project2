@@ -31,6 +31,8 @@ return [
     'lbl-add-cart' => 'Add to cart',
     'lbl-stt' => 'No.',
     'lbl-forgot-password' => 'Forgot password?',
+    'lbl-detail' => 'Detail',
+    'lbl-search' => 'Search',
     'file' => [
         'import' => 'Import File',
         'export' => 'Export File',
@@ -44,6 +46,8 @@ return [
         'login' => 'Login',
         'change' => 'Change',
         'agree' => 'Agree',
+        'order' => 'Order',
+        'search' => 'Search'
     ],
 
     'made_in' => [
@@ -57,5 +61,7 @@ return [
 
     'msg' => [
         'confirm-delete' => 'Do you want to delete this row?',
+        'confirm-order' => 'Do you want to order this products?',
+        'confirm-delete-order' => 'Do you want to remove this products in your cart?',
     ],
 ];

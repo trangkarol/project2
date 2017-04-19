@@ -61,8 +61,6 @@ class ForgotPasswordController extends Controller
      */
     protected function forgotPassword(ForgotPasswordRequest $request)
     {
-
-
         $result = $this->userRepository->forgotPassword($request);
         if ($result) {
             $request->session()->flash('success', trans('user.msg.forgotpassword-success'));

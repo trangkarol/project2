@@ -1,7 +1,7 @@
 @extends('admin.block.master')
 <!-- title off page -->
 @section('title')
-    {{ trans('product.title-product') }}
+    {{ trans('order.title-order') }}
 @endsection
 <!-- css used for page -->
 <!-- content of page -->
@@ -10,19 +10,12 @@
         <!-- title -->
         <div class="page-title">
             <div class="title_left">
-                <h3>{{ trans('product.title-product') }}</h3>
+                <h3>{{ trans('order.title-order') }}</h3>
             </div>
             <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group">
                     <div class="col-md-4">
-                        <a href="{{ action('Admin\ProductController@create') }}" data-toggle="tooltip" data-placement="top" title="{{ trans('product.tooltip.create') }}" class="btn btn-primary"><i class="fa fa-plus " ></i></a>
-                    </div>
-
-                    <div class="col-md-4">
-                        <a href="#" class="btn btn-primary" id= "import-file" data-toggle="tooltip" data-placement="top" title="{{ trans('product.tooltip.import-file') }}"><i class="glyphicon glyphicon-import" ></i></a>
-                        {!! Form::open(['action' => 'Admin\ProductController@importFile', 'class' => 'form-horizontal', 'id' => 'form-input-file', 'enctype' => 'multipart/form-data']) !!}
-                            {{  Form::file('file', ['id' => 'file-csv', 'class' => 'hidden']) }}
-                        {!! Form::close() !!}
+                        <a href="{{ action('Admin\OrderController@create') }}" data-toggle="tooltip" data-placement="top" title="{{ trans('order.tooltip.create') }}" class="btn btn-primary"><i class="fa fa-plus " ></i></a>
                     </div>
                 </div>
             </div>
@@ -49,7 +42,7 @@
                             </div>
                             <div class="x_content" id="result-users">
                                 <div class="table-responsive">
-                                    @include('admin.product.table_result')
+                                    @include('admin.order.table_result')
                                 </div>
                             </div>
                             <div class="clearfix"></div>
@@ -58,11 +51,10 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
 <!-- js used for page -->
 @section('contentJs')
     @parent
-    {{ Html::script('/admin/js/product.js') }}
+    {{ Html::script('/admin/js/order.js') }}
 @endsection

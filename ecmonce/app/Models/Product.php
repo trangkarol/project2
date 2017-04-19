@@ -73,6 +73,6 @@ class Product extends Model
 
     public function getPriceFormatAttribute()
     {
-        return number_format($this->price, 3, ',', '.');
+        return number_format($this->price, 3, ',', ','). ' ' . trans('common.lbl-vnd');
     }
 }

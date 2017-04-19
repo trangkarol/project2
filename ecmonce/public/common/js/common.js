@@ -50,6 +50,19 @@ $(document).ready(function() {
             }
         });
     });
+
+    // /import-file
+    $(document).on('click', '#import-file', function(event) {
+        $('#file-csv').click();
+        $('#file-csv').change(function(event) {
+            $('#form-input-file').submit();
+        });
+    });
+
+    // save file
+    $(document).on('click', '#save-file', function(event) {
+        $('#form-save').submit();
+    });
 });
 
 function getComfirmExport() {

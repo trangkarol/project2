@@ -65,8 +65,15 @@
             {{ Html::script('/common/js/common.js') }}
             {{ Html::script('/common/js/bootbox.min.js') }}
             <script type="text/javascript">
+                var trans = {
+                    'confirm_order': "{{ trans('common.msg.confirm-order') }}",
+                    'confirm_delete_order': "{{ trans('common.msg.confirm-delete-order') }}",
+                };
+
                 var action = {
                     'get_login': "{{ action('Member\HomeController@getFormLogin') }}",
+                    'add_cart': "{{ action('Member\OrderController@addCart') }}",
+                    'remove_cart': "{{ action('Member\OrderController@removeCart') }}",
                 };
 
             </script>

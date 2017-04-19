@@ -22,7 +22,7 @@
                     <div class="women">
                         <h6><a href="{{ action('Member\ProductController@show', $product->id) }}">{{ $product->name }}</a></h6>
                         <span class="size">{{ $product->made_in }}</span>
-                        <p ><em class="item_price">{{ $product->price }}</em> <strong>{{ trans('common.lbl-vnd') }}</strong></p>
+                        <p ><em class="item_price">{{ $product->price_format }}</em> <strong>{{ trans('common.lbl-vnd') }}</strong></p>
                     </div>
                     @include('member.cart.add_cart')
                 </div>

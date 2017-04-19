@@ -3425,3 +3425,41 @@ h3.tittle1, h3.tittle {
 .fb-like {
     margin-top: 10px;
 }
+
+.yourCart {
+    background: #fff;
+    padding: 17px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 999;
+    width: 300px;
+    display: none;
+}
+
+.yourCart ul {
+    list-style: none;
+}
+
+.cart.box_1:hover .yourCart {
+    display: block;
+}
+
+.your-cart-price {
+    color:red;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.yourCart ul li {
+    padding: 1%;
+}
+
+.div-search {
+    width: 90%;
+    padding: 2%;
+    border: 1px solid #b8b8b8;
+    border-radius: 7px;
+    margin-top: 10px;
+    margin-left: 2%;
+    margin-bottom: 10px;
+}

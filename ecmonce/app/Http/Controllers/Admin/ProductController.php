@@ -8,6 +8,8 @@ use App\Repositories\Product\ProductInterface;
 use App\Repositories\Category\CategoryInterface;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Http\Requests\Product\InsertProductRequest;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\ReportController as Report;
 use App\Helpers\Library;
 use DB;
 
@@ -171,5 +173,70 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             return response()->json('result', false);
         }
+    }
+
+    /**
+     * importFile
+     *
+     * @param  int  $parent_id
+     * @return \Illuminate\Http\Response
+     */
+    public function importFile(Request $request)
+    {
+        $file = $request->file;
+        try {
+            $nameFile = '';
+            if (isset($file)) {
+                $nameFile = $this->productRepository->importFile($file);
+                $products = Report::importFileExcel($nameFile);
+                // dd($products);
+            }
+
+            return view('admin.product.import_product', compact('products', 'nameFile'));
+        } catch (Exception $e) {
+            return redirect()->action('Admin\ProductController@index');
+        }
+    }
+
+    /**
+     * importFile
+     *
+     * @param  int  $parent_id
+     * @return \Illuminate\Http\Response
+     */
+    public function saveImport(Request $request)
+    {
+        $nameFile = $request->nameFile;
+        try {
+            $products = Report::importFileExcel($nameFile)->toArray();
+            $this->productRepository->saveFile($products);
+            $request->session()->flash('success', trans('product.msg.import-success'));
+
+            return redirect()->action('Admin\ProductController@index');
+        } catch (\Exception $e) {
+            $request->session()->flash('fail', trans('product.msg.import-fail'));
+
+            return redirect()->action('Admin\ProductController@index');
+        }
+    }
+
+    /**
+     *data Product.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function dataProduct($product)
+    {
+        $data = [];
+        $data['name'] = $product['name'];
+        $data['image'] = config('setting.images.product');
+        $data['price']= $product['price'];
+        $data['number_current']= $product['number'];
+        $data['made_in'] = $product['made_in'];
+        $data['date_manufacture'] = $product['date_manufacture'];
+        $data['date_expiration'] = $product['date_expiration'];
+        $data['description'] = $product['description'];
+        return $data;
     }
 }

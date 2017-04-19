@@ -7,6 +7,8 @@ return [
     'lbl-msg-pass' => 'My new password is ',
     'lbl-msg-please' => 'Please connect to your website to login',
     'lbl-connect' => 'Connect',
+    'lbl-order' => 'Your Order',
+    'lbl-your-cart' => 'Your Cart',
     'title-new-product' => 'New Product',
     'title-hot-product' => 'Hot Product',
     'title-product' => 'Product',

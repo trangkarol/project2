@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Product\ProductInterface;
 use App\Repositories\Category\CategoryInterface;
 use App\Http\Controllers\Controller;
+use Session;
 
 class HomeController extends Controller
 {
@@ -32,6 +33,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // Session::flush();
         $product_hots = $this->productRepository->hotProduct();
         $product_news = $this->productRepository->newProduct();
         $categories = $this->categoryRepository->getProductHome();

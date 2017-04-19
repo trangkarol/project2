@@ -19,8 +19,11 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace' => 'Admin'], function () {
     // product
     Route::resource('product', 'ProductController');
+    Route::resource('order', 'OrderController');
     Route::group(['prefix' => 'product'], function () {
         Route::post('/sub-category', 'ProductController@getSubCategory');
+        Route::post('/import-file', 'ProductController@importFile');
+        Route::post('/save-file', 'ProductController@saveFile');
     });
 });
 
@@ -32,6 +35,9 @@ Route::group(['prefix' => 'member', 'namespace' => 'Member'], function () {
     Route::resource('product', 'ProductController');
     Route::resource('suggest', 'SuggestProductController');
     Route::post('/sub-category', 'SuggestProductController@getCategory');
+    Route::resource('order', 'OrderController');
+    Route::post('/add-cart', 'OrderController@addCart');
+    Route::post('/remove-cart', 'OrderController@removeCart');
 });
 
 /*login user*/

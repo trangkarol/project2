@@ -37,7 +37,7 @@
                                 <td><a href="{{ action('Member\SuggestProductController@show', $product->id) }}">{{ $product->product_name }}</a></td>
                                 <td>{{ $product->price_format }}</td>
                                 <td>{{ $product->description }}</td>
-                                <td>{{ $product->is_accept ? trans('common.lbl-accept') : '' }}</td>
+                                <td>{{ $product->is_accept ? trans('product.lbl-accept') : '' }}</td>
                                 <td>
                                     @if (!$product->is_accept)
                                         <div class="col-md-6">

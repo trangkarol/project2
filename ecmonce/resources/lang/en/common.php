@@ -47,7 +47,9 @@ return [
         'change' => 'Change',
         'agree' => 'Agree',
         'order' => 'Order',
-        'search' => 'Search'
+        'search' => 'Search',
+        'accept' => 'Accept',
+        'cancel' => 'Cancel',
     ],
 
     'made_in' => [
@@ -63,5 +65,7 @@ return [
         'confirm-delete' => 'Do you want to delete this row?',
         'confirm-order' => 'Do you want to order this products?',
         'confirm-delete-order' => 'Do you want to remove this products in your cart?',
+        'confirm-accept' => 'Do you want to insert this products to your website?',
+        'confirm-cancel' => 'Do you want to cancel this products to your website?',
     ],
 ];

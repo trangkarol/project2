@@ -4,6 +4,8 @@ return [
     'minutes' => 60,
     'numer_pass' => 8,
     'accept_default' => 0,
+    'accept' => 1,
+    'cancel' => 2,
     'defaul_select' => [
         '0' => '',
     ],
@@ -25,6 +27,7 @@ return [
     'images' => [
         'avatar' => 'avatar.png',
         'product' => 'product.jpg',
+        'category' => 'category.jpg',
     ],
 
     'mutil-level' => [

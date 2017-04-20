@@ -14,6 +14,7 @@ return [
     'lbl-total-price' => 'Total price',
     'lbl-customer' => 'Customer',
     'lbl-detail' => 'Detail',
+    'lbl-list-order' => 'List Orders',
     'tooltip' => [
         'create' => 'Create order',
         'update' => 'Update order',

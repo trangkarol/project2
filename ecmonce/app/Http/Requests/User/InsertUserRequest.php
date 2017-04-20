@@ -24,7 +24,7 @@ class InsertUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255|min:6',
+            'name' => 'required|max:255',
             'email' => 'required|email|unique:users',
             'birthday' => 'required',
             'address' => 'max:255|min:6',
@@ -42,7 +42,6 @@ class InsertUserRequest extends FormRequest
         return [
             'name.required' => trans('user.msg.name-required'),
             'name.max' => trans('user.msg.name-max'),
-            'name.min' => trans('user.msg.name-min'),
             'email.required' => trans('user.msg.email-required'),
             'email.unique' => trans('user.msg.email-unique'),
             'email.email' => trans('user.msg.email-email'),

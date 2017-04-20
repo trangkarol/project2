@@ -5,6 +5,7 @@ namespace App\Repositories\Category;
 use App\Models\Category;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Input;
+use DB;
 
 class CategoryRepository extends BaseRepository implements CategoryInterface
 {
@@ -68,5 +69,41 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
     public function productCategory()
     {
         return $this->model->with('products')->where('type_category', config('setting.mutil-level.one'))->paginate(config('setting.user.paginate'));
+    }
+
+    /**
+    * function createName.
+     *
+     * @return true or false
+     */
+    public function createName($input)
+    {
+        DB::beginTransaction();
+        try {
+            $parentCategory = [
+                'name' => $input['category_name'],
+                'image' => config('setting.images.category'),
+                'type_category' => config('setting.mutil-level.one'),
+                'parent_id' => config('setting.mutil-level.one'),
+            ];
+
+            $parentCategory = parent::create($parentCategory);
+
+            $subCategory = [
+                'name' => empty($input['sub_category_name']) ? $input['sub_category_name'] : 'default',
+                'parent_id' => $parentCategory->id,
+                'image' => config('setting.images.category'),
+                'type_category' => config('setting.mutil-level.two'),
+            ];
+
+            $result = parent::create($subCategory);
+            DB::commit();
+
+            return $result;
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return false;
+        }
     }
 }

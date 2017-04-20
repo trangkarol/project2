@@ -13,7 +13,7 @@
         <div class="main-agileits">
             <div class="form-w3agile form1">
                 <h3>{{ trans('member.title-update-suggest') }}</h3>
-                 {!! Form::open(['action' => ['Member\SuggestProductController@update', $productSuggest->id], 'enctype' => 'multipart/form-data']) !!}
+                 {!! Form::open(['action' => ['Member\SuggestProductController@update', $productSuggest->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
 
                     @include('member.product_suggest.form_product_suggest')
                     <div class="form-group">

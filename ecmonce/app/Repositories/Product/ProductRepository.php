@@ -8,6 +8,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Input;
 use DateTime;
 use Session;
+use DB;
 
 class ProductRepository extends BaseRepository implements ProductInterface
 {
@@ -39,9 +40,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
     public function create($request)
     {
         try {
-            $input = $request->only(['name', 'made_in', 'number_current', 'description', 'price']);
-            $input['date_manufacture'] = date_create($request->date_manufacture);
-            $input['date_expiration'] = date_create($request->date_expiration);
+            $input = $request->only(['name', 'made_in', 'number_current', 'description', 'price', 'date_manufacture', 'date_expiration']);
             $input['category_id'] = $request->subCategory;
             $input['image'] = isset($request->file) ? parent::uploadImages(null, $request->file, null) : config('settings.images.product');
             $result = parent::create($input);
@@ -53,26 +52,49 @@ class ProductRepository extends BaseRepository implements ProductInterface
     }
 
     /**
+    * function create.
+     *
+     * @return true or false
+     */
+    public function saveRequestProduct($products)
+    {
+        DB::beginTransaction();
+        try {
+            parent::create($products);
+            DB::commit();
+
+            return true;
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollback();
+
+            return false;
+        }
+    }
+
+    /**
     * function update.
      *
      * @return true or false
      */
     public function update($request, $id)
     {
+        DB::beginTransaction();
         try {
             $product = parent::find($id, 'image');
-            $input = $request->only(['name', 'made_in', 'number_current', 'description']);
-            $input['date_manufacture'] = date_create($request->date_manufacture);
-            $input['date_expiration'] = date_create($request->date_expiration);
+            $input = $request->only(['name', 'made_in', 'number_current', 'description', 'date_manufacture', 'date_expiration']);
             $input['category_id'] = $request->subCategory;
             if (isset($request->file)) {
-                $input['image'] = parent::uploadImages($product->image, $request->file, config('settings.images.product'));
+                $input['image'] = parent::uploadImages($product->image, $request->file, config('setting.images.product'));
             }
 
             parent::update($input, $id);
+            DB::commit();
 
             return true;
         } catch (\Exception $e) {
+            DB::rollback();
+
             return false;
         }
     }

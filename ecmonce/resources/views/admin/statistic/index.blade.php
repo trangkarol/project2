@@ -33,19 +33,28 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2> {{ trans('order.lbl-list-order') }} </h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
+                                <canvas id="myChart" width="400" height="400"></canvas>
+                                {{ Html::style('/bower_components/moment/src/moment.js') }}
+                                {{ Html::style('/bower_components/chartjs/dist/Chart.min.js') }}
+                                <script type="text/javascript">
+                                     var riceData = {
+                                        labels : ["January","February","March","April","May","June"],
+                                        datasets :
+                                         [
+                                            {
+                                              fillColor : "rgba(172,194,132,0.4)",
+                                              strokeColor : "#ACC26D",
+                                              pointColor : "#fff",
+                                              pointStrokeColor : "#9DB86D",
+                                              data : [203000,15600,99000,25100,30500,24700]
+                                            }
+                                         ]
+                                        }
+
+                                        var rice = document.getElementById('myChart').getContext('2d');
+                                         new Chart(rice).Line(riceData);
+                                </script>
                             </div>
-                            <div class="x_content" id="result-users">
-                                <div class="table-responsive">
-                                    @include('admin.order.table_result')
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>

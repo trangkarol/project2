@@ -6,6 +6,7 @@ return [
     'title-edit' => 'Edit Product',
     'title-delete' => 'Delete Product',
     'title-detail-product' => 'Detail Product',
+    'title-request' => 'Management Requests',
     'lbl-related-product' => 'Related Product',
     'title-import-file' => 'Import File',
     'lbl-name' => 'Name',
@@ -28,11 +29,15 @@ return [
     'lbl-data-import' => 'Import Data',
     'lbl-sub-name' => 'Subcategory',
     'lbl-viewed-product' => 'Viewed Product',
+    'lbl-customer' => 'Customer',
+    'lbl-list-product' => 'List Products',
+    'lbl-list-request' => 'List Requests',
     'tooltip' => [
         'create' => 'Create product',
         'update' => 'Update product',
         'delete' => 'Delete product',
         'list' => 'List products',
+        'import-file' => 'Import File',
     ],
 
     'msg' => [

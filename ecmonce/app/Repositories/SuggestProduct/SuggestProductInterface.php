@@ -10,5 +10,11 @@ interface SuggestProductInterface
 
     public function getSuggestProduct();
 
+    public function getSuggestProductUsers();
+
     public function updateSuggestProduct($input, $file, $id);
+
+    public function findSuggestProduct($suggestId);
+
+    public function changeAccept($suggestId, $status);
 }

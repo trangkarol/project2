@@ -20,6 +20,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace' => 'Admi
     // product
     Route::resource('product', 'ProductController');
     Route::resource('order', 'OrderController');
+    Route::resource('request', 'RequestController');
     Route::group(['prefix' => 'product'], function () {
         Route::post('/sub-category', 'ProductController@getSubCategory');
         Route::post('/import-file', 'ProductController@importFile');

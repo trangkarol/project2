@@ -13,4 +13,6 @@ interface CategoryInterface
     public function getProductHome();
 
     public function productCategory();
+
+    public function createName($input);
 }

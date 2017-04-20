@@ -7,7 +7,6 @@
             <th>{{ trans('order.lbl-total-price') }}</th>
             <th>{{ trans('order.lbl-customer') }}</th>
             <th>{{ trans('order.lbl-detail') }}</th>
-
         </tr>
     </thead>
     <tbody>

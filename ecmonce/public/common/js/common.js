@@ -63,6 +63,8 @@ $(document).ready(function() {
     $(document).on('click', '#save-file', function(event) {
         $('#form-save').submit();
     });
+
+    chart();
 });
 
 function getComfirmExport() {
@@ -76,4 +78,9 @@ function getComfirmExport() {
             }
         }
     });
+}
+
+function chart() {
+    // var ctx = document.getElementById("myChart");
+
 }

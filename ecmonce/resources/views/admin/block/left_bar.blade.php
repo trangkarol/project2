@@ -22,9 +22,16 @@
                 <ul class="nav side-menu">
                     <!-- management products-->
                     <li class="@if (Request::url() == action('Admin\ProductController@index')) active @endif ">
-                        <a href="{{ action('Admin\ProductController@index') }}"><i class="fa fa-users "></i><span> {{ trans('product.title-product') }} </span></a>
+                        <a href="{{ action('Admin\ProductController@index') }}"><i class="fa fa-product-hunt"></i><span> {{ trans('product.title-product') }} </span></a>
                     </li>
-
+                    <!-- management orders-->
+                    <li class="@if (Request::url() == action('Admin\OrderController@index')) active @endif ">
+                        <a href="{{ action('Admin\OrderController@index') }}"><i class="fa fa-first-order"></i><span> {{ trans('order.title-order') }} </span></a>
+                    </li>
+                    <!-- management request-->
+                    <li class="@if (Request::url() == action('Admin\RequestController@index')) active @endif ">
+                        <a href="{{ action('Admin\RequestController@index') }}"><i class="fa fa-retweet"></i><span> {{ trans('product.title-request') }} </span></a>
+                    </li>
                 </ul>
             </div>
         </div>

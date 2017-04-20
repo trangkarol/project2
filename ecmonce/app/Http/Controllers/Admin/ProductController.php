@@ -122,22 +122,19 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
-        DB::beginTransaction();
         try {
-            $ressult = $this->productRepository->update($request, $id);
-            if (!$ressult) {
-                $request->session()->flash('fail', trans('product.msg.update-fail'));
-                DB::rollback();
+            $result = $this->productRepository->update($request, $id);
 
-                return redirect()->back();
+            if (!$result) {
+                $request->session()->flash('fail', trans('product.msg.update-fail'));
+
+                return redirect()->action('Admin\ProductController@edit', $id);
             }
 
-            DB::commit();
             $request->session()->flash('success', trans('product.msg.update-success'));
 
-            return redirect()->action(['Admin\ProductController@edit', $id]);
+            return redirect()->action('Admin\ProductController@edit', $id);
         } catch (\Exception $e) {
-            DB::rollback();
             $request->session()->flash('fail', trans('product.msg.update-fail'));
 
             return redirect()->back();

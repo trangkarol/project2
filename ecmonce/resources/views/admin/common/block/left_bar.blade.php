@@ -9,7 +9,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
                 <div class="profile_pic">
-                    <img src="{{ url('/Upload', Auth::user()->avatar) }}" class="img-circle profile_img">
+                    <img src="{{ Auth::user()->path_avatar }}" class="img-circle profile_img">
                 </div>
                 <div class="profile_info">
                     <span>{{ trans('user.lbl-welcome') }}</span>

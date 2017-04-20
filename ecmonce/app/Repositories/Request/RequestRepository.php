@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\SuggestProduct;
+namespace App\Repositories\Request;
 
 use Auth;
 use App\Models\SuggestProduct;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Input;
 use DateTime;
 use DB;
 
-class SuggestProductRepository extends BaseRepository implements SuggestProductInterface
+class RequestRepository extends BaseRepository implements RequestInterface
 {
     /**
     * Create a new controller instance.
@@ -35,7 +35,6 @@ class SuggestProductRepository extends BaseRepository implements SuggestProductI
 
             return $result;
         } catch (\Exception $e) {
-            dd($e);
             DB::rollback();
 
             return false;
@@ -61,7 +60,6 @@ class SuggestProductRepository extends BaseRepository implements SuggestProductI
 
             return $result;
         } catch (\Exception $e) {
-            dd($e);
             DB::rollback();
 
             return false;
@@ -89,48 +87,13 @@ class SuggestProductRepository extends BaseRepository implements SuggestProductI
     }
 
     /**
-    * function findSuggestProduct.
-     *
-     * @return true or false
-     */
-    public function findSuggestProduct($suggestId)
-    {
-        return $this->model->find($suggestId);
-    }
-
-    /**
-    * function accept.
-     *
-     * @return true or false
-     */
-    public function changeAccept($suggestId, $status)
-    {
-        DB::beginTransaction();
-        try {
-            $input = [
-                'is_accept' => $status,
-            ];
-
-            $result = parent::update($input, $suggestId);
-            DB::commit();
-
-            return $result;
-        } catch (\Exception $e) {
-            DB::rollback();
-
-            return false;
-        }
-        return $this->model->update($suggestId);
-    }
-
-    /**
     * function getSuggestProduct.
      *
      * @return true or false
      */
     public function getSuggestProduct()
     {
-        return $this->model->with('user')->paginate(config('setting.admin.paginate'));
+        return $this->model->with('user')->where('is_accept', config('setting.accept_default'))->paginate(config('setting.admin.paginate'));
     }
 
     /**

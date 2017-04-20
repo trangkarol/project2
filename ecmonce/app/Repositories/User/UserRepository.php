@@ -153,6 +153,7 @@ class UserRepository extends BaseRepository implements UserInterface
 
             return parent::update($input, $id);
         } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
 
             return false;

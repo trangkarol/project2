@@ -6,6 +6,8 @@ interface ProductInterface
 {
     public function create($request);
 
+    public function saveRequestProduct($products);
+
     public function getProduct();
 
     public function findProduct($productId);

@@ -13,6 +13,7 @@ return [
     'title-everywhere' => 'everywhere',
     'title-register' => 'Register',
     'title-home' => 'Home',
+    'title-shop-online' => 'Shop online',
     'title-detail' => 'Detail',
     'lbl-or' => 'or',
     'lbl-sdt' => '+0123-456-789',
@@ -50,6 +51,7 @@ return [
         'search' => 'Search',
         'accept' => 'Accept',
         'cancel' => 'Cancel',
+        'paid' => 'Paid',
     ],
 
     'made_in' => [
@@ -61,11 +63,32 @@ return [
         'italy' => 'Italy',
     ],
 
+    'rating' => [
+        'chosse' => '-- All --',
+        'one' => ' 1 Start',
+        'two' => ' 2 Start',
+        'three' => ' 3 Start',
+        'four' => ' 4 Start',
+    ],
+
+    'price' => [
+        'sort' => '-- Sort --',
+        'ascending' => 'Ascende',
+        'decrease' => 'Decrease',
+    ],
+
     'msg' => [
         'confirm-delete' => 'Do you want to delete this row?',
         'confirm-order' => 'Do you want to order this products?',
         'confirm-delete-order' => 'Do you want to remove this products in your cart?',
         'confirm-accept' => 'Do you want to insert this products to your website?',
         'confirm-cancel' => 'Do you want to cancel this products to your website?',
+        'not-login' => 'You need login to use this function!',
+    ],
+
+    'mail' => [
+        'lbl-header' => 'Hello !',
+        'lbl-content' => 'This is list product that you bought at this website: ',
+        'lbl-content' => 'Total price: ',
     ],
 ];

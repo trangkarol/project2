@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Product\ProductInterface;
 use App\Repositories\Category\CategoryInterface;
 use App\Http\Controllers\Controller;
+use App\Helpers\Library;
 use Session;
 
 class ProductController extends Controller
@@ -32,28 +33,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('member.product.product_detail', compact());
-    }
+        $ratings = Library::getRatings();
+        $products = $this->productRepository->getProduct();
+        $sortPrice = Library::getSortPrice();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('member.product.products', compact('products', 'ratings', 'sortPrice'));
     }
 
     /**
@@ -91,36 +75,38 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * getProductCategory .
      *
-     * @param  int  $id
+     * @param  int  $categoryId
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function getProductCategory($categoryId)
     {
-        //
+        $products = $this->productRepository->getProductCategory($categoryId);
+        $ratings = Library::getRatings();
+        $sortPrice = Library::getSortPrice();
+
+        return view('member.product.products', compact('products', 'ratings', 'sortPrice'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * search product .
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $categoryId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function searchProduct(Request $request)
     {
-        //
-    }
+        if ($request->ajax()) {
+            try {
+                $input = $request->only(['name', 'sort_price', 'price_from', 'price_to', 'rating', 'categoryId']);
+                $products = $this->productRepository->searchProduct($input);
+                $html = view('member.product.result_product', compact('products'))->render();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+                return response()->json(['result' => true,  'html' => $html]);
+             } catch (\Exception $e) {
+                return response()->json('result', true);
+            }
+        }
     }
 }

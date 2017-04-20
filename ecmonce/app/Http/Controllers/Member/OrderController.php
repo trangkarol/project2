@@ -41,7 +41,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = $this->orderRepository->getOrderUsers();
+        if (Auth::check()) {
+            $orders = $this->orderRepository->getOrderUsers();
+        }
+
 
         return view('member.cart.cart_detail', compact('orders'));
     }
@@ -80,7 +83,7 @@ class OrderController extends Controller
 
             $orders = [
                 'user_id' => Auth::user()->id,
-                'total_price' => $products->sum('price'),
+                'total_price' => $products->sum('total_price'),
                 'number' => $products->sum('number_order'),
             ];
 

@@ -17,4 +17,5 @@ return [
     'title-update-suggest' => 'Update Suggest Product',
     'title-insert-suggest' => 'Insert Suggest Product',
     'title-detail-suggest' => 'Detail Suggest Product',
+    'lbl-categories' => 'Categories',
 ];

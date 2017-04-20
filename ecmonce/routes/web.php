@@ -31,14 +31,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace' => 'Admi
 //member , 'middleware' => 'admin'
 Route::group(['prefix' => 'member', 'namespace' => 'Member'], function () {
     // home
-    Route::resource('/home', 'HomeController');
-    Route::get('/get-login', 'HomeController@getFormLogin');
-    Route::resource('product', 'ProductController');
+    Route::resource('home', 'HomeController');
     Route::resource('suggest', 'SuggestProductController');
-    Route::post('/sub-category', 'SuggestProductController@getCategory');
     Route::resource('order', 'OrderController');
+    Route::resource('product', 'ProductController', ['only' => ['index', 'show']]);
+    Route::get('/get-login', 'HomeController@getFormLogin');
+    Route::post('/sub-category', 'SuggestProductController@getCategory');
     Route::post('/add-cart', 'OrderController@addCart');
     Route::post('/remove-cart', 'OrderController@removeCart');
+    Route::get('/category/{categoryId}', 'ProductController@getProductCategory');
+    Route::post('/search-product', 'ProductController@searchProduct');
 });
 
 /*login user*/
@@ -54,7 +56,7 @@ Route::group(['namespace' => 'Auth'], function() {
     Route::get('/update/{id}', 'RegisterController@getUpdate');
     Route::post('/update/{id}', 'RegisterController@update');
     // change password
-    Route::get('/page-change-password', 'ResetPasswordController@index')->middleware('auth');
+    Route::get('/page-change-password', 'ResetPasswordController@index');
     //forgot password
     Route::get('/forgot-password', 'ForgotPasswordController@index');
     Route::post('/forgot-password', 'ForgotPasswordController@forgotPassword');

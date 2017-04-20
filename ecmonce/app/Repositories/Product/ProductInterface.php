@@ -21,4 +21,8 @@ interface ProductInterface
     public function listProduct($productIds);
 
     public function saveFile($products);
+
+    public function getProductCategory($categoryId);
+
+    public function searchProduct($input);
 }

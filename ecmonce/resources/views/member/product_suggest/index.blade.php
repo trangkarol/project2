@@ -9,13 +9,17 @@
 @endsection
 <!-- content of page -->
 @section('content')
-    <div class="products-agileinfo">
-        <h2 class="tittle">{{ trans('member.title-suggest') }}
-            <a href="{{ action('Member\SuggestProductController@create') }}" data-toggle="tooltip" data-placement="top" title="{{ trans('product.tooltip.create') }}" class="btn btn-success"><i class="fa fa-plus" ></i></a>
-        </h2>
-        <div class="container">
+<div class="sidebar">
+    @include('member.product.viewed_product')
+</div>
+<div class="content">
+    <div class="cnt-main">
+        <div class="add-request">
+            <a href="{{ action('Member\SuggestProductController@create') }}" class="btn btn-success"><i class="fa fa-plus " ></i></a>
+        </div>
+        <div class="table-responsive">
             <table class="table table-bordered table-striped">
-                <thead>
+                 <thead>
                     <tr>
                         <th>{{ trans('common.lbl-stt') }}</th>
                         <th>{{ trans('product.lbl-images') }}</th>
@@ -44,9 +48,9 @@
                                             <a href ="{{ action('Member\SuggestProductController@edit', $product->id) }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="{{ trans('product.tooltip.update') }}"><i class="fa fa-pencil-square-o"></i></a>
                                         </div>
                                         <div class="col-md-6">
-                                        {{ Form::open(['action' => ['Member\SuggestProductController@destroy', $product->id], 'class' => 'form-delete']) }}
-                                            {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['class' => 'btn btn-success btn-delete', 'type' => 'button', 'data-toggle' => 'tooltip', 'title' => trans('product.tooltip.delete')]) !!}
-                                        {{ Form::close() }}
+                                            {{ Form::open(['action' => ['Member\SuggestProductController@destroy', $product->id], 'class' => 'form-delete']) }}
+                                                {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['class' => 'btn btn-success btn-delete', 'type' => 'button', 'data-toggle' => 'tooltip', 'title' => trans('product.tooltip.delete')]) !!}
+                                            {{ Form::close() }}
                                         </div>
                                     @endif
                                 </td>
@@ -60,7 +64,7 @@
             @endif
         </div>
     </div>
-
+</div>
 @endsection
 <!-- js used for page -->
 @section('contentJs')

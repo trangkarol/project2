@@ -14,7 +14,7 @@ class Library
      */
     public static function getMadeIn()
     {
-        $madeIn = [
+        return [
             '0' => trans('common.made_in.chosse'),
             trans('common.made_in.china') => trans('common.made_in.china'),
             trans('common.made_in.vietname') => trans('common.made_in.vietname'),
@@ -22,7 +22,35 @@ class Library
             trans('common.made_in.japan') => trans('common.made_in.japan'),
             trans('common.made_in.italy') => trans('common.made_in.italy'),
         ];
+    }
 
-        return $madeIn;
+    /**
+    * get getRatings
+     *
+     * @return category
+     */
+    public static function getRatings()
+    {
+        return [
+            '0' => trans('common.rating.chosse'),
+            '1' => trans('common.ratind.one'),
+            '2' => trans('common.ratind.two'),
+            '3' => trans('common.ratind.three'),
+            '4' => trans('common.ratind.four'),
+        ];
+    }
+
+    /**
+    * get sort price
+     *
+     * @return category
+     */
+    public static function getSortPrice()
+    {
+        return [
+            '0' => trans('common.price.sort'),
+            '1' => trans('common.price.ascending'),
+            '2' => trans('common.price.decrease'),
+        ];
     }
 }

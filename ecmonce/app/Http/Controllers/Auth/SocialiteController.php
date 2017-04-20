@@ -43,6 +43,7 @@ class SocialiteController extends Controller
     public function handleProviderCallback($provider)
     {
         $user = Socialite::driver($provider)->user();
+
         $authUser = $this->findOrCreateUser($user, $provider);
         if ($authUser) {
             Auth::login($authUser, true);

@@ -9,17 +9,12 @@
 @endsection
 <!-- content of page -->
 @section('content')
-    <div class="products-agileinfo">
-        <!-- site map -->
-        <div class="col-md-12">
-            <ul>
-                <li><a href="{{ action('Member\HomeController@index') }}">Home</a></li>
-                <li><a href="{{ action('Member\HomeController@index') }}">{{ $product->category->name }}</a></li>
-            </ul>
-        </div>
-        <h2 class="tittle">{{ trans('product.title-detail-product') }}</h2>
-        <div class="container">
-        <!--single-->
+<div class="sidebar">
+    @include('member.product.related_product')
+    @include('member.product.viewed_product')
+</div>
+<div class="content">
+    <div class="cnt-main">
             <div class="single-wl3">
                 <div class="container">
                     <div class="single-grids">
@@ -55,10 +50,6 @@
                             </div>
                             <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#{{ action('Member\ProductController@show', $product->id) }}" data-numposts="5"></div>
                         </div>
-                        <div class="col-md-3 single-grid1">
-                            @include('member.product.related_product')
-                            @include('member.product.viewed_product')
-                        </div>
                         <div class="clearfix"> </div>
                     </div>
 
@@ -66,4 +57,5 @@
             </div>
         </div>
     </div>
+    <div class="clear"></div>
 @endsection

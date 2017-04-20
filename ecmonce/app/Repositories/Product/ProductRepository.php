@@ -29,7 +29,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
      */
     public function getProduct()
     {
-        return $this->model->with('category')->paginate(config('setting.admin.paginate'));
+        return $this->model->with('category')->paginate(12);
     }
 
     /**
@@ -110,6 +110,18 @@ class ProductRepository extends BaseRepository implements ProductInterface
     }
 
     /**
+    * function getProductCategory.
+     *
+     * @return true or false
+     */
+    public function getProductCategory($categoryId)
+    {
+        return $this->model->whereHas('category', function($query) use ($categoryId) {
+            $query->where('parent_id', $categoryId);
+        })->paginate(12);
+    }
+
+    /**
     * function listProduct.
      *
      * @return true or false
@@ -186,7 +198,54 @@ class ProductRepository extends BaseRepository implements ProductInterface
         }
     }
 
-     /**
+    /**
+    * function searchProduct($input)
+     *
+     * @return true or false
+     */
+    public function searchProduct($input)
+    {
+        try {
+            $products = $this->model;
+            if ($input['categoryId'] != config('setting.search_default')) {
+                $categoryId = $input['categoryId'];
+                $products = $products->with(['category' => function ($query) use ($categoryId) {
+                    $query->where('parent_id', $input['categoryId']);
+                }]);
+            }
+
+            if ($input['rating']!= config('setting.search_default')) {
+                $products = $products->where('avg_rating', '>=', $input['rating']);
+            }
+
+            if ($input['price_from'] != config('setting.search_default')) {
+                $products = $products->where('price', '>=', $input['price_from']);
+            }
+
+            if ($input['price_to'] != config('setting.search_default')) {
+                $products = $products->where('price', '<=', $input['price_to']);
+            }
+
+            if (!empty($input['name'])) {
+                $products = $products->where('name', 'LIKE', '%' . $input['name']);
+            }
+
+            if ($input['sort_price'] == 1) {
+                $products = $products->orderBy('price', 'asc');
+            }
+
+            if ($input['sort_price'] == 2) {
+                $products = $products->orderBy('price', 'desc');
+            }
+
+            return $products->paginate(12);
+        } catch (\Exception $e) {
+            dd($e);
+            return false;
+        }
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data

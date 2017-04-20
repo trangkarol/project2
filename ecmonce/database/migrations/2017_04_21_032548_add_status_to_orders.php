@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EditTotalPriceToOrderDetails extends Migration
+class AddStatusToOrders extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class EditTotalPriceToOrderDetails extends Migration
      */
     public function up()
     {
-        Schema::table('order_details', function (Blueprint $table) {
-            $table->integer('total_price')->change();
+        Schema::table('orders', function (Blueprint $table) {
+            $table->tinyInteger('status')->nullable()->after('total_price');
         });
     }
 
@@ -25,8 +25,8 @@ class EditTotalPriceToOrderDetails extends Migration
      */
     public function down()
     {
-        Schema::table('order_details', function (Blueprint $table) {
-            $table->decimal('total_price', 5, 2)->change();
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn('status');
         });
     }
 }

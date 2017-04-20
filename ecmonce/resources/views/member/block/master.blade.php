@@ -11,6 +11,7 @@
             {{ Html::style('/bower_components/components-font-awesome/css/font-awesome.min.css') }}
             {{ Html::style('/css/bootstrap.css') }}
             {{ Html::style('/css/style.css') }}
+            {{ Html::style('/css/plugins/style.css') }}
             {{ Html::style('/css/coreSlider.css') }}
             {{ Html::style('/css/jstarbox.css') }}
             {{ Html::style('/css/flexslider.css') }}
@@ -18,9 +19,8 @@
             {{ Html::style('/css/owl.carousel.css') }}
             {{ Html::style('//fonts.googleapis.com/css?family=Cagliostro') }}
             {{ Html::style('/jquery-colorbox/example3/colorbox.css') }}
-            {{ Html::style('//fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300') }}
+            {{ Html::style('////fonts.googleapis.com/css?family=Cabin+Condensed') }}
         @show
-
     </head>
     <body>
         <script type='text/javascript'>
@@ -36,15 +36,17 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
-        <div class="container-fluid">
+        <div class="wrap">
             <!-- header -->
             <div class="header">
                 @include('member.block.header')
             </div>
+
             <!-- banner -->
             @yield('banner')
             <!-- content -->
-            <div class="content">
+           <div class="main">
+
                 @yield('content')
             </div>
         </div>
@@ -68,6 +70,7 @@
                 var trans = {
                     'confirm_order': "{{ trans('common.msg.confirm-order') }}",
                     'confirm_delete_order': "{{ trans('common.msg.confirm-delete-order') }}",
+                    'msg_login': "{{ trans('common.msg.not-login') }}",
                 };
 
                 var action = {

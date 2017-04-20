@@ -6,7 +6,9 @@
             <th>{{ trans('order.lbl-total-number') }}</th>
             <th>{{ trans('order.lbl-total-price') }}</th>
             <th>{{ trans('order.lbl-customer') }}</th>
+            <th>{{ trans('order.lbl-status') }}</th>
             <th>{{ trans('order.lbl-detail') }}</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +20,7 @@
                     <td>{{ $order->number }}</a></td>
                     <td>{{ $order->total_price_format }}</td>
                     <th>{{ $order->user->name }}</th>
+                    <th>{{ $order->status ? trans('order.lbl-paid') : trans('order.lbl-unpaid') }}</th>
                     <td>
                         @if (!$order->orderDeatils->isEmpty())
                             <table class="table table-bordered table-striped">
@@ -41,6 +44,16 @@
                                 </tbody>
                             </table>
                         @endif
+                    </td>
+                    <td>
+                        <div class="col-md-6">
+                            <a href ="{{ action('Admin\ProductController@edit', $order->id) }}" class="btn btn-primary">{{ trans('common.button.paid') }}</i></a>
+                        </div>
+                        <div class="col-md-6">
+                        {{ Form::open(['action' => ['Admin\ProductController@destroy', $order->id], 'class' => 'form-delete-product']) }}
+                            {!! Form::button(trans('common.button.cancel'), ['class' => 'btn btn-danger btn-delete', 'type' => 'button']) !!}
+                        {{ Form::close() }}
+                        </div>
                     </td>
                 </tr>
             @endforeach

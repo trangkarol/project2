@@ -1,10 +1,26 @@
-<h3>{{ trans('mail.lbl-header') }} <strong>{{ Auth::user()->name }}</strong></h3>
+<h3>{{ trans('common.mail.lbl-header') }} <strong>{{ Auth::user()->name }}</strong></h3>
 <div>
-    <h5>{{ trans('mail.lbl-content') }}</h5>
-    <ul>
-        @foreach ($order->orderDeatils as $orderDeatil)
-            <li>{{ $loop->iteration. ' '}}<strong>{{ $orderDeatil->product->name }}</strong>. {{ trans('mail.lbl-number').': '. $orderDeatil->number }} <strong>{{ $orderDeatil->total_price_format }}</strong></li>
-        @endforeach
-    </ul>
-    <h6>{{ trans('mail.lbl-content') }} <strong>{{ $order->total_price_format }}</strong></h6>
+    <h5>{{ trans('common.mail.lbl-content') }}</h5>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>{{ trans('common.lbl-stt') }}</th>
+                    <th>{{ trans('product.lbl-name') }}</th>
+                    <th>{{ trans('order.lbl-total-number') }}</th>
+                    <th>{{ trans('order.lbl-total-price') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                 @foreach ($order->orderDeatils as $orderDetail)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $orderDetail->product->name }}</td>
+                        <td>{{ $orderDetail->number }}</td>
+                        <td>{{ $orderDetail->total_price_format }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    <h6>{{ trans('common.mail.lbl-content') }} <strong>{{ $order->total_price_format }}</strong></h6>
 </div>

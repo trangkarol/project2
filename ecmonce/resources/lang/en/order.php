@@ -15,6 +15,9 @@ return [
     'lbl-customer' => 'Customer',
     'lbl-detail' => 'Detail',
     'lbl-list-order' => 'List Orders',
+    'lbl-status' => 'Status',
+    'lbl-paid' => 'Paid',
+    'lbl-unpaid' => 'UnPaid',
     'tooltip' => [
         'create' => 'Create order',
         'update' => 'Update order',

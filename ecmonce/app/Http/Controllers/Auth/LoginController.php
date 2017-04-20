@@ -50,7 +50,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('admin.common.login');
+        return view('member.user.login');
     }
 
     /**

@@ -45,6 +45,19 @@
         });
     });
 
+    $(document).on('click', '#message', function () {
+        event.preventDefault();
+        bootbox.alert(trans['msg_login']);
+    });
+
+
+    //handel pagination by ajax
+    $(document).on('click', '.search.pagination a', function(event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        search(page);
+    });
+
     $.ajaxSetup ({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -66,6 +79,11 @@ $(document).ready(function() {
             });
         });
     });
+
+$(document).on('click', '#btn-search',function() {
+    // when event search is firstly
+    search(0);
+});
 
 jQuery(function() {
     jQuery('.starbox').each(function() {
@@ -140,3 +158,58 @@ function removeCart() {
         }
     });
 }
+
+function search(page) {
+    var name = $('#name').val();
+    var price_from = $('#price_from').val();
+    var price_to = $('#price_to').val();
+    var rating = $('#rating').val();
+    var sort_price = $('#sort_price').val();
+    var cartegoryId = 0;
+    var url = action['search_product'];
+    if (!page) {
+        url += '?page=' + page;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        dataType: 'json',
+        data: {
+            name: name,
+            price_from: price_from,
+            price_to: price_to,
+            rating: rating,
+            cartegoryId: cartegoryId,
+            sort_price: sort_price,
+        },
+        success:function(data) {
+            $('#div-result-product').empty();
+            $('#div-result-product').html(data.html);
+            $('.pagination').addClass('search');
+            if (page) {
+                location.hash='?page='+page;
+            }
+            jQuery(function() {
+                jQuery('.starbox').each(function() {
+                    var starbox = jQuery(this);
+                        starbox.starbox({
+                        average: starbox.attr('data-start-value'),
+                        changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
+                        ghosting: starbox.hasClass('ghosting'),
+                        autoUpdateAverage: starbox.hasClass('autoupdate'),
+                        buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
+                        stars: starbox.attr('data-star-count') || 5
+                        }).bind('starbox-value-changed', function(event, value) {
+                        if (starbox.hasClass('random')) {
+                            var val = Math.random();
+                            starbox.next().text(' ' + val);
+                            return val;
+                        }
+                    })
+                });
+            });
+        },
+    });
+}
+

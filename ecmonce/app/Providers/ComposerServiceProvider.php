@@ -13,8 +13,8 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('member.block.header', 'App\Http\ViewComposers\MenuComposer');
-        view()->composer('member.product.new_products', 'App\Http\ViewComposers\ProductNewsComposer');
+        view()->composer('*', 'App\Http\ViewComposers\MenuComposer');
+        view()->composer('*', 'App\Http\ViewComposers\ProductNewsComposer');
         view()->composer('*', 'App\Http\ViewComposers\CartComposer');
         view()->composer('*', 'App\Http\ViewComposers\ViewedProductComposer');
     }

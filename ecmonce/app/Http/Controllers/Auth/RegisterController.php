@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Requests\User\InsertUserRequest;
 use App\Repositories\Category\CategoryInterface;
 use App\Http\Requests\User\UpdateUserRequest;
+use Illuminate\Http\Request;
 use DB;
 use Auth;
 
@@ -98,7 +99,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         DB::beginTransaction();
         $result = $this->userRepository->update($request, $id);

@@ -169,7 +169,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
     public function newProduct()
     {
         return $this->model->select('products.id', 'products.name', 'products.image', 'products.price', 'products.avg_rating')
-            ->where(\DB::raw('DATEDIFF(NOW(), created_at)'), '>=', 3)->orderBy('created_at', 'desc')->take(8)->get();
+            ->where(\DB::raw('DATEDIFF(NOW(), created_at)'), '<=', 3)->orderBy('created_at', 'desc')->take(8)->get();
     }
 
     /**

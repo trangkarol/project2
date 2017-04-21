@@ -21,7 +21,7 @@
                     </td>
                     <td><a href="{{ action('Admin\RequestController@show', $product->id) }}">{{ $product->product_name }}</a></td>
                     <td>{{ $product->price_format }}</td>
-                    <td>{{ $product->description }}</td>
+                    <td class="div-description">{{ $product->description }}</td>
                     <td>{{ $product->user->name }}</td>
                     <td>{{ $product->is_accept ? trans('product.lbl-accept') : '' }}</td>
                     <td>

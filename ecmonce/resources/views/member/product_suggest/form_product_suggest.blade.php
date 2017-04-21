@@ -69,7 +69,7 @@
     {{ Form::label('category', trans('product.lbl-category'), ['class' => 'col-md-4 control-label']) }}
     <div class="col-md-8">
         {{ Form::hidden('sub_id', isset($productSuggest->sub_category_id) ? $productSuggest->sub_category_id : 0, ['id' => 'sub_id']) }}
-        {{ Form::select('category_id', $parentCategory, isset($productSuggest->category_id) ? $productSuggest->category_id : old('category_id'), ['class' => 'form-control', 'id' => 'category']) }}
+        {{ Form::select('category_id', $parentCategory, isset($productSuggest->category_id) ? $productSuggest->category_id : old('sub_category_id'), ['class' => 'form-control', 'id' => 'category']) }}
     </div>
     <div class="clearfix"></div>
 </div>

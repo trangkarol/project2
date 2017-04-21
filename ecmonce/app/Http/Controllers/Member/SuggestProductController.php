@@ -60,13 +60,11 @@ class SuggestProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $input = $request->only(['product_name', 'made_in', 'number_current', 'description', 'price', 'category_id', 'category_name', 'sub_category_id', 'sub_category_name', 'date_manufacture', 'date_expiration']);
 
         $input['images'] = isset($request->file) ? $this->suggestProductRepository->uploadImages(null, $request->file, null) : config('settings.images.product');
         $input['is_accept'] = config('setting.accept_default');
         $input['user_id'] = Auth::user()->id;
-        dd($input);
 
         $result = $this->suggestProductRepository->create($input);
 
@@ -117,9 +115,7 @@ class SuggestProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->only(['product_name', 'made_in', 'number_current', 'description', 'price', 'category_id', 'category_name', 'sub_category_id', 'sub_category_name', 'images']);
-        $input['date_manufacture'] = $request->date_manufacture;
-        $input['date_expiration'] = $request->date_expiration;
+        $input = $request->only(['product_name', 'made_in', 'number_current', 'description', 'price', 'category_id', 'category_name', 'sub_category_id', 'sub_category_name']);
         $input['is_accept'] = config('setting.accept_default');
         $input['user_id'] = Auth::user()->id;
         $result = $this->suggestProductRepository->updateSuggestProduct($input, $request->file, $id);
@@ -140,6 +136,7 @@ class SuggestProductController extends Controller
     public function destroy($id)
     {
         $this->suggestProductRepository->delete($id);
+        return redirect()->action('Member\SuggestProductController@index');
     }
 
     /**

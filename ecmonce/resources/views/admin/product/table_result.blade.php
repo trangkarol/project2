@@ -20,7 +20,7 @@
                     </td>
                     <td><a href="{{ action('Admin\ProductController@show', $product->id) }}">{{ $product->name }}</a></td>
                     <td>{{ $product->price_format }}</td>
-                    <td>{{ $product->description }}</td>
+                    <td class="div-description">{{ $product->description }}</td>
                     <td>{{ $product->category->name }}</td>
                     <td>
                         <div class="col-md-6">

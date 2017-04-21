@@ -35,7 +35,6 @@ class SuggestProductRepository extends BaseRepository implements SuggestProductI
 
             return $result;
         } catch (\Exception $e) {
-            dd($e);
             DB::rollback();
 
             return false;
@@ -52,11 +51,11 @@ class SuggestProductRepository extends BaseRepository implements SuggestProductI
         DB::beginTransaction();
         try {
             $suggestProduct = $this->model->find($id);
-            if (!is_null($file)) {
+            if (!isset($file)) {
                 $tnput['images'] = isset($request->file) ? parent::uploadImages($suggestProduct->images, $file, config('settings.images.product')) : $suggestProduct->images;
             }
 
-            $result = parent::create($input);
+            $result = parent::update($input, $id);
             DB::commit();
 
             return $result;

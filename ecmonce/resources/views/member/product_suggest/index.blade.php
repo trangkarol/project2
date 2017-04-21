@@ -48,7 +48,7 @@
                                             <a href ="{{ action('Member\SuggestProductController@edit', $product->id) }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="{{ trans('product.tooltip.update') }}"><i class="fa fa-pencil-square-o"></i></a>
                                         </div>
                                         <div class="col-md-6">
-                                            {{ Form::open(['action' => ['Member\SuggestProductController@destroy', $product->id], 'class' => 'form-delete']) }}
+                                            {{ Form::open(['action' => ['Member\SuggestProductController@destroy', $product->id], 'method' => 'DELETE', 'class' => 'form-delete']) }}
                                                 {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['class' => 'btn btn-success btn-delete', 'type' => 'button', 'data-toggle' => 'tooltip', 'title' => trans('product.tooltip.delete')]) !!}
                                             {{ Form::close() }}
                                         </div>

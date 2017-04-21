@@ -82,7 +82,6 @@ class RequestController extends Controller
 
             return redirect()->action('Admin\RequestController@index');
         } catch (\Exception $e) {
-            dd($e);
             $request->session()->flash('fail', trans('product.msg.insert-fail'));
 
             return redirect()->action('Admin\RequestController@index');
@@ -154,7 +153,7 @@ class RequestController extends Controller
     {
         $data = [];
         $data['name'] = $product['product_name'];
-        $data['image'] = config('setting.images.product');
+        $data['image'] = $product['images'];
         $data['price']= $product['price'];
         $data['number_current']= $product['number_current'];
         $data['made_in'] = $product['made_in'];

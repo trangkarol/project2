@@ -46,7 +46,7 @@ class Order extends Model
 
     public function getTotalPriceFormatAttribute()
     {
-        return number_format($this->total_price, 3, ',', ','). ' ' . trans('common.lbl-vnd');
+        return number_format($this->total_price, 3, ',', ',') . ' ' . trans('common.lbl-vnd');
     }
 
     public function getDateFormatAttribute()

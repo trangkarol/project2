@@ -65,4 +65,10 @@
 @section('contentJs')
     @parent
     {{ Html::script('/admin/js/product.js') }}
+    <!-- add trans and action used in file user.js -->
+    <script type="text/javascript">
+        var action = {
+            'product_sub_category': "{{ action('Admin\ProductController@getSubCategory') }}",
+        };
+    </script>
 @endsection

@@ -18,6 +18,7 @@ class ProductController extends Controller
 
     protected $productRepository;
     protected $categoryRepository;
+    protected $madeIn;
 
     /**
     * Create a new controller instance.
@@ -30,6 +31,7 @@ class ProductController extends Controller
     ) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->madeIn = Library::getMadeIn();
     }
 
     /**
@@ -39,9 +41,14 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $ratings = Library::getRatings();
+        $sortPrice = Library::getSortPrice();
+        $sortPrice = Library::getSortPrice();
+        $sortProduct = Library::getSortProduct();
+        $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
         $products = $this->productRepository->getProduct();
 
-        return view('admin.product.index', compact('products'));
+        return view('admin.product.index', compact('products', 'ratings', 'sortPrice', 'parentCategory', 'sortProduct'));
     }
 
     /**
@@ -52,9 +59,8 @@ class ProductController extends Controller
     public function create()
     {
         $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
-        $madeIn = Library::getMadeIn();
 
-        return view('admin.product.create', compact('parentCategory', 'subCategory', 'madeIn'));
+        return view('admin.product.create')->with(['parentCategory' => $parentCategory, 'subCategory' => $subCategory, 'madeIn' => $this->madeIn]);
     }
 
     /**
@@ -67,7 +73,7 @@ class ProductController extends Controller
     {
         DB::beginTransaction();
         try {
-            $ressult = $this->productRepository->create($request);
+            $ressult = $this->productRepository->createProduct($request);
             if (!$ressult) {
                 $request->session()->flash('fail', trans('product.msg.insert-fail'));
                 DB::rollback();
@@ -108,9 +114,8 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->findProduct($id);
         $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
-        $madeIn = Library::getMadeIn();
 
-        return view('admin.product.edit', compact('product', 'parentCategory', 'madeIn'));
+        return view('admin.product.edit')->with(['product' => $product, 'parentCategory' => $parentCategory, 'madeIn' => $this->madeIn]);
     }
 
     /**
@@ -186,7 +191,6 @@ class ProductController extends Controller
             if (isset($file)) {
                 $nameFile = $this->productRepository->importFile($file);
                 $products = Report::importFileExcel($nameFile);
-                // dd($products);
             }
 
             return view('admin.product.import_product', compact('products', 'nameFile'));
@@ -201,22 +205,51 @@ class ProductController extends Controller
      * @param  int  $parent_id
      * @return \Illuminate\Http\Response
      */
-    public function saveImport(Request $request)
+    public function saveFile(Request $request)
     {
-        $nameFile = $request->nameFile;
+        DB::beginTransaction();
         try {
-            $products = Report::importFileExcel($nameFile)->toArray();
-            $this->productRepository->saveFile($products);
+            $products = Report::importFileExcel($request->nameFile)->toArray();
+            foreach ($products as $product) {
+                $inputs = $this->dataProduct($product);
+                $inputs['category_id'] = $this->categoryRepository->getCategoryId($product['category_name'], $product['subcategory_name']);
+
+                if (!$this->validator($inputs)->validate()) {
+                    $this->productRepository->create($inputs);
+                }
+            }
+
             $request->session()->flash('success', trans('product.msg.import-success'));
+            DB::commit();
 
             return redirect()->action('Admin\ProductController@index');
         } catch (\Exception $e) {
             $request->session()->flash('fail', trans('product.msg.import-fail'));
+            DB::rollback();
 
             return redirect()->action('Admin\ProductController@index');
         }
     }
 
+    /**
+     * search.
+     *
+     * @param  int  $categoryId
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        dd('dddd');
+        try {
+            $input = $request->only(['name', 'sort_price', 'price_from', 'price_to', 'rating', 'categoryId']);
+            $products = $this->productRepository->searchProduct($input);
+            $html = view('member.product.result_product', compact('products'))->render();
+
+            return response()->json(['result' => true,  'html' => $html]);
+         } catch (\Exception $e) {
+            return response()->json('result', true);
+        }
+    }
     /**
      *data Product.
      *
@@ -234,6 +267,26 @@ class ProductController extends Controller
         $data['date_manufacture'] = $product['date_manufacture'];
         $data['date_expiration'] = $product['date_expiration'];
         $data['description'] = $product['description'];
+
         return $data;
+    }
+
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|max:50|min:4|unique:products',
+            'date_manufacture' => 'required',
+            'date_expiration' => 'required|after:date_manufacture',
+            'description' => 'required',
+            'price' => 'required',
+            'number_current' => 'required',
+        ]);
     }
 }

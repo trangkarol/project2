@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace' => 'Admi
         Route::post('/sub-category', 'ProductController@getSubCategory');
         Route::post('/import-file', 'ProductController@importFile');
         Route::post('/save-file', 'ProductController@saveFile');
+        Route::get('/search', 'ProductController@search');
     });
 });
 

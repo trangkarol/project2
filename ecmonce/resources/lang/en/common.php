@@ -77,6 +77,12 @@ return [
         'decrease' => 'Decrease',
     ],
 
+    'product' => [
+        'sort' => '-- Sort --',
+        'hot' => 'Hot Product',
+        'new' => 'New Product',
+    ],
+
     'msg' => [
         'confirm-delete' => 'Do you want to delete this row?',
         'confirm-order' => 'Do you want to order this products?',

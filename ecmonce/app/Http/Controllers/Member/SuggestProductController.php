@@ -13,6 +13,7 @@ class SuggestProductController extends Controller
 {
     protected $suggestProductRepository;
     protected $categoryRepository;
+    protected $madeIn;
 
     /**
     * Create a new controller instance.
@@ -25,6 +26,7 @@ class SuggestProductController extends Controller
     ) {
         $this->suggestProductRepository = $suggestProductRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->madeIn = Library::getMadeIn();
     }
 
     /**
@@ -35,7 +37,7 @@ class SuggestProductController extends Controller
     public function index()
     {
         $productSuggests = $this->suggestProductRepository->getSuggestProductUsers();
-        $madeIn = Library::getMadeIn();
+
         return view('member.product_suggest.index', compact('productSuggests'));
     }
 
@@ -47,9 +49,8 @@ class SuggestProductController extends Controller
     public function create()
     {
         $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
-        $madeIn = Library::getMadeIn();
 
-        return view('member.product_suggest.create', compact('parentCategory', 'madeIn'));
+        return view('member.product_suggest.create')->with(['parentCategory' => $parentCategory, 'madeIn' => $this->madeIn]);
     }
 
     /**
@@ -61,11 +62,9 @@ class SuggestProductController extends Controller
     public function store(Request $request)
     {
         $input = $request->only(['product_name', 'made_in', 'number_current', 'description', 'price', 'category_id', 'category_name', 'sub_category_id', 'sub_category_name', 'date_manufacture', 'date_expiration']);
-
         $input['images'] = isset($request->file) ? $this->suggestProductRepository->uploadImages(null, $request->file, null) : config('settings.images.product');
         $input['is_accept'] = config('setting.accept_default');
         $input['user_id'] = Auth::user()->id;
-
         $result = $this->suggestProductRepository->create($input);
 
         if ($result) {
@@ -84,26 +83,23 @@ class SuggestProductController extends Controller
     public function show($id)
     {
         $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
-        $madeIn = Library::getMadeIn();
         $productSuggest = $this->suggestProductRepository->find($id, '*');
 
-        return view('member.product_suggest.detail', compact('parentCategory', 'madeIn', 'productSuggest'));
+        return view('member.product_suggest.detail')->with(['parentCategory' => $parentCategory, 'madeIn' => $this->madeIn, 'productSuggest' => $productSuggest]);
     }
 
     /**
+     * @return \Illuminate\Http\Response
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
-        $madeIn = Library::getMadeIn();
-        $productSuggest = $this->suggestProductRepository->find($id, '*');
-        $menus = [];
+        $productSuggest = $this->suggestProductRepository->find($id);
 
-        return view('member.product_suggest.edit', compact('parentCategory', 'madeIn', 'menus', 'productSuggest'));
+        return view('member.product_suggest.edit')->with(['parentCategory' => $parentCategory, 'madeIn' => $this->madeIn, 'productSuggest' => $productSuggest]);
     }
 
     /**
@@ -136,6 +132,7 @@ class SuggestProductController extends Controller
     public function destroy($id)
     {
         $this->suggestProductRepository->delete($id);
+
         return redirect()->action('Member\SuggestProductController@index');
     }
 

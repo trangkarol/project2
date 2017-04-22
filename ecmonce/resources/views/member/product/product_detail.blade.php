@@ -29,7 +29,6 @@
                                         <span>{{ trans('product.lbl-number') }} : <strong>{{ $product->number_current }}</strong></span>
                                         <span>{{ trans('product.lbl-date-manufacture') }} : <strong>{{ $product->date_manufacture }}</strong></span>
                                         <span>{{ trans('product.lbl-date-expiration') }} : <strong>{{ $product->date_expiration }}</strong></span>
-
                                     </div>
                                     @include('member.cart.add_cart')
                                 </div>
@@ -52,7 +51,6 @@
                         </div>
                         <div class="clearfix"> </div>
                     </div>
-
                 </div>
             </div>
         </div>

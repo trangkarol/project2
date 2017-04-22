@@ -10,7 +10,10 @@
         <ul>
             @foreach ($productCats as $product)
                 <li>
-                    <a href="{{ action('Member\ProductController@show', $product->id) }}">{{ $product->name }}</a><span class="your-cart-price">{{ $product->number_order }}</span> <span class="your-cart-price">{{ number_format($product->total_price, 3, ',', ',') . ' ' . trans('common.lbl-vnd')}}</span></li>
+                    <a href="{{ action('Member\ProductController@show', $product->id) }}">{{ $product->name }}</a>
+                    <span class="your-cart-price">{{ $product->number_order }}</span>
+                    <span class="your-cart-price">{{ number_format($product->total_price, 3, ',', ',') . ' ' . trans('common.lbl-vnd') }}</span>
+                </li>
             @endforeach
         </ul>
     @endif

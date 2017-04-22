@@ -37,7 +37,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
      *
      * @return true or false
      */
-    public function create($request)
+    public function createProduct($request)
     {
         try {
             $input = $request->only(['name', 'made_in', 'number_current', 'description', 'price', 'date_manufacture', 'date_expiration']);
@@ -84,6 +84,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
             $product = parent::find($id, 'image');
             $input = $request->only(['name', 'made_in', 'number_current', 'description', 'date_manufacture', 'date_expiration']);
             $input['category_id'] = $request->subCategory;
+
             if (isset($request->file)) {
                 $input['image'] = parent::uploadImages($product->image, $request->file, config('setting.images.product'));
             }
@@ -207,14 +208,23 @@ class ProductRepository extends BaseRepository implements ProductInterface
     {
         try {
             $products = $this->model;
-            if ($input['categoryId'] != config('setting.search_default')) {
-                $categoryId = $input['categoryId'];
-                $products = $products->with(['category' => function ($query) use ($categoryId) {
-                    $query->where('parent_id', $input['categoryId']);
-                }]);
+
+            if ($input['parentCategory_id'] != config('setting.search_default')) {
+                $parentId = $input['subCategory_id'];
+
+                if ($input['subCategory_id'] != config('setting.search_default')) {
+                    $subCategoryId = $input['subCategory_id'];
+                    $products = $products->with(['category' => function ($query) use ($subCategoryId) {
+                        $query->where('id', $subCategoryId);
+                    }]);
+                } else {
+                    $products = $products->with(['category' => function ($query) use ($parentId) {
+                        $query->where('parent_id', $parentId);
+                    }]);
+                }
             }
 
-            if ($input['rating']!= config('setting.search_default')) {
+            if ($input['rating'] != config('setting.search_default')) {
                 $products = $products->where('avg_rating', '>=', $input['rating']);
             }
 
@@ -230,36 +240,27 @@ class ProductRepository extends BaseRepository implements ProductInterface
                 $products = $products->where('name', 'LIKE', '%' . $input['name']);
             }
 
-            if ($input['sort_price'] == 1) {
+            if ($input['sort_product'] == config('setting.product.hot')) {
+                $products = $products->with(['orderDetail' => function ($query) {
+                    $query->sum('product_id');
+                }]);
+            }
+
+            if ($input['sort_product'] == config('setting.product.new')) {
                 $products = $products->orderBy('price', 'asc');
             }
 
-            if ($input['sort_price'] == 2) {
+            if ($input['sort_price'] == config('setting.sort_price.asc')) {
+                $products = $products->orderBy('price', 'asc');
+            }
+
+            if ($input['sort_price'] == config('setting.sort_price.desc')) {
                 $products = $products->orderBy('price', 'desc');
             }
 
             return $products->paginate(12);
         } catch (\Exception $e) {
-            dd($e);
             return false;
         }
-    }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    public function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:50|min:4|unique:products',
-            'date_manufacture' => 'required',
-            'date_expiration' => 'required|after:date_manufacture',
-            'description' => 'required|min:30',
-            'price' => 'required',
-            'number' => 'required',
-        ]);
     }
 }

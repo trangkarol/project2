@@ -1,5 +1,5 @@
 <div class="form-group{{ $errors->has('name') ? 'has-error' : '' }}">
-      {{ Form::label('name', trans('product.lbl-name'), ['class' => 'col-md-4 control-label']) }}
+    {{ Form::label('name', trans('product.lbl-name'), ['class' => 'col-md-4 control-label']) }}
     <div class="col-md-6">
         {{ Form::text('name', isset($product->name) ? $product->name : old('name'), ['class' => 'form-control', 'id' => 'name', 'required' => true, 'autofocus' => true]) }}
         @if ($errors->has('name'))

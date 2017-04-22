@@ -106,4 +106,53 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             return false;
         }
     }
+
+    /**
+    * function getCategoryId.
+     *
+     * @return true or false
+     */
+    public function getCategoryId($parentCategory, $subCategory)
+    {
+        try {
+            $checkExitsParentCategory = $this->model->where('name', $parentCategory)->first();
+
+            if (!is_null($checkExitsParentCategory)) {
+                $checkExitsSubCategory = $this->model->where('name', $subCategory)->first();
+
+                if (!is_null($checkExitsSubCategory)) {
+                    return $checkExitsSubCategory->id;
+                } else {
+                    $input = $this->dataCategory($subCategory, $checkExitsParentCategory->id, config('setting.mutil-level.two'));
+                    $subCategory = $this->model->create($input);
+
+                    return $subCategory->id;
+                }
+            }
+
+            //insert
+            $parentCategory = $this->model->create($this->dataCategory($parentCategory, '', config('setting.mutil-level.one')));
+            $subCategory = $this->model->create($this->dataCategory($subCategory, $parentCategory->id, config('setting.mutil-level.two')));
+
+            return $subCategory->id;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     *data category.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function dataCategory($name, $parentCategory, $typeCategory)
+    {
+        $data = [];
+        $data['name'] = $name;
+        $data['image'] = config('setting.images.category');
+        $data['parent_id']= $parentCategory;
+        $data['type_category']= $typeCategory;
+        return $data;
+    }
 }

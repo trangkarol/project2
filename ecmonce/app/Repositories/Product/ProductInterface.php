@@ -4,7 +4,7 @@ namespace App\Repositories\Product;
 
 interface ProductInterface
 {
-    public function create($request);
+    public function createProduct($request);
 
     public function saveRequestProduct($products);
 

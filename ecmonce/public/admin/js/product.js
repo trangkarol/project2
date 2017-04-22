@@ -1,11 +1,5 @@
 $(document).ready(function() {
     getSubCategory();
-    // click on search
-    $(document).on('click', '#btn-search',function() {
-        // when event search is firstly
-        search(0);
-    });
-
     // change category one
     $(document).on('change', '#category',function() {
         getSubCategory();

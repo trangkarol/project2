@@ -51,6 +51,7 @@ class SuggestProductRepository extends BaseRepository implements SuggestProductI
         DB::beginTransaction();
         try {
             $suggestProduct = $this->model->find($id);
+
             if (!isset($file)) {
                 $tnput['images'] = isset($request->file) ? parent::uploadImages($suggestProduct->images, $file, config('settings.images.product')) : $suggestProduct->images;
             }

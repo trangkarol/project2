@@ -15,4 +15,6 @@ interface CategoryInterface
     public function productCategory();
 
     public function createName($input);
+
+    public function getCategoryId($category, $subCategory);
 }

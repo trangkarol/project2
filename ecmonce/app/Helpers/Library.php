@@ -33,10 +33,10 @@ class Library
     {
         return [
             '0' => trans('common.rating.chosse'),
-            '1' => trans('common.ratind.one'),
-            '2' => trans('common.ratind.two'),
-            '3' => trans('common.ratind.three'),
-            '4' => trans('common.ratind.four'),
+            '1' => trans('common.rating.one'),
+            '2' => trans('common.rating.two'),
+            '3' => trans('common.rating.three'),
+            '4' => trans('common.rating.four'),
         ];
     }
 
@@ -51,6 +51,20 @@ class Library
             '0' => trans('common.price.sort'),
             '1' => trans('common.price.ascending'),
             '2' => trans('common.price.decrease'),
+        ];
+    }
+
+    /**
+    * get sort Product
+     *
+     * @return category
+     */
+    public static function getSortProduct()
+    {
+        return [
+            '0' => trans('common.product.sort'),
+            '1' => trans('common.product.hot'),
+            '2' => trans('common.product.new'),
         ];
     }
 }

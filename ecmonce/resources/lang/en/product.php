@@ -34,6 +34,7 @@ return [
     'lbl-list-request' => 'List Requests',
     'lbl-rating' => 'Quality',
     'lbl-sort-price' => 'Sort Price',
+    'lbl-sort_product' => 'Sort Product',
     'tooltip' => [
         'create' => 'Create product',
         'update' => 'Update product',
@@ -53,7 +54,7 @@ return [
         'date-expiration-after' => 'Date Manufacture must be start after Date Expiration!',
         'description-required' => 'Please input description!',
         'description-min' => 'Name have minlengt is 30 characters!',
-
+        // messages
         'insert-success' => 'Insert Product Success!',
         'insert-fail' => 'Insert Product Fail!',
         'update-success' => 'Update Product Success!',

@@ -7,6 +7,7 @@ return [
     'accept' => 1,
     'cancel' => 2,
     'search_default' => 0,
+    'default_cart' => 0,
     'defaul_select' => [
         '0' => '',
     ],
@@ -39,5 +40,10 @@ return [
     'role' => [
         'admin' => 0,
         'user' => 1,
+    ],
+
+    'sort_price' => [
+        'asc' => 1,
+        'desc' => 2,
     ],
 ];

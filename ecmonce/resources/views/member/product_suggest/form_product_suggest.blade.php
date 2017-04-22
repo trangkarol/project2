@@ -18,7 +18,6 @@
         <div class="col-md-6">
             <img src="{{ isset($productSuggest->images)? $productSuggest->path_images : url(config('setting.path.show'), config('setting.images.product')) }}" width="200px" height="150px">
         </div>
-
     </div>
     <div class="clearfix"></div>
 </div>

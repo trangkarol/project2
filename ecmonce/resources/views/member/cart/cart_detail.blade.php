@@ -18,7 +18,6 @@
                <h2>{{ trans('member.lbl-your-cart') }} (<span id="total-number-cart">{{ Session::has('yourCart') ? count($productCats) : 0 }}</span>)</h2>
             </div>
         <div class="single-wl3">
-
             <div class="text1-nav">
                 @if (!is_null($productCats))
                     @foreach ($productCats as $product)

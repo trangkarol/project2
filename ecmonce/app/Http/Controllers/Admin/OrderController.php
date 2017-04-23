@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Product\ProductInterface;
 use App\Repositories\Order\OrderInterface;
 use App\Repositories\OrderDetail\OrderDetailInterface;
+use App\Helpers\Library;
 use App\Mail\SendOrder;
 use Session;
 use DB;
@@ -40,8 +41,9 @@ class OrderController extends Controller
     public function index()
     {
         $orders = $this->orderRepository->getOrders();
+        $status = Library::getStatus();
 
-        return view('admin.order.index', compact('orders'));
+        return view('admin.order.index', compact('orders', 'status'));
     }
 
     /**
@@ -108,5 +110,26 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * search.
+     *
+     * @param  int  $categoryId
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        try {
+            $input = $request->only(['date_from', 'date_to', 'price_from', 'price_to', 'status']);
+
+            $orders = $this->orderRepository->searchOrder($input);
+            dd($orders);
+            $html = view('admin.order.table_result', compact('orders'))->render();
+
+            return response()->json(['result' => true, 'html' => $html]);
+        } catch (Exception $e) {
+            return response()->json('result', false);
+        }
     }
 }

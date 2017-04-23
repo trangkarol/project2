@@ -80,4 +80,19 @@ class Library
             config('setting.role.user') => trans('common.role.user'),
         ];
     }
+
+    /**
+    * get status
+     *
+     * @return category
+     */
+    public static function getStatus()
+    {
+        return [
+            '0' => trans('order.lbl-chosse'),
+            config('setting.order_status.paid') => trans('order.lbl-paid'),
+            config('setting.order_status.unpaid') => trans('order.lbl-unpaid'),
+            config('setting.order_status.cancel') => trans('order.lbl-cancel'),
+        ];
+    }
 }

@@ -71,4 +71,42 @@ class OrderRepository extends BaseRepository implements OrderInterface
     {
         return $this->model->with('products')->where('user_id', Auth::user()->id)->paginate(config('setting.admin.paginate'));
     }
+
+    /**
+     * function search Order.
+     *
+     * @return imageName
+     */
+    public function searchOrder($input)
+    {
+        try {
+            $orders = $this->model;
+
+            if (!is_null($input['date_from'])) {
+                $orders = $orders->where('created_at', '>=', $input['date_from'])->where('created_at', '<=', $input['date_to']);
+            }
+
+            if (!is_null($input['date_to'])) {
+                $orders = $orders->where('created_at', '<=', $input['date_to']);
+            }
+
+            if ($input['price_from'] != config('setting.search_default')) {
+                $orders = $orders->where('price', '>=', $input['price_from']);
+            }
+
+            if ($input['price_to'] != config('setting.search_default')) {
+                $orders = $orders->where('price', '<=', $input['price_to']);
+            }
+
+            if ($input['status'] == config('setting.search_default')) {
+                $orders = $orders->where('status', $input['status']);
+            }
+
+            return $orders->paginate(12);
+        } catch (\Exception $e) {
+            dd($e);
+            return false;
+        }
+
+    }
 }

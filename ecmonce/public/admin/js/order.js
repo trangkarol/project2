@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	// click on search
+    // click on search
     $(document).on('click', '#btn-search', function(){
         search(0);
     });
@@ -25,23 +25,23 @@ $(document).ready(function() {
 });
 
 function search(page) {
-    var data = $('#user-search').serialize();
+    var data = $('#order-search').serialize();
 
-	url = action['user_search'];
-	if (page) {
-		url += '?page=' + page;
-	}
+    url = action['order_search'];
+    if (page) {
+        url += '?page=' + page;
+    }
 
-	$.ajax({
+    $.ajax({
         type: 'POST',
         url: url,
         dataType: 'json',
         data: data,
-       	success:function(data) {
+        success:function(data) {
             console.log(data);
             if (data.result) {
-                $('#result-users').empty();
-                $('#result-users').html(data.html);
+                $('#result-orders').empty();
+                $('#result-orders').html(data.html);
                 $('.pagination').addClass('search');
                 if (page){
                     location.hash='?page='+page;

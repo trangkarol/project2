@@ -41,6 +41,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace' => 'Admi
     Route::group(['prefix' => 'statistic'], function () {
         Route::post('/export-file', 'StatisticController@exportFile');
     });
+
+    Route::group(['prefix' => 'order'], function () {
+        Route::post('/search', 'OrderController@search');
+    });
 });
 
 //member , 'middleware' => 'admin'

@@ -40,7 +40,7 @@
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="x_content" id="result-users">
+                            <div class="x_content" id="result-orders">
                                 <div class="table-responsive">
                                     @include('admin.order.table_result')
                                 </div>
@@ -57,4 +57,9 @@
 @section('contentJs')
     @parent
     {{ Html::script('/admin/js/order.js') }}
+    <script type="text/javascript">
+        var action = {
+            'order_search': "{{ action('Admin\OrderController@search') }}",
+        };
+    </script>
 @endsection

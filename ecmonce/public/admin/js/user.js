@@ -22,116 +22,10 @@ $(document).ready(function() {
         search(page);
     });
 
-    //handel pagination by ajax
-    $(document).on('click', '#btn-add-skill', function(event) {
-        addSkill($(this), 1);
-    });
-
-    //handel pagination by ajax
-    $(document).on('click', '#btn-edit-skill', function(event) {
-        addSkill($(this), 0);
-    });
-
-    // get skill
-    $(document).on('click', '.skill', function(event) {
-        // $(this).addClass('users-current');
-        var skillId = $(this).val();
-        getFormSkill(skillId, 1);
-    });
-
-    // edit skill
-    $(document).on('click', '.btn-edit-skill', function(event) {
-        // $(this).addClass('users-current');
-        var skillId = $(this).parents('tr').find('.skillId').html().trim();
-        getFormSkill(skillId, 0);
-    });
-
-    // delete skill
-    $(document).on('click', '.btn-delete-skill-popup', function(event) {
-        var skillId = $(this).parents('tr').find('.skillId').html().trim();
-        bootbox.confirm(trans['msg_comfirm_delete'], function(result){
-            if(result) {
-                 deleteSkill(skillId);
-            }
-        });
-    });
-
-    // position team
-    $(document).on('click', '.team', function(event) {
-        // $(this).addClass('users-current');
-        var teamId = $(this).val();
-        positionTeam(teamId, 1);
-    });
-
-    // position team
-    $(document).on('click', '.btn-edit-team', function(event) {
-        // $(this).addClass('users-current');
-        var teamId = $(this).parents('tr').find('.teamId').html().trim();
-        positionTeam(teamId, 0);
-    });
-
-    // position team
-    $(document).on('click', '.btn-delete-team', function(event) {
-        var teamId = $(this).parents('tr').find('.teamId').html().trim();
-        bootbox.confirm(trans['msg_comfirm_delete'], function(result){
-            if(result) {
-                deleteTeam(teamId, 2);
-            }
-        });
-    });
-
-
-    // position team
-    $(document).on('click', '#btn-add-team', function(event) {
-        addTeam(event, 1);
-    });
-
-    // position team
-    $(document).on('click', '#btn-update-team', function(event) {
-        addTeam(event, 0);
-    });
-
-    // position team
-    $(document).on('click', '#btn-delete-team', function(event) {
-        deleteTeam(event);
-    });
-
-    //import-file
-    $(document).on('click', '#import-file', function(event) {
-        // event.preventDefault();
-        $('#file-csv').click();
-        $('#file-csv').change(function(event) {
-            $('#form-input-file').submit();
-        });
-    });
-
-    $(document).on('click', '#cboxClose', function() {
-        $('.skill').prop('checked',false);
-        $('.team').prop('checked',false);
-    });
-
-    // save user
-    $(document).on('click', '#add-user', function(event) {
-        $('#form-save-user').submit();
-    });
-
-    // comfirm export
-    $(document).on('click', '#export-file', function(event) {
-        getComfirmExport();
-    });
-
-    // export file
-    $(document).on('click', '#btn-add-export', function() {
-        var type = $('.type_export:checked').val();
-        exportFile(type);
-    });
-
 });
 
 function search(page) {
-	var teamId = $('#team').val();
-    var position = $('#position').val();
-    var positionTeams = $('#positionTeams').val();
+    var data = $('#user-search').serialize();
 
 	url = action['user_search'];
 	if (page) {
@@ -142,18 +36,17 @@ function search(page) {
         type: 'POST',
         url: url,
         dataType: 'json',
-        data: {
-        	teamId: teamId,
-            position: position,
-            positionTeams: positionTeams,
-        },
+        data: data,
        	success:function(data) {
-          	$('#result-users').html();
-          	$('#result-users').html(data.html);
-          	$('.pagination').addClass('search');
-          	if (page){
-          		location.hash='?page='+page;
-          	}
+            console.log(data);
+            if (data.result) {
+                $('#result-users').empty();
+                $('#result-users').html(data.html);
+                $('.pagination').addClass('search');
+                if (page){
+                    location.hash='?page='+page;
+                }
+            }
         }
     });
 }

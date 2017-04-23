@@ -20,7 +20,7 @@
                     <td>{{ $order->number }}</a></td>
                     <td>{{ $order->total_price_format }}</td>
                     <th>{{ $order->user->name }}</th>
-                    <th>{{ $order->status ? trans('order.lbl-paid') : trans('order.lbl-unpaid') }}</th>
+                    <th>{{ $order->name_status }}</th>
                     <td>
                         @if (!$order->orderDeatils->isEmpty())
                             <table class="table table-bordered table-striped">
@@ -46,14 +46,16 @@
                         @endif
                     </td>
                     <td>
-                        <div class="col-md-6">
-                            <a href ="{{ action('Admin\ProductController@edit', $order->id) }}" class="btn btn-primary">{{ trans('common.button.paid') }}</i></a>
-                        </div>
-                        <div class="col-md-6">
-                        {{ Form::open(['action' => ['Admin\ProductController@destroy', $order->id], 'class' => 'form-delete-product']) }}
-                            {!! Form::button(trans('common.button.cancel'), ['class' => 'btn btn-danger btn-delete', 'type' => 'button']) !!}
-                        {{ Form::close() }}
-                        </div>
+                        @if ($order->status == config('setting.order_status.unpaid'))
+                            <div class="col-md-6">
+                                <a href ="{{ action('Admin\ProductController@edit', $order->id) }}" class="btn btn-primary">{{ trans('common.button.paid') }}</i></a>
+                            </div>
+                            <div class="col-md-6">
+                            {{ Form::open(['action' => ['Admin\ProductController@destroy', $order->id], 'class' => 'form-delete-product']) }}
+                                {!! Form::button(trans('common.button.cancel'), ['class' => 'btn btn-danger btn-delete', 'type' => 'button']) !!}
+                            {{ Form::close() }}
+                            </div>
+                        @endif
                     </td>
                 </tr>
             @endforeach

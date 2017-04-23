@@ -22,19 +22,24 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace' => 'Admi
     Route::resource('order', 'OrderController');
     Route::resource('request', 'RequestController');
     Route::resource('user', 'UserController');
-    Route::resource('statistic', 'StaticController');
+    Route::resource('statistic', 'StatisticController');
+
     Route::group(['prefix' => 'product'], function () {
         Route::post('/sub-category', 'ProductController@getSubCategory');
         Route::post('/import-file', 'ProductController@importFile');
         Route::post('/save-file', 'ProductController@saveFile');
-        Route::get('/search', 'ProductController@search');
+        Route::post('/search', 'ProductController@search');
     });
 
     Route::group(['prefix' => 'user'], function () {
         Route::post('/import-file', 'UserController@importFile');
         Route::post('/export-file', 'UserController@exportFile');
         Route::post('/save-file', 'UserController@saveFile');
-        Route::get('/search', 'UserController@search');
+        Route::post('/search', 'UserController@search');
+    });
+
+    Route::group(['prefix' => 'statistic'], function () {
+        Route::post('/export-file', 'StatisticController@exportFile');
     });
 });
 

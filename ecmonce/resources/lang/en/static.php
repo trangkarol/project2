@@ -2,6 +2,11 @@
 
 return [
     'title-static' => 'Management Statics',
+    'lbl-name-product' => 'Name Product',
+    'lbl-total-number' => 'Total Number',
+    'lbl-total-price' => 'Total Price',
+    'title-satistic-category' => 'Statistic Category',
+    'export-statistic' => 'Export Statistic',
     'tooltip' => [
         'create' => 'Create product',
         'update' => 'Update product',

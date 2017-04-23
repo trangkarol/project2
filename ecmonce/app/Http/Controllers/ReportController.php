@@ -26,12 +26,12 @@ class ReportController extends Controller
      *
      * @return void
      */
-    public static function exportFileExcel($data, $type, $nameFile)
+    public static function exportFileExcel($data, $type, $nameFile, $urlView)
     {
-        return Excel::create($nameFile, function($excel) use ($data) {
-            $excel->sheet('mySheet', function($sheet) use ($data)
+        return Excel::create($nameFile, function($excel) use ($data, $urlView) {
+            $excel->sheet('mySheet', function($sheet) use ($data, $urlView)
             {
-                $sheet->loadView('admin.user.export_user', compact('data'));
+                $sheet->loadView($urlView, compact('data'));
             });
 
         })->export($type);

@@ -47,7 +47,7 @@
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="x_content" id="result-users">
+                            <div class="x_content" id="result-products">
                                 <div class="table-responsive">
                                     @include('admin.product.table_result')
                                 </div>
@@ -69,6 +69,7 @@
     <script type="text/javascript">
         var action = {
             'product_sub_category': "{{ action('Admin\ProductController@getSubCategory') }}",
+            'product_search': "{{ action('Admin\ProductController@search') }}",
         };
     </script>
 @endsection

@@ -18,6 +18,7 @@ return [
     'lbl-status' => 'Status',
     'lbl-paid' => 'Paid',
     'lbl-unpaid' => 'UnPaid',
+    'lbl-cancel' => 'Cancel',
     'tooltip' => [
         'create' => 'Create order',
         'update' => 'Update order',

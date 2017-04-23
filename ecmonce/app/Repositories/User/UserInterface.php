@@ -19,4 +19,6 @@ interface UserInterface
     public function forgotPassword($request);
 
     public function updateProfile($request, $id, $role);
+
+    public function searchUser($input);
 }

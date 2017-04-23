@@ -42,6 +42,12 @@ return [
         'user' => 1,
     ],
 
+    'order_status' => [
+        'unpaid' => 0,
+        'paid' => 1,
+        'cancel' => 2,
+    ],
+
     'sort_price' => [
         'asc' => 1,
         'desc' => 2,

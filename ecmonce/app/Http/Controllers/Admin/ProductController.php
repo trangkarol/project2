@@ -242,15 +242,19 @@ class ProductController extends Controller
      */
     public function search(Request $request)
     {
-        dd('dddd');
         try {
-            $input = $request->only(['name', 'sort_price', 'price_from', 'price_to', 'rating', 'categoryId']);
-            $products = $this->productRepository->searchProduct($input);
-            $html = view('member.product.result_product', compact('products'))->render();
+            $input = $request->only(['name', 'sort_price', 'price_from', 'price_to', 'rating', 'parentCategory_id', 'sort_product']);
 
-            return response()->json(['result' => true,  'html' => $html]);
-         } catch (\Exception $e) {
-            return response()->json('result', true);
+            if (isset($request->subCategory_id)) {
+                $input['subCategory_id'] = $request->subCategory_id;
+            }
+
+            $products = $this->productRepository->searchProduct($input);
+            $html = view('admin.product.table_result', compact('products'))->render();
+
+            return response()->json(['result' => true, 'html' => $html]);
+        } catch (Exception $e) {
+            return response()->json('result', false);
         }
     }
     /**

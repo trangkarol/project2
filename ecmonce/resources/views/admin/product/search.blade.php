@@ -6,7 +6,7 @@
                     <h2> {{ trans('common.lbl-search') }} </h2>
                     <div class="clearfix"></div>
                 </div>
-                {!! Form::open(['action' => 'Admin\ProductController@search', 'method' => 'GET', 'class' => 'form-horizontal form-label-left']) !!}
+                {!! Form::open(['action' => 'Admin\ProductController@search', 'class' => 'form-horizontal form-label-left', 'id' => 'product-search']) !!}
                 <div class="form-group col-md-6">
                     {{ Form::label('name', trans('product.lbl-name'), ['class' => 'col-md-4 control-label']) }}
                     <div class="col-md-8">
@@ -34,15 +34,15 @@
                 <div class="form-group col-md-6">
                     {{ Form::label('rating', trans('product.lbl-rating'), ['class' => 'col-md-4 control-label']) }}
                     <div class="col-md-8">
-                        {{ Form::select('rating', $ratings, old('made_in'), ['class' => 'form-control', 'id' => 'rating']) }}
+                        {{ Form::select('rating', $ratings, old('rating'), ['class' => 'form-control', 'id' => 'rating']) }}
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="form-group col-md-6">
                     {{ Form::label('category', trans('product.lbl-category'), ['class' => 'col-md-4 control-label']) }}
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         {{ Form::hidden('sub_id', isset($product->category_id) ? $product->category_id : 0, ['id' => 'sub_id']) }}
-                        {{ Form::select('category', $parentCategory, isset($product->category->parent_id) ? $product->category->parent_id : old('category'), ['class' => 'form-control search', 'id' => 'category']) }}
+                        {{ Form::select('parentCategory_id', $parentCategory, isset($product->category->parent_id) ? $product->category->parent_id : old('parentCategory_id'), ['class' => 'form-control search', 'id' => 'category']) }}
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-10">
-                        <button type="submit" class="btn btn-success" id="btn-search">{{ trans('common.button.search') }}</button>
+                        <button type="button" class="btn btn-success" id="btn-search">{{ trans('common.button.search') }}</button>
                     </div>
                 </div>
                 {!! Form::close() !!}

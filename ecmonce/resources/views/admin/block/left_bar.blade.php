@@ -21,8 +21,8 @@
                 <h3>{{ trans('common.lbl-genaral') }}</h3>
                 <ul class="nav side-menu">
                     <!-- management statics-->
-                    <li class="@if (Request::url() == action('Admin\StaticController@index')) active @endif ">
-                        <a href="{{ action('Admin\StaticController@index') }}"><i class="fa fa-bar-chart"></i><span> {{ trans('static.title-static') }} </span></a>
+                    <li class="@if (Request::url() == action('Admin\StatisticController@index')) active @endif ">
+                        <a href="{{ action('Admin\StatisticController@index') }}"><i class="fa fa-bar-chart"></i><span> {{ trans('static.title-static') }} </span></a>
                     </li>
                     <!-- management users-->
                     <li class="@if (Request::url() == action('Admin\UserController@index')) active @endif ">

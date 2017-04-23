@@ -10,34 +10,41 @@
                         </ul>
                     <div class="clearfix"></div>
                 </div>
-                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                {!! Form::open(['action' => 'Admin\UserController@search', 'class' => 'form-horizontal form-label-left', 'id' => 'user-search']) !!}
+
                     <div class="form-group col-md-6">
-                        <label for="team" class="control-label col-md-3 col-sm-3 col-xs-12">{{ trans('user.lbl-team') }}</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{ Form::select('team', $teams, null, ['class' => 'form-control search', 'id' => 'team']) }}
+                        <label for="team" class="control-label col-md-3 col-sm-3 col-xs-12">{{ trans('user.lbl-name') }}</label>
+                        <div class="col-md-6">
+                            {{ Form::text('name', null, ['class' => 'form-control', 'id' => 'name']) }}
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="team" class="control-label col-md-3 col-sm-3 col-xs-12">{{ trans('user.lbl-position') }}</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{ Form::select('team', $position, null, ['class' => 'form-control search', 'id' => 'position']) }}
+                        <label for="team" class="control-label col-md-3 col-sm-3 col-xs-12">{{ trans('user.lbl-email') }}</label>
+                        <div class="col-md-6">
+                            {{ Form::email('email', null, ['class' => 'form-control', 'id' => 'email']) }}
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="team" class="control-label col-md-3 col-sm-3 col-xs-12">{{ trans('user.lbl-position_team') }}</label>
+                        <label for="team" class="control-label col-md-3 col-sm-3 col-xs-12">{{ trans('user.lbl-role') }}</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{ Form::select('team', $positionTeams, null, ['class' => 'form-control search', 'id' => 'positionTeams']) }}
+                            {{ Form::select('role', $role, null, ['class' => 'form-control search', 'id' => 'positionTeams']) }}
                         </div>
                     </div>
-                    <div class="ln_solid"></div>
+
+                    <div class="form-group col-md-6">
+                        <label for="team" class="control-label col-md-3 col-sm-3 col-xs-12">{{ trans('user.lbl-active-member') }}</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ Form::checkbox('active_members', 1, null, ['class' => 'search', 'id' => 'active_members']) }}
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-10">
-                            <button type="button" class="btn btn-success" id="btn-search">{{ trans('admin.lbl-search') }}</button>
+                            <button type="button" class="btn btn-success" id="btn-search">{{ trans('common.button.search') }}</button>
                         </div>
                     </div>
-                </form>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

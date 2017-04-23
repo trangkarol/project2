@@ -225,4 +225,39 @@ class UserRepository extends BaseRepository implements UserInterface
             return false;
         }
     }
+
+    /**
+    * function delete.
+     *
+     * @return imageName
+     */
+    public function searchUser($input)
+    {
+        try {
+            $users = $this->model;
+
+            if (!is_null($input['name'])) {
+                $users = $users->where('name', 'LIKE', '%' . $input['name']);
+            }
+
+            if (!is_null($input['email'])) {
+                $users = $users->where('email', 'LIKE', '%' . $input['email']);
+            }
+
+            if ($input['role'] != config('setting.search_default')) {
+                $users = $users->where('role', $input['role']);
+            }
+
+            // if ($input['active_members'] != config('setting.search_default')) {
+            //     $users = $users->where('role', $input['role']);
+            // }
+
+            return $users->paginate(12);
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollback();
+
+            return false;
+        }
+    }
 }

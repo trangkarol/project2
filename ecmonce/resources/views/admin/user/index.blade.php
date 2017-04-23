@@ -39,7 +39,7 @@
         <div class="clearfix"></div>
         <!-- form search -->
         <div class="row">
-
+        @include('admin.user.search')
         </div>
         <div class="row">
             <div class="x_content">
@@ -73,4 +73,9 @@
     @parent
     {{ Html::script('/admin/js/user.js') }}
     <!-- add trans and action used in file user.js -->
+    <script type="text/javascript">
+        var action = {
+            'user_search': "{{ action('Admin\UserController@search') }}",
+        };
+    </script>
 @endsection

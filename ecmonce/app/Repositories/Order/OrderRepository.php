@@ -61,4 +61,14 @@ class OrderRepository extends BaseRepository implements OrderInterface
     {
         return $this->model->with('orderDeatils.product', 'user')->where('user_id', Auth::user()->id)->paginate(config('setting.admin.paginate'));
     }
+
+    /**
+     * function statisticProduct.
+     *
+     * @return imageName
+     */
+    public function statisticProduct()
+    {
+        return $this->model->with('products')->where('user_id', Auth::user()->id)->paginate(config('setting.admin.paginate'));
+    }
 }

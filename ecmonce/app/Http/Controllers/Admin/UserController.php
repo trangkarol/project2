@@ -29,9 +29,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $role = Library::getRoles();
         $members = $this->userRepository->getUsers();
 
-        return view('admin.user.index', compact('members'));
+        return view('admin.user.index', compact('members', 'role'));
     }
 
     /**
@@ -144,5 +145,25 @@ class UserController extends Controller
     public function importFile($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+       try {
+            $input = $request->only(['name', 'email', 'role']);
+            $input['active_members'] = isset($request->active_members) ? $request->active_members : 0;
+            $members = $this->userRepository->searchUser($input);
+            $html = view('admin.user.table_result', compact('members'))->render();
+
+            return response()->json(['result' => true, 'html' => $html]);
+        } catch (Exception $e) {
+            return response()->json('result', false);
+        }
     }
 }

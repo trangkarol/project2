@@ -61,7 +61,7 @@ $factory->define(App\Models\Order::class, function (Faker\Generator $faker) {
         'user_id' => $faker->randomElement($userId ?: $userId = App\Models\User::pluck('id')->toArray()),
         'total_price' => $faker->numberBetween(100, 1000000),
         'number' => $faker->numberBetween(10, 100),
-        'status' => $faker->numberBetween(0, 1),
+        'status' => $faker->numberBetween(0, 2),
     ];
 });
 

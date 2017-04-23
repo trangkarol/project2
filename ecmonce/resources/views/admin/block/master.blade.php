@@ -15,7 +15,6 @@
             </div>
         </div>
         @section('contentJs')
-            {{ Html::script('/bower_components/jquery/dist/jquery.js') }}
             {{ Html::script('/bower_components/bootstrap/dist/js/bootstrap.min.js') }}
             {{ Html::style('/bower_components/nprogress/nprogress.js') }}
             {{ Html::style('/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}

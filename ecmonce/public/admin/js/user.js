@@ -6,10 +6,11 @@ $(document).ready(function() {
 
     // delelete
     $(document).on('click', '.btn-delete', function(event) {
+        $(this).parents('.delete-form-user').addClass('current');
         event.preventDefault();
         bootbox.confirm('Are you want to delete?', function(result) {
             if (result) {
-                $('.delete-form-user').submit();
+                $('.delete-form-user.current').submit();
             }
         });
     });

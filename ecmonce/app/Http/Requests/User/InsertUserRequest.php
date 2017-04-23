@@ -23,9 +23,18 @@ class InsertUserRequest extends FormRequest
      */
     public function rules()
     {
+        $email = null;
+        switch ($this->method()) {
+            case 'PUT':
+            case 'PATCH':
+                $email = 'required|email|unique:users,email,' . $this->id;
+            case 'POST':
+                $email = 'required|email|unique:users';
+        }
+
         return [
             'name' => 'required|max:255',
-            'email' => 'required|email|unique:users',
+            'email' => $email,
             'birthday' => 'required',
             'address' => 'max:255|min:6',
             'phone_number' => 'max:12|min:12',
@@ -50,7 +59,6 @@ class InsertUserRequest extends FormRequest
             'address.min' => trans('user.msg.address-min'),
             'phone_number.max' => trans('user.msg.phone_number-max'),
             'phone_number.min' => trans('user.msg.phone_number-min'),
-            // 'phone_number.integer' => trans('user.msg.name-integer'),
         ];
     }
 }

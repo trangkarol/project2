@@ -25,7 +25,7 @@
         @include('admin.block.messages')
         <!-- form search -->
         <div class="row">
-            @include('admin.product.search')
+            @include('admin.order.search')
         </div>
         <div class="row">
             <div class="x_content">

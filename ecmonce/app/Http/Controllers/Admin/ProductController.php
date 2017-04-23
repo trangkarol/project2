@@ -19,6 +19,7 @@ class ProductController extends Controller
     protected $productRepository;
     protected $categoryRepository;
     protected $madeIn;
+    protected $library;
 
     /**
     * Create a new controller instance.
@@ -27,11 +28,13 @@ class ProductController extends Controller
      */
     public function __construct(
         ProductInterface $productRepository,
-        CategoryInterface $categoryRepository
+        CategoryInterface $categoryRepository,
+        Library $library
     ) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->madeIn = Library::getMadeIn();
+        $this->library = $library;
     }
 
     /**
@@ -41,10 +44,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $ratings = Library::getRatings();
-        $sortPrice = Library::getSortPrice();
-        $sortPrice = Library::getSortPrice();
-        $sortProduct = Library::getSortProduct();
+        $ratings = $this->library->getRatings();
+        $sortPrice = $this->library->getSortPrice();
+        $sortPrice = $this->library->getSortPrice();
+        $sortProduct = $this->library->getSortProduct();
         $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
         $products = $this->productRepository->getProduct();
 

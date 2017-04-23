@@ -34,6 +34,8 @@ return [
     'lbl-forgot-password' => 'Forgot password?',
     'lbl-detail' => 'Detail',
     'lbl-search' => 'Search',
+    'lbl-admin' => 'Admin',
+    'lbl-user' => 'User',
     'file' => [
         'import' => 'Import File',
         'export' => 'Export File',
@@ -75,6 +77,11 @@ return [
         'sort' => '-- Sort --',
         'ascending' => 'Ascende',
         'decrease' => 'Decrease',
+    ],
+
+    'role' => [
+        'admin' => 'Admin',
+        'user' => 'User',
     ],
 
     'product' => [

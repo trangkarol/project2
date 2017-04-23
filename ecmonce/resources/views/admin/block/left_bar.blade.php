@@ -20,6 +20,14 @@
             <div class="menu_section">
                 <h3>{{ trans('common.lbl-genaral') }}</h3>
                 <ul class="nav side-menu">
+                    <!-- management statics-->
+                    <li class="@if (Request::url() == action('Admin\StaticController@index')) active @endif ">
+                        <a href="{{ action('Admin\StaticController@index') }}"><i class="fa fa-bar-chart"></i><span> {{ trans('static.title-static') }} </span></a>
+                    </li>
+                    <!-- management users-->
+                    <li class="@if (Request::url() == action('Admin\UserController@index')) active @endif ">
+                        <a href="{{ action('Admin\UserController@index') }}"><i class="fa fa-users"></i><span> {{ trans('user.title-users') }} </span></a>
+                    </li>
                     <!-- management products-->
                     <li class="@if (Request::url() == action('Admin\ProductController@index')) active @endif ">
                         <a href="{{ action('Admin\ProductController@index') }}"><i class="fa fa-product-hunt"></i><span> {{ trans('product.title-product') }} </span></a>

@@ -40,7 +40,6 @@ class UserRepository extends BaseRepository implements UserInterface
 
             return false;
         } catch (\Exception $e) {
-            dd($e);
             return false;
         }
     }
@@ -123,11 +122,11 @@ class UserRepository extends BaseRepository implements UserInterface
         try {
             $input = $request->only(['name', 'email', 'password', 'address', 'phone_number']);
             $input['avatar'] = isset($request->file) ? parent::uploadImages(null, $request->file, null) : config('setting.images.avatar');
-            $input['birthday'] = $request->birthday;
             $input['role'] = $role;
+            $result = $this->model->create($input);
             DB::commit();
 
-            return parent::create($input);
+            return $result;
         } catch (\Exception $e) {
             DB::rollback();
 
@@ -140,14 +139,13 @@ class UserRepository extends BaseRepository implements UserInterface
      *
      * @return $result
      */
-    public function update($request, $id)
+    public function updateProfile($request, $id, $role)
     {
         DB::beginTransaction();
         try {
             $user = $this->model->find($id);
             $input = $request->only(['name', 'email', 'address', 'phone_number']);
             $input['avatar'] = isset($request->file) ? parent::uploadImages($user->avatar, $request->file, config('setting.images.avatar')) : $user->avatar;
-            $input['birthday'] = $request->birthday;
             $input['password'] = isset($request->password) ? $request->password : $user->password;
             DB::commit();
 
@@ -187,6 +185,41 @@ class UserRepository extends BaseRepository implements UserInterface
 
             return false;
         } catch (\Exception $e) {
+            DB::rollback();
+
+            return false;
+        }
+    }
+
+    /**
+    * function getUsers.
+     *
+     * @return imageName
+     */
+    public function getUsers()
+    {
+        return $this->model->paginate(config('setting.admin.paginate'));
+    }
+
+    /**
+    * function delete.
+     *
+     * @return imageName
+     */
+    public function delete($id)
+    {
+        DB::beginTransaction();
+        try {
+            $result = $this->model->find($id)->with('order', 'products', 'suggestProducts')->detach();
+            dd($result);
+            // $this->model->find($id)->with('products')->delete();
+            // $this->model->find($id)->with('suggestProducts')->delete();
+            // $result = $this->model->find($id)->delete();
+            DB::commit();
+
+            return false;
+        } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
 
             return false;

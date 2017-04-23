@@ -67,4 +67,17 @@ class Library
             '2' => trans('common.product.new'),
         ];
     }
+
+    /**
+    * get role
+     *
+     * @return category
+     */
+    public static function getRoles()
+    {
+        return [
+            config('setting.role.admin') => trans('common.role.admin'),
+            config('setting.role.user') => trans('common.role.user'),
+        ];
+    }
 }

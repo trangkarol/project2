@@ -1,8 +1,7 @@
-/node_modules
-/public/storage
+
 /storage/*.key
 /vendor
-public/Upload/
+
 /.idea
 Homestead.json
 Homestead.yaml

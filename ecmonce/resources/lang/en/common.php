@@ -97,6 +97,8 @@ return [
         'confirm-accept' => 'Do you want to insert this products to your website?',
         'confirm-cancel' => 'Do you want to cancel this products to your website?',
         'not-login' => 'You need login to use this function!',
+        'comfirm-status' => 'Do you want to change status of this order?',
+        'confirm-rating' => 'Do you want to comment this product?',
     ],
 
     'mail' => [

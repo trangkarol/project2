@@ -15,7 +15,7 @@
     <div class="col-md-6">
        {{ Form::file('file', ['id' => 'images']) }}
         <div class="col-md-6">
-            <img src="{{ isset($product->image)? url('/Upload', $product->image) : url('/Upload', config('setting.images.product')) }}" width="200px" height="150px">
+            <img src="{{ isset($product->image)? $product->path_image : url(config('setting.path.show'), config('setting.images.product')) }}" width="200px" height="150px">
         </div>
 
     </div>

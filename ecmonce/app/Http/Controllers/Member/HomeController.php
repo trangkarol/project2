@@ -33,7 +33,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Session::flush();
         $product_hots = $this->productRepository->hotProduct();
         $product_news = $this->productRepository->newProduct();
         $categories = $this->categoryRepository->getProductHome();

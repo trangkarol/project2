@@ -48,12 +48,14 @@
                     <td>
                         @if ($order->status == config('setting.order_status.unpaid'))
                             <div class="col-md-6">
-                                <a href ="{{ action('Admin\ProductController@edit', $order->id) }}" class="btn btn-primary">{{ trans('common.button.paid') }}</i></a>
+                                {{ Form::open(['action' => ['Admin\OrderController@changeStatus', $order->id, config('setting.order_status.paid')], 'method' => 'GET', 'class' => 'form-status-paid']) }}
+                                    {!! Form::button(trans('common.button.paid'), ['class' => 'btn btn-success btn-status-paid', 'type' => 'button']) !!}
+                                {{ Form::close() }}
                             </div>
                             <div class="col-md-6">
-                            {{ Form::open(['action' => ['Admin\ProductController@destroy', $order->id], 'class' => 'form-delete-product']) }}
-                                {!! Form::button(trans('common.button.cancel'), ['class' => 'btn btn-danger btn-delete', 'type' => 'button']) !!}
-                            {{ Form::close() }}
+                                {{ Form::open(['action' => ['Admin\OrderController@changeStatus', $order->id, config('setting.order_status.cancel')], 'method' => 'GET', 'class' => 'form-status-cancel']) }}
+                                    {!! Form::button(trans('common.button.cancel'), ['class' => 'btn btn-danger btn-status-cancel', 'type' => 'button']) !!}
+                                {{ Form::close() }}
                             </div>
                         @endif
                     </td>

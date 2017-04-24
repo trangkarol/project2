@@ -44,6 +44,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace' => 'Admi
 
     Route::group(['prefix' => 'order'], function () {
         Route::post('/search', 'OrderController@search');
+        Route::get('/change-status/{id}/{status}', 'OrderController@changeStatus');
     });
 });
 
@@ -60,6 +61,7 @@ Route::group(['prefix' => 'member', 'namespace' => 'Member'], function () {
     Route::post('/remove-cart', 'OrderController@removeCart');
     Route::get('/category/{categoryId}', 'ProductController@getProductCategory');
     Route::post('/search-product', 'ProductController@searchProduct');
+    Route::post('/add-rating', 'RatingController@addRating');
 });
 
 /*login user*/

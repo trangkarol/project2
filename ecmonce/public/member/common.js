@@ -45,6 +45,15 @@
         });
     });
 
+    $(document).on('click', '#agree', function () {
+        event.preventDefault();
+        bootbox.confirm(trans['confirm_rating'], function(result) {
+            if(result) {
+                rating();
+            }
+        });
+    });
+
     $(document).on('click', '#message', function () {
         event.preventDefault();
         bootbox.alert(trans['msg_login']);
@@ -85,8 +94,8 @@ $(document).on('click', '#btn-search',function() {
     search(0);
 });
 
-jQuery(function() {
-    jQuery('.starbox').each(function() {
+$(function() {
+    $('.starbox').each(function() {
         var starbox = jQuery(this);
             starbox.starbox({
             average: starbox.attr('data-start-value'),
@@ -103,7 +112,92 @@ jQuery(function() {
             }
         })
     });
+
+    $('span.stars').stars();
 });
+
+$.fn.stars = function() {
+    return $(this).each(function() {
+        // Get the value
+        var val = parseFloat($(this).html());
+        // Make sure that the value is in 0 - 5 range, multiply to get width
+        var size = Math.max(0, (Math.min(5, val))) * 16;
+        // Create stars holder
+        var $span = $('<span />').width(size);
+        // Replace the numerical value with stars
+        $(this).html($span);
+    });
+}
+
+$('.btn-number').click(function(e){
+    e.preventDefault();
+
+    fieldName = $(this).attr('data-field');
+    type      = $(this).attr('data-type');
+    var input = $("input[name='"+fieldName+"']");
+    var currentVal = parseInt(input.val());
+    if (!isNaN(currentVal)) {
+        if(type == 'minus') {
+
+            if(currentVal > input.attr('min')) {
+                input.val(currentVal - 1).change();
+            }
+            if(parseInt(input.val()) == input.attr('min')) {
+                $(this).attr('disabled', true);
+            }
+
+        } else if(type == 'plus') {
+
+            if(currentVal < input.attr('max')) {
+                input.prop('value', currentVal + 1);
+            }
+            if(parseInt(input.val()) == input.attr('max')) {
+                $(this).attr('disabled', true);
+            }
+
+        }
+    } else {
+        input.val(0);
+    }
+});
+$('.input-number').focusin(function(){
+   $(this).data('oldValue', $(this).val());
+});
+$('.input-number').change(function() {
+
+    minValue =  parseInt($(this).attr('min'));
+    maxValue =  parseInt($(this).attr('max'));
+    valueCurrent = parseInt($(this).val());
+
+    name = $(this).attr('name');
+    if(valueCurrent >= minValue) {
+        $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the minimum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    if(valueCurrent <= maxValue) {
+        $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the maximum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+});
+$(".input-number").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
 
 });
 function getFormLogin() {
@@ -213,3 +307,22 @@ function search(page) {
     });
 }
 
+function rating() {
+    var productId = $('#productId').val();
+    $.ajax({
+        type: 'POST',
+        url: action['rating_product'],
+        dataType: 'json',
+        data: {
+            productId: productId,
+        },
+        success:function(data) {
+            console.log(data);
+            if (data.result) {
+                $('#div-your-cart').empty();
+                $('#div-your-cart').html(data.html);
+                $('#total-number-cart').text(data.totalNumber);
+            }
+        }
+    });
+}

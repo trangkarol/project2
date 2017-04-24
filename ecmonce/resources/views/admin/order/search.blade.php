@@ -6,7 +6,7 @@
                     <h2> {{ trans('common.lbl-search') }} </h2>
                     <div class="clearfix"></div>
                 </div>
-                {!! Form::open(['action' => 'Admin\ProductController@search', 'class' => 'form-horizontal form-label-left', 'id' => 'product-search']) !!}
+                {!! Form::open(['action' => 'Admin\ProductController@search', 'class' => 'form-horizontal form-label-left', 'id' => 'order-search']) !!}
                 <div class="form-group col-md-6">
                     {{ Form::label('price', trans('product.lbl-date'), ['class' => 'col-md-4 control-label']) }}
                     <div class="col-md-8">

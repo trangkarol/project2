@@ -45,5 +45,7 @@ return [
         'update-fail' => 'Update Product Fail!',
         'delete-success' => 'Delete Product Success!',
         'delete-fail' => 'Delete Product Fail!',
+        'change-status-success' => 'Change status success',
+        'change-status-fail' => 'Change status fail',
     ],
 ];

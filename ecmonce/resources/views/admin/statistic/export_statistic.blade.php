@@ -21,7 +21,7 @@
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->numberProduct }}</td>
-                    <td>{{ number_format($product->totalPrice, 3, ',', ',') . ' ' . trans('common.lbl-vnd') }}</td>
+                    <td>{{ number_format($product->toatalPrice, 3, ',', ',') . ' ' . trans('common.lbl-vnd') }}</td>
                     <td>{{ $product->categoryName }}</td>
                 </tr>
             @endforeach

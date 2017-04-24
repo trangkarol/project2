@@ -122,14 +122,32 @@ class OrderController extends Controller
     {
         try {
             $input = $request->only(['date_from', 'date_to', 'price_from', 'price_to', 'status']);
-
             $orders = $this->orderRepository->searchOrder($input);
-            dd($orders);
             $html = view('admin.order.table_result', compact('orders'))->render();
 
             return response()->json(['result' => true, 'html' => $html]);
         } catch (Exception $e) {
             return response()->json('result', false);
+        }
+    }
+
+    /**
+     * changeStatus.
+     *
+     * @param  int  $categoryId
+     * @return \Illuminate\Http\Response
+     */
+    public function changeStatus($id, $status, Request $request)
+    {
+        try {
+            $status = $this->orderRepository->changeStatus($id, $status);
+            $request->session()->flash('success', trans('order.msg.change-status-success'));
+
+            return redirect()->back();
+        } catch (Exception $e) {
+            $request->session()->flash('fail', trans('order.msg.change-status-fail'));
+
+            return redirect()->back();
         }
     }
 }

@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Repositories\Order;
+namespace App\Repositories\Rating;
 
-use App\Models\Order;
+use App\Models\Rating;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Input;
 use DB;
 use Auth;
 
-class OrderRepository extends BaseRepository implements OrderInterface
+class RatingRepository extends BaseRepository implements RatingInterface
 {
     /**
     * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Rating $rating)
     {
-        $this->model = $order;
+        $this->model = $rating;
     }
 
     /**
@@ -25,16 +25,27 @@ class OrderRepository extends BaseRepository implements OrderInterface
      *
      * @return imageName
      */
-    public function createOrderMultiple($orders, $orderDetails)
+    public function addRating($input, $productId)
     {
         DB::beginTransaction();
         try {
-            $order = parent::create($orders);
-            $this->model->find($order->id)->products()->attach($orderDetails);
-            $orderDetails = $this->model->with('orderDeatils.product')->where('id', $order->id)->first();
-            DB::commit();
+            $rating = $this->model->where('product_id', $productId)->where('user_id', Auth::check() ?: Auth::user()->id)->first();
 
-            return $orderDetails;
+            if ($rating) {
+                $result = $this->model->update($input, $rating->id);
+            } else {
+                $result = $this->model->create($input);
+            }
+
+            if ($result) {
+                DB::commit();
+
+                return $this->model->where('product_id', $productId)->where('user_id', Auth::check() ?: Auth::user()->id)->avg('point');
+            }
+
+            DB::rollback();
+
+            return false;
         } catch (\Exception $e) {
             DB::rollback();
 

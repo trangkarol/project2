@@ -21,6 +21,7 @@
                         <div class="col-md-9 single-grid">
                             <div clas="single-top">
                                 <div class="single-left">
+                                    {{ Form::hidden('productId', $product->id,['class' => 'btn btn-success btn-agree', 'id' => 'productId', 'type' => 'button']) }}
                                     <div class="flexslider">
                                         <div class="thumb-image"> <img src="{{ $product->path_image }}" data-imagezoom="true" class="img-responsive"> </div>
                                     </div>
@@ -31,12 +32,35 @@
                                         <span>{{ trans('product.lbl-date-expiration') }} : <strong>{{ $product->date_expiration }}</strong></span>
                                     </div>
                                     @include('member.cart.add_cart')
+                                    <div class="description">
+                                        <p>
+                                            <span>{{ trans('product.lbl-quality') }}</span>
+                                        </p>
+                                    </div>
+                                    <div class="input-group col-md-6">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quality">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </button>
+                                        </span>
+                                        <input type="text" name="quality" class="form-control input-number" value="1" min="1" max="5">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quality">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+
+                                    <div class="input-group col-md-6">
+                                        {!! Form::button(trans('common.button.agree'), ['class' => 'btn btn-success btn-agree', 'type' => 'button']) !!}
+                                    </div>
                                 </div>
                                 <div class="single-right simpleCart_shelfItem">
                                     <h4>{{ $product->name }}</h4>
                                     <div class="block">
-                                        <div class="starbox small ghosting"> </div>
+                                        <div class="small ghosting"> <span class="stars">{{ $product->avg_rating }}</span> </div>
                                     </div>
+                                    <div class="clearfix"> </div>
                                     <p class="price item_price">{{ $product->price_format }}</p>
                                     <div class="description">
                                         <p><span>{{ trans('product.lbl-description') }} : </span> {{ $product->description }}</p>
@@ -56,4 +80,17 @@
         </div>
     </div>
     <div class="clear"></div>
+@endsection
+<!-- js used for page -->
+@section('contentJs')
+    @parent
+    <script type="text/javascript">
+        var trans = {
+            'confirm_rating': "{{ trans('common.msg.confirm-rating') }}",
+        };
+
+        var action = {
+            'rating_product': "{{ action('Member\RatingController@addRating') }}",
+        };
+    </script>
 @endsection

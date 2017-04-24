@@ -58,6 +58,10 @@
     @parent
     {{ Html::script('/admin/js/order.js') }}
     <script type="text/javascript">
+    var trans = {
+        'msg_comfirm_status': "{{ trans('common.msg.comfirm-status') }}",
+    };
+    trans['']
         var action = {
             'order_search': "{{ action('Admin\OrderController@search') }}",
         };

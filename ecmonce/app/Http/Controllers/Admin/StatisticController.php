@@ -110,7 +110,7 @@ class StatisticController extends Controller
      */
     public function exportFile()
     {
-        try{
+        try {
             $dateTime = new DateTime;
             $products =$this->orderDetailRepository->statisticProduct();
             $nameFile = 'products_'.$dateTime->format('Y-m-d-H-i-s');
@@ -118,7 +118,7 @@ class StatisticController extends Controller
             $request->session()->flash('success', trans('user.msg.import-success'));
 
             return redirect()->action('Admin\StatisticController@index');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             dd($e);
             return response()->json('result', false);
         }

@@ -45,7 +45,7 @@
         });
     });
 
-    $(document).on('click', '#agree', function () {
+    $(document).on('click', '#btn-agree', function () {
         event.preventDefault();
         bootbox.confirm(trans['confirm_rating'], function(result) {
             if(result) {
@@ -131,10 +131,11 @@ $.fn.stars = function() {
 
 $('.btn-number').click(function(e){
     e.preventDefault();
-
+    $(this).parents('.add-cart-number').addClass('current');
     fieldName = $(this).attr('data-field');
     type      = $(this).attr('data-type');
-    var input = $("input[name='"+fieldName+"']");
+    var input = $('.add-cart-number.current').find("input[name='"+fieldName+"']");
+    $(this).parents('.add-cart-number').removeClass('current');
     var currentVal = parseInt(input.val());
     if (!isNaN(currentVal)) {
         if(type == 'minus') {
@@ -216,6 +217,7 @@ function getFormLogin() {
 function addCart() {
     var productId = $('.cart-current').find('.cart-product').val();
     var number = $('.cart-current').find('.number-product').val();
+    console.log(productId);
     $.ajax({
         type: 'POST',
         url: action['add_cart'],
@@ -309,19 +311,20 @@ function search(page) {
 
 function rating() {
     var productId = $('#productId').val();
+    var point = $('.quality').val();
     $.ajax({
         type: 'POST',
         url: action['rating_product'],
         dataType: 'json',
         data: {
             productId: productId,
+            point: point,
         },
         success:function(data) {
-            console.log(data);
             if (data.result) {
-                $('#div-your-cart').empty();
-                $('#div-your-cart').html(data.html);
-                $('#total-number-cart').text(data.totalNumber);
+                $('.detail-start').empty();
+                $('.detail-start').text(data.avgRating);
+                $('span.detail-start').stars();
             }
         }
     });

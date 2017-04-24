@@ -23,6 +23,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace' => 'Admi
     Route::resource('request', 'RequestController');
     Route::resource('user', 'UserController');
     Route::resource('statistic', 'StatisticController');
+    Route::resource('category', 'CategoryController');
 
     Route::group(['prefix' => 'product'], function () {
         Route::post('/sub-category', 'ProductController@getSubCategory');

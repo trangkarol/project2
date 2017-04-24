@@ -101,6 +101,26 @@ class ProductRepository extends BaseRepository implements ProductInterface
     }
 
     /**
+    * function changeRating.
+     *
+     * @return true or false
+     */
+    public function changeRating($avgRating, $productId)
+    {
+        DB::beginTransaction();
+        try {
+            $result = parent::update($avgRating, $productId);
+            DB::commit();
+
+            return $result;
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return false;
+        }
+    }
+
+    /**
     * function findProduct.
      *
      * @return true or false

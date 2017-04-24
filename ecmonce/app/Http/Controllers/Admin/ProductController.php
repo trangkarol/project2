@@ -15,7 +15,6 @@ use DB;
 
 class ProductController extends Controller
 {
-
     protected $productRepository;
     protected $categoryRepository;
     protected $madeIn;

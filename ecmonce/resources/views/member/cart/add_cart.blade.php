@@ -1,7 +1,7 @@
 @if (!in_array($product->id, $productIdCats))
     {{ Form::hidden('productId', $product->id, ['class' => 'cart-product']) }}
     <a href="javascript:void(0)" data-text="{{ trans('common.lbl-add-cart') }}" class="my-cart-b add-cart col-md-6">{{ trans('common.lbl-add-cart') }}</a>
-    <div class="input-group number-cart col-md-6">
+    <div class="input-group number-cart col-md-6 add-cart-number">
         <span class="input-group-btn">
             <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="number-product">
                 <span class="glyphicon glyphicon-minus"></span>

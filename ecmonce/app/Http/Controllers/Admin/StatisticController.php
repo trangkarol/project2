@@ -30,10 +30,17 @@ class StatisticController extends Controller
     public function index()
     {
         $statisticCategory = $this->orderDetailRepository->statistiCategory();
-        $totalPrice = $statisticCategory->pluck('totalPrice')->all();
-        $nameCategory = $statisticCategory->pluck('parentNameCategory')->all();
+        // dd($statisticCategory->toArray());
+        $category = [];
 
-        return view('admin.statistic.index', compact('statisticCategory', 'totalPrice', 'nameCategory'));
+        foreach ($statisticCategory as $value) {
+            $category[] = [
+                'name' => $value->parentNameCategory,
+                'y' => $value->totalPrice
+            ];
+        }
+
+        return view('admin.statistic.index', compact('statisticCategory', 'category'));
     }
 
     /**

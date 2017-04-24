@@ -256,12 +256,7 @@ function removeCart() {
 }
 
 function search(page) {
-    var name = $('#name').val();
-    var price_from = $('#price_from').val();
-    var price_to = $('#price_to').val();
-    var rating = $('#rating').val();
-    var sort_price = $('#sort_price').val();
-    var cartegoryId = 0;
+    var data = $('#product-search').serialize();
     var url = action['search_product'];
     if (!page) {
         url += '?page=' + page;
@@ -271,14 +266,7 @@ function search(page) {
         type: 'POST',
         url: url,
         dataType: 'json',
-        data: {
-            name: name,
-            price_from: price_from,
-            price_to: price_to,
-            rating: rating,
-            cartegoryId: cartegoryId,
-            sort_price: sort_price,
-        },
+        data: data,
         success:function(data) {
             $('#div-result-product').empty();
             $('#div-result-product').html(data.html);

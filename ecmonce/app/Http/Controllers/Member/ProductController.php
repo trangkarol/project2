@@ -12,6 +12,8 @@ use Session;
 class ProductController extends Controller
 {
     protected $categoryRepository;
+    protected $productRepository;
+    protected $library;
 
     /**
     * Create a new controller instance.
@@ -20,10 +22,12 @@ class ProductController extends Controller
      */
     public function __construct(
         CategoryInterface $categoryRepository,
-        ProductInterface $productRepository
+        ProductInterface $productRepository,
+        Library $library
     ) {
         $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
+        $this->library = $library;
     }
 
     /**
@@ -33,11 +37,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $ratings = Library::getRatings();
         $products = $this->productRepository->getProduct();
-        $sortPrice = Library::getSortPrice();
+        $ratings = $this->library->getRatings();
+        $sortPrice = $this->library->getSortPrice();
+        $sortProduct = $this->library->getSortProduct();
+        $parentCategory = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
 
-        return view('member.product.products', compact('products', 'ratings', 'sortPrice'));
+        return view('member.product.products', compact('products', 'ratings', 'sortPrice', 'sortProduct', 'parentCategory'));
     }
 
     /**
@@ -99,7 +105,13 @@ class ProductController extends Controller
     {
         if ($request->ajax()) {
             try {
-                $input = $request->only(['name', 'sort_price', 'price_from', 'price_to', 'rating', 'categoryId']);
+                $input = $request->only(['name', 'sort_price', 'price_from', 'price_to', 'rating', 'parentCategory_id', 'sort_product']);
+                $input['subCategory_id'] = -1;
+
+                if (isset($request->subCategory_id)) {
+                    $input['subCategory_id'] = $request->subCategory_id;
+                }
+
                 $products = $this->productRepository->searchProduct($input);
                 $html = view('member.product.result_product', compact('products'))->render();
 

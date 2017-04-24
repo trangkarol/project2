@@ -230,7 +230,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
             $products = $this->model;
 
             if ($input['parentCategory_id'] != config('setting.search_default')) {
-                $parentId = $input['subCategory_id'];
+                $parentId = $input['parentCategory_id'];
 
                 if ($input['subCategory_id'] != config('setting.search_default')) {
                     $subCategoryId = $input['subCategory_id'];
@@ -242,17 +242,19 @@ class ProductRepository extends BaseRepository implements ProductInterface
                         $query->where('parent_id', $parentId);
                     }]);
                 }
+            } else {
+                $products = $products->with('category');
             }
 
             if ($input['rating'] != config('setting.search_default')) {
                 $products = $products->where('avg_rating', '>=', $input['rating']);
             }
 
-            if ($input['price_from'] != config('setting.search_default')) {
+            if (!empty($input['price_from'])) {
                 $products = $products->where('price', '>=', $input['price_from']);
             }
 
-            if ($input['price_to'] != config('setting.search_default')) {
+            if (!empty($input['price_to'])) {
                 $products = $products->where('price', '<=', $input['price_to']);
             }
 
@@ -280,6 +282,7 @@ class ProductRepository extends BaseRepository implements ProductInterface
 
             return $products->paginate(12);
         } catch (\Exception $e) {
+            dd($e);
             return false;
         }
     }

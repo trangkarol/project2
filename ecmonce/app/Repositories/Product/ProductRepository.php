@@ -238,9 +238,9 @@ class ProductRepository extends BaseRepository implements ProductInterface
                         $query->where('id', $subCategoryId);
                     }]);
                 } else {
-                    $products = $products->with(['category' => function ($query) use ($parentId) {
+                    $products = $products->whereHas('category', function ($query) use ($parentId) {
                         $query->where('parent_id', $parentId);
-                    }]);
+                    });
                 }
             } else {
                 $products = $products->with('category');

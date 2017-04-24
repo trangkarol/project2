@@ -165,7 +165,6 @@ class OrderController extends Controller
     public function addCart(Request $request)
     {
         if ($request->ajax()) {
-        dd($request->all());
 
             try {
                 $yourCart = $request->only('productId', 'number');

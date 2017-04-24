@@ -113,6 +113,7 @@ class ProductController extends Controller
                 }
 
                 $products = $this->productRepository->searchProduct($input);
+                dd($products->toArray());
                 $html = view('member.product.result_product', compact('products'))->render();
 
                 return response()->json(['result' => true,  'html' => $html]);

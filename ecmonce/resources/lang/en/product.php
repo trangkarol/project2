@@ -63,5 +63,7 @@ return [
         'update-fail' => 'Update Product Fail!',
         'delete-success' => 'Delete Product Success!',
         'delete-fail' => 'Delete Product Fail!',
+        'import-success' => 'Import File Success',
+        'import-fail' => 'Import File Fail',
     ],
 ];

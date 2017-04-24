@@ -5,21 +5,26 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ReportController as Report;
+use App\Repositories\Category\CategoryInterface;
 use App\Repositories\OrderDetail\OrderDetailInterface;
 use DateTime;
 
 class StatisticController extends Controller
 {
     protected $orderDetailRepository;
+    protected $categoryRepository;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(OrderDetailInterface $orderDetailRepository)
-    {
+    public function __construct(
+        OrderDetailInterface $orderDetailRepository,
+        CategoryInterface $categoryRepository
+    ) {
         $this->orderDetailRepository = $orderDetailRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -30,6 +35,7 @@ class StatisticController extends Controller
     public function index()
     {
         $statisticCategory = $this->orderDetailRepository->statistiCategory();
+        $categories = $this->categoryRepository->getCategoryLibrary(config('setting.mutil-level.one'));
         // dd($statisticCategory->toArray());
         $category = [];
 
@@ -40,7 +46,7 @@ class StatisticController extends Controller
             ];
         }
 
-        return view('admin.statistic.index', compact('statisticCategory', 'category'));
+        return view('admin.statistic.index', compact('statisticCategory', 'category', 'categories'));
     }
 
     /**

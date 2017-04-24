@@ -220,12 +220,12 @@ class ProductController extends Controller
                     $this->productRepository->create($inputs);
                 }
             }
-
             $request->session()->flash('success', trans('product.msg.import-success'));
             DB::commit();
 
             return redirect()->action('Admin\ProductController@index');
         } catch (\Exception $e) {
+            dd($e);
             $request->session()->flash('fail', trans('product.msg.import-fail'));
             DB::rollback();
 

@@ -41,7 +41,13 @@
                             <div class="clearfix"></div>
                           </div>
                           <div class="x_content">
-                            <!-- <canvas id="chart-statistic"></canvas> -->
+                            <div class="form-group col-md-6">
+                                {{ Form::label('category', trans('product.lbl-category'), ['class' => 'col-md-4 control-label']) }}
+                                <div class="col-md-8">
+                                    {{ Form::select('category', $categories, old('category'), ['class' => 'form-control search', 'id' => 'category']) }}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
 
                             <div id="chart-statistic" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
                           </div>

@@ -7,7 +7,7 @@
                 <span class="glyphicon glyphicon-minus"></span>
             </button>
         </span>
-        <input type="text" name="number-product" class="form-control input-number" value="1" min="1" max="100" text-align="center">
+        <input type="text" name="number-product" class="form-control input-number number-product" value="1" min="1" max="100" text-align="center">
         <span class="input-group-btn">
             <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="number-product">
                 <span class="glyphicon glyphicon-plus"></span>
